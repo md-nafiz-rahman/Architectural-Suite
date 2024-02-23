@@ -8,9 +8,9 @@ public class MainMenu : MonoBehaviour
 
     public void StartNewDesign()
     {
-
-        SceneManager.LoadScene("Environment");
+        SceneManager.LoadScene("ModernHomes");
     }
+
 
     public void LoadDesign()
     {
