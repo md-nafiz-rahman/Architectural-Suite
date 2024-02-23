@@ -304,7 +304,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9189065510491252739}
-  - component: {fileID: 8354300448811149684}
   - component: {fileID: 9189065510491252738}
   - component: {fileID: 9189065510491252737}
   - component: {fileID: 9189065510491252736}
@@ -332,19 +331,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8354300448811149684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9189065510491252750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  furnitureItem: {fileID: 11400000, guid: 158a0f3fcce9f4840901163ee9bafc3c, type: 2}
 --- !u!33 &9189065510491252738
 MeshFilter:
   m_ObjectHideFlags: 0

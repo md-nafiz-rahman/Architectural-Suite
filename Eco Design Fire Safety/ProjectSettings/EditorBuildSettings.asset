@@ -8,12 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: f348f677e52d335488a47ee8c59e8e9b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/LoadingScreen.unity
     guid: edb5f7f717bdafb4ab7d076555bc96a5
   - enabled: 0
     path: Assets/Brick Project Studio/Apartment Kit/Scenes/Scene_01.unity
     guid: 4f80debdb52c166478997e1d2b329e3c
+  - enabled: 0
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
     path: Assets/Brick Project Studio/Apartment Kit/Scenes/Scene_02.unity
     guid: 9b5aa6428ba7a6246bd201ba8d95cebe

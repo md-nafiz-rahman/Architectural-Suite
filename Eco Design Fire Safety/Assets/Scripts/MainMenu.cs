@@ -8,7 +8,8 @@ public class MainMenu : MonoBehaviour
 
     public void StartNewDesign()
     {
-        SceneManager.LoadScene("ModernHomes");
+        PlayerPrefs.SetString("SceneToLoad", "ModernHomes");
+        SceneManager.LoadScene("LoadingScreen");
     }
 
 
