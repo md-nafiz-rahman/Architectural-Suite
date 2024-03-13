@@ -8,11 +8,14 @@ public class InventoryManager : MonoBehaviour
     public GameObject slotPrefab; 
     public GameObject inventoryCanvas;
     public Transform inventoryContentPanel;
-    public GameObject emptyInventoryText; 
+    public GameObject emptyInventoryText;
+    public GameObject bedsEmptyText; 
     private List<GameObject> inventorySlots = new List<GameObject>(); 
     private List<FurnitureItem> furnitureItems = new List<FurnitureItem>(); 
     public PlacementManager placementManager; 
-    public GameObject confirmationPanel; 
+    public GameObject confirmationPanel;
+    public GameObject allFurnitureScrollView; 
+    public GameObject bedsScrollView; 
     private FurnitureItem selectedItemForPlacement;
 
 
@@ -91,6 +94,8 @@ public class InventoryManager : MonoBehaviour
         UpdateInventoryUI();
         CheckIfInventoryIsEmpty();
     }
+
+
     public void ClearInventory()
     {
         foreach (GameObject slot in inventorySlots)
@@ -102,31 +107,48 @@ public class InventoryManager : MonoBehaviour
 
     private void UpdateInventoryUI()
     {
-        foreach (GameObject slot in inventorySlots)
-        {
-            Destroy(slot);
-        }
-        inventorySlots.Clear();
+        ClearInventorySlots(allFurnitureScrollView.transform.Find("Viewport/Content"));
+        ClearInventorySlots(bedsScrollView.transform.Find("Viewport/Content"));
 
         foreach (FurnitureItem item in furnitureItems)
         {
-            GameObject newSlot = Instantiate(slotPrefab, inventoryContentPanel);
-            newSlot.GetComponent<Image>().sprite = item.icon;
-            inventorySlots.Add(newSlot);
+            CreateSlotForItem(item, allFurnitureScrollView.transform.Find("Viewport/Content"));
+        }
 
-            Button button = newSlot.GetComponent<Button>();
-            button.onClick.AddListener(() => ShowConfirmationPanel(item));
+        foreach (FurnitureItem item in furnitureItems)
+        {
+            if (item.category == FurnitureCategory.Bed)
+            {
+                CreateSlotForItem(item, bedsScrollView.transform.Find("Viewport/Content"));
+            }
+        }
 
-            EventTrigger trigger = newSlot.GetComponent<EventTrigger>() ?? newSlot.AddComponent<EventTrigger>();
-            EventTrigger.Entry entry = new EventTrigger.Entry();
-            entry.eventID = EventTriggerType.PointerClick;
-            entry.callback.AddListener((data) => OnRightClick((PointerEventData)data, item));
-            trigger.triggers.Add(entry);
+        CheckIfInventoryIsEmpty();
+    }
 
-            CheckIfInventoryIsEmpty();
-
+    private void ClearInventorySlots(Transform contentPanel)
+    {
+        foreach (Transform child in contentPanel)
+        {
+            Destroy(child.gameObject);
         }
     }
+
+    private void CreateSlotForItem(FurnitureItem item, Transform contentPanel)
+    {
+        GameObject newSlot = Instantiate(slotPrefab, contentPanel);
+        newSlot.GetComponent<Image>().sprite = item.icon;
+
+        Button button = newSlot.GetComponent<Button>();
+        button.onClick.AddListener(() => ShowConfirmationPanel(item));
+
+        EventTrigger trigger = newSlot.GetComponent<EventTrigger>() ?? newSlot.AddComponent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerClick;
+        entry.callback.AddListener((data) => OnRightClick((PointerEventData)data, item));
+        trigger.triggers.Add(entry);
+    }
+
     public void HideInventoryUI()
     {
         inventoryCanvas.SetActive(false);
@@ -136,8 +158,12 @@ public class InventoryManager : MonoBehaviour
     private void CheckIfInventoryIsEmpty()
     {
         bool isInventoryEmpty = furnitureItems.Count == 0;
-        emptyInventoryText.SetActive(isInventoryEmpty);
+        emptyInventoryText.SetActive(isInventoryEmpty && allFurnitureScrollView.activeSelf); 
+
+        bool isBedsEmpty = furnitureItems.FindAll(item => item.category == FurnitureCategory.Bed).Count == 0;
+        bedsEmptyText.SetActive(isBedsEmpty && bedsScrollView.activeSelf); 
     }
+
 
     public void RemoveFurnitureFromInventory(FurnitureItem itemToRemove)
     {
@@ -157,4 +183,22 @@ public class InventoryManager : MonoBehaviour
             ToggleInventoryUI();
         }
     }
+
+
+    public void ShowAllFurniture()
+    {
+        allFurnitureScrollView.SetActive(true);
+        bedsScrollView.SetActive(false);
+        UpdateInventoryUI();
+    }
+
+    public void ShowBeds()
+    {
+        allFurnitureScrollView.SetActive(false);
+        bedsScrollView.SetActive(true);
+        UpdateInventoryUI();
+    }
+
+
+
 }
