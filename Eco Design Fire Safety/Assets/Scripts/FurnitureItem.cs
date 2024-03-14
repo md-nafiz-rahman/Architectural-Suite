@@ -4,7 +4,11 @@ using UnityEngine;
 public enum FurnitureCategory
 {
     Bed,
-    Table,
+    TableDesk,
+    SofaChair,
+    Cabinet,
+    Decoration,
+    Other
 }
 
 [CreateAssetMenu(fileName = "New FurnitureItem", menuName = "Inventory/FurnitureItem")]

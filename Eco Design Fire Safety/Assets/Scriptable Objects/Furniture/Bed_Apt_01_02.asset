@@ -15,3 +15,4 @@ MonoBehaviour:
   itemName: Bed_Apt_01_02
   icon: {fileID: 21300000, guid: 004d6505d7681194482cec7d922709ad, type: 3}
   prefab: {fileID: 9189065510491252750, guid: 8af73887c9cd7fa47a2f642969b20378, type: 3}
+  category: 1

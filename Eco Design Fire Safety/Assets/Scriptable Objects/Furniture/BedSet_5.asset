@@ -15,4 +15,4 @@ MonoBehaviour:
   itemName: BedSet_5
   icon: {fileID: 21300000, guid: 3e2f854fffbf7514c86c6de568e25df9, type: 3}
   prefab: {fileID: 1000011466839270, guid: fac55ee50f68c41449a87415834588f5, type: 3}
-  category: 1
+  category: 3
