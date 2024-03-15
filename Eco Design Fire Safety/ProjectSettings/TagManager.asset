@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - House1LampPost
+  - House2LampPost
+  - House3LampPost
   layers:
   - Default
   - TransparentFX
