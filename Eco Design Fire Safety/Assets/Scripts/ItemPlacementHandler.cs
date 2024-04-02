@@ -7,13 +7,7 @@ public class ItemPlacementHandler : MonoBehaviour
     private Camera cam;
     private bool isPlacing = false;
     private GameObject currentItem;
-    private int currentRotationIndex = 0;
-    private readonly Vector3[] rotations = { 
-        Vector3.up * 0, 
-        Vector3.up * 90, 
-        Vector3.up * 180, 
-        Vector3.up * 270 
-    };
+    private float currentRotation = 0f;
 
     void Start()
     {
@@ -27,7 +21,7 @@ public class ItemPlacementHandler : MonoBehaviour
             Destroy(currentItem);
         }
         currentItem = Instantiate(itemPrefab);
-        currentItem.transform.rotation = Quaternion.Euler(rotations[currentRotationIndex]); 
+        currentItem.transform.rotation = Quaternion.Euler(Vector3.up * currentRotation);
         isPlacing = true;
 
         ToggleColliders(currentItem, false);
@@ -44,19 +38,23 @@ public class ItemPlacementHandler : MonoBehaviour
             if (Physics.Raycast(ray, out hit))
             {
                 currentItem.transform.position = hit.point;
-                currentItem.transform.rotation = Quaternion.Euler(rotations[currentRotationIndex]); 
+                currentItem.transform.rotation = Quaternion.Euler(Vector3.up * currentRotation);
             }
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                RotateItem();
-            }
+
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            RotateItem(scroll);
         }
     }
 
-    private void RotateItem()
+    private void RotateItem(float scrollInput)
     {
-        currentRotationIndex = (currentRotationIndex + 1) % rotations.Length;
-        currentItem.transform.rotation = Quaternion.Euler(rotations[currentRotationIndex]);
+        if (scrollInput != 0)
+        {
+            currentRotation += (scrollInput > 0) ? 45f : -45f;
+            currentRotation = (currentRotation + 360f) % 360f;
+            if (currentItem != null) 
+                currentItem.transform.rotation = Quaternion.Euler(Vector3.up * currentRotation);
+        }
     }
 
     public void PlaceItem()
@@ -75,7 +73,6 @@ public class ItemPlacementHandler : MonoBehaviour
         Collider[] colliders = item.GetComponentsInChildren<Collider>();
         foreach (Collider collider in colliders)
         {
-            Debug.Log("Toggling collider on object: " + collider.gameObject.name + " to " + state);
             collider.enabled = state;
         }
     }
