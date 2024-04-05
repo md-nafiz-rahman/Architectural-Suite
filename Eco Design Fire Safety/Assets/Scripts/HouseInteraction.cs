@@ -51,8 +51,13 @@ public class HouseInteraction : MonoBehaviour
     public GameObject messageGroundFloorHouse3;
     public GameObject messageFirstFloorHouse3;
 
+    public Material[] wallMaterials; 
+    public Material[] floorMaterials; 
+
     private GameObject currentLampPost = null;
     private bool isCustomizationPanelOpen = false;
+    public MaterialSelection materialSelection;
+
 
     void Update()
     {
@@ -558,6 +563,28 @@ public class HouseInteraction : MonoBehaviour
         }
         return false;
     }
+
+    public void OnMaterialSelected(string identifier, int materialIndex, bool isWall)
+    {
+        string[] parts = identifier.Split('-');
+        if (parts.Length != 2) return;
+
+        string houseTag = $"House{parts[0]}LampPost";
+        string roomName = parts[1];
+
+        Material selectedMaterial = isWall ? wallMaterials[materialIndex] : floorMaterials[materialIndex];
+
+        if (isWall)
+        {
+            materialSelection.ApplyWallMaterial(houseTag, roomName, selectedMaterial);
+        }
+        else
+        {
+            materialSelection.ApplyFloorMaterial(houseTag, roomName, selectedMaterial);
+        }
+    }
+
+
 
 
 }
