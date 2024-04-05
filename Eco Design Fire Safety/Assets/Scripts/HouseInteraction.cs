@@ -10,6 +10,13 @@ public class HouseInteraction : MonoBehaviour
     public GameObject customizationPanelHouse2;
     public GameObject customizationPanelHouse3;
 
+    public GameObject groundFloorPanelHouse1;
+    public GameObject firstFloorPanelHouse1;
+    public GameObject groundFloorPanelHouse2;
+    public GameObject firstFloorPanelHouse2;
+    public GameObject groundFloorPanelHouse3;
+    public GameObject firstFloorPanelHouse3;
+
     private GameObject currentLampPost = null;
     private bool isCustomizationPanelOpen = false;
 
@@ -17,21 +24,85 @@ public class HouseInteraction : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            if (currentLampPost != null && !isCustomizationPanelOpen)
-            {
-                ShowCustomizationPanel(currentLampPost.tag);
-                FreezeGame(true);
-                isCustomizationPanelOpen = true; 
-
-            }
-            else if (isCustomizationPanelOpen)
-            {
-                HideAllPanels();
-                FreezeGame(false);
-                isCustomizationPanelOpen = false; 
-            }
+            ToggleCustomizationPanel();
         }
     }
+
+    private void ToggleCustomizationPanel()
+    {
+        if (currentLampPost != null && !isCustomizationPanelOpen)
+        {
+            ShowCustomizationPanel(currentLampPost.tag);
+            FreezeGame(true);
+            isCustomizationPanelOpen = true;
+        }
+        else if (isCustomizationPanelOpen)
+        {
+            HideAllPanels();
+            FreezeGame(false);
+            isCustomizationPanelOpen = false;
+        }
+    }
+
+    public void ShowGroundFloorPanel(string houseTag)
+    {
+        HideAllCustomizationPanels(); 
+        ActivateFloorPanel(houseTag, true);
+    }
+
+    public void ShowFirstFloorPanel(string houseTag)
+    {
+        HideAllCustomizationPanels();
+        ActivateFloorPanel(houseTag, false);
+    }
+
+    private void ActivateFloorPanel(string houseTag, bool isGroundFloor)
+    {
+        GameObject panelToShow = null;
+        switch (houseTag)
+        {
+            case "House1LampPost":
+                panelToShow = isGroundFloor ? groundFloorPanelHouse1 : firstFloorPanelHouse1;
+                break;
+            case "House2LampPost":
+                panelToShow = isGroundFloor ? groundFloorPanelHouse2 : firstFloorPanelHouse2;
+                break;
+            case "House3LampPost":
+                panelToShow = isGroundFloor ? groundFloorPanelHouse3 : firstFloorPanelHouse3;
+                break;
+        }
+
+        if (panelToShow != null)
+        {
+            panelToShow.SetActive(true);
+            isCustomizationPanelOpen = true;
+        }
+    }
+
+    public void GoBackToCustomizationPanel()
+    {
+        if (currentLampPost != null)
+        {
+            HideAllWallFloorPanels();
+            ShowCustomizationPanel(currentLampPost.tag);
+        }
+    }
+
+    public void OnGoBackButtonClicked()
+    {
+        GoBackToCustomizationPanel(); 
+    }
+
+    private void HideAllWallFloorPanels()
+    {
+        groundFloorPanelHouse1.SetActive(false);
+        firstFloorPanelHouse1.SetActive(false);
+        groundFloorPanelHouse2.SetActive(false);
+        firstFloorPanelHouse2.SetActive(false);
+        groundFloorPanelHouse3.SetActive(false);
+        firstFloorPanelHouse3.SetActive(false);
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
