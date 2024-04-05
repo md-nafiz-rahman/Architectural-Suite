@@ -36,12 +36,26 @@ public class HouseInteraction : MonoBehaviour
             FreezeGame(true);
             isCustomizationPanelOpen = true;
         }
-        else if (isCustomizationPanelOpen)
+        else if (IsAnyCustomizationPanelOpen())
         {
             HideAllPanels();
+            HideAllWallFloorPanels(); 
             FreezeGame(false);
             isCustomizationPanelOpen = false;
         }
+    }
+
+    private bool IsAnyCustomizationPanelOpen()
+    {
+        return customizationPanelHouse1.activeSelf ||
+               customizationPanelHouse2.activeSelf ||
+               customizationPanelHouse3.activeSelf ||
+               groundFloorPanelHouse1.activeSelf ||
+               firstFloorPanelHouse1.activeSelf ||
+               groundFloorPanelHouse2.activeSelf ||
+               firstFloorPanelHouse2.activeSelf ||
+               groundFloorPanelHouse3.activeSelf ||
+               firstFloorPanelHouse3.activeSelf;
     }
 
     public void ShowGroundFloorPanel(string houseTag)
@@ -79,18 +93,13 @@ public class HouseInteraction : MonoBehaviour
         }
     }
 
-    public void GoBackToCustomizationPanel()
+    public void OnGoBackButtonClicked()
     {
         if (currentLampPost != null)
         {
             HideAllWallFloorPanels();
             ShowCustomizationPanel(currentLampPost.tag);
         }
-    }
-
-    public void OnGoBackButtonClicked()
-    {
-        GoBackToCustomizationPanel(); 
     }
 
     private void HideAllWallFloorPanels()
