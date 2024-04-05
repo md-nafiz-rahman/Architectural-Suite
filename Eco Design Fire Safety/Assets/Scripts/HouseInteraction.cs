@@ -198,15 +198,20 @@ public class HouseInteraction : MonoBehaviour
 
     public void ShowGroundFloorPanel(string houseTag)
     {
-        HideAllCustomizationPanels(); 
+        int houseNumber = GetHouseNumberFromLampPostTag(houseTag);
+        HideAllCustomizationPanels();
         ActivateFloorPanel(houseTag, true);
+        CheckAndToggleOnScreenMessageForHouse(houseNumber);
     }
 
     public void ShowFirstFloorPanel(string houseTag)
     {
+        int houseNumber = GetHouseNumberFromLampPostTag(houseTag);
         HideAllCustomizationPanels();
         ActivateFloorPanel(houseTag, false);
+        CheckAndToggleOnScreenMessageForHouse(houseNumber);
     }
+
 
     private void ActivateFloorPanel(string houseTag, bool isGroundFloor)
     {
@@ -235,10 +240,25 @@ public class HouseInteraction : MonoBehaviour
     {
         if (currentLampPost != null)
         {
+            int houseNumber = GetHouseNumberFromLampPostTag(currentLampPost.tag);
+
+            HideAllRoomMaterialPanels();
             HideAllWallFloorPanels();
+
             ShowCustomizationPanel(currentLampPost.tag);
+
+            CheckAndToggleOnScreenMessageForHouse(houseNumber);
         }
     }
+
+    private int GetHouseNumberFromLampPostTag(string tag)
+    {
+        if (tag.Contains("House1")) return 1;
+        if (tag.Contains("House2")) return 2;
+        if (tag.Contains("House3")) return 3;
+        return 0; 
+    }
+
 
     private void HideAllWallFloorPanels()
     {
@@ -338,121 +358,206 @@ public class HouseInteraction : MonoBehaviour
     public void OnLivingRoomButtonClickedHouse1()
     {
         ShowRoomMaterialPanel("House1LampPost", "LivingRoom");
+        CheckAndToggleOnScreenMessageForHouse(1);
     }
 
     public void OnDrawingRoomButtonClickedHouse1()
     {
         ShowRoomMaterialPanel("House1LampPost", "DrawingRoom");
+        CheckAndToggleOnScreenMessageForHouse(1);
     }
 
     public void OnGuestRoomButtonClickedHouse1()
     {
         ShowRoomMaterialPanel("House1LampPost", "GuestRoom");
+        CheckAndToggleOnScreenMessageForHouse(1);
     }
 
     public void OnKitchenButtonClickedHouse1()
     {
         ShowRoomMaterialPanel("House1LampPost", "Kitchen");
+        CheckAndToggleOnScreenMessageForHouse(1);
     }
 
     public void OnBedroom1ButtonClickedHouse1()
     {
         ShowRoomMaterialPanel("House1LampPost", "Bedroom1");
+        CheckAndToggleOnScreenMessageForHouse(1);
     }
 
     public void OnBedroom2ButtonClickedHouse1()
     {
         ShowRoomMaterialPanel("House1LampPost", "Bedroom2");
+        CheckAndToggleOnScreenMessageForHouse(1);
     }
 
     public void OnMasterBedroomButtonClickedHouse1()
     {
         ShowRoomMaterialPanel("House1LampPost", "MasterBedroom");
+        CheckAndToggleOnScreenMessageForHouse(1);
     }
 
     public void OnLoungeButtonClickedHouse1()
     {
         ShowRoomMaterialPanel("House1LampPost", "Lounge");
+        CheckAndToggleOnScreenMessageForHouse(1);
     }
 
     public void OnLivingRoomButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "LivingRoom");
+        CheckAndToggleOnScreenMessageForHouse(2);
     }
 
     public void OnDrawingRoomButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "DrawingRoom");
+        CheckAndToggleOnScreenMessageForHouse(2);
     }
 
     public void OnGuestRoomButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "GuestRoom");
+        CheckAndToggleOnScreenMessageForHouse(2);
     }
 
     public void OnKitchenButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "Kitchen");
+        CheckAndToggleOnScreenMessageForHouse(2);
     }
 
     public void OnBedroom1ButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "Bedroom1");
+        CheckAndToggleOnScreenMessageForHouse(2);
     }
 
     public void OnBedroom2ButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "Bedroom2");
+        CheckAndToggleOnScreenMessageForHouse(2);
     }
 
     public void OnMasterBedroomButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "MasterBedroom");
+        CheckAndToggleOnScreenMessageForHouse(2);
     }
 
     public void OnLoungeButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "Lounge");
+        CheckAndToggleOnScreenMessageForHouse(2);
     }
 
     public void OnLivingRoomButtonClickedHouse3()
     {
         ShowRoomMaterialPanel("House3LampPost", "LivingRoom");
+        CheckAndToggleOnScreenMessageForHouse(3);
     }
 
     public void OnDrawingRoomButtonClickedHouse3()
     {
         ShowRoomMaterialPanel("House3LampPost", "DrawingRoom");
+        CheckAndToggleOnScreenMessageForHouse(3);
     }
 
     public void OnGuestRoomButtonClickedHouse3()
     {
         ShowRoomMaterialPanel("House3LampPost", "GuestRoom");
+        CheckAndToggleOnScreenMessageForHouse(3);
     }
 
     public void OnKitchenButtonClickedHouse3()
     {
         ShowRoomMaterialPanel("House3LampPost", "Kitchen");
+        CheckAndToggleOnScreenMessageForHouse(3);
     }
 
     public void OnBedroom1ButtonClickedHouse3()
     {
         ShowRoomMaterialPanel("House3LampPost", "Bedroom1");
+        CheckAndToggleOnScreenMessageForHouse(3);
     }
 
     public void OnBedroom2ButtonClickedHouse3()
     {
         ShowRoomMaterialPanel("House3LampPost", "Bedroom2");
+        CheckAndToggleOnScreenMessageForHouse(3);
     }
 
     public void OnMasterBedroomButtonClickedHouse3()
     {
         ShowRoomMaterialPanel("House3LampPost", "MasterBedroom");
+        CheckAndToggleOnScreenMessageForHouse(3);
     }
 
     public void OnLoungeButtonClickedHouse3()
     {
         ShowRoomMaterialPanel("House3LampPost", "Lounge");
+        CheckAndToggleOnScreenMessageForHouse(3);
     }
+
+    private void CheckAndToggleOnScreenMessageForHouse(int houseNumber)
+    {
+        bool groundFloorActive = false;
+        bool firstFloorActive = false;
+
+        switch (houseNumber)
+        {
+            case 1:
+                groundFloorActive = CheckActiveMaterialPanelForHouse(
+                    livingRoomMaterialPanelHouse1, drawingRoomMaterialPanelHouse1,
+                    guestRoomMaterialPanelHouse1, kitchenMaterialPanelHouse1);
+
+                firstFloorActive = CheckActiveMaterialPanelForHouse(
+                    bedroom1MaterialPanelHouse1, bedroom2MaterialPanelHouse1,
+                    masterBedroomMaterialPanelHouse1, loungeMaterialPanelHouse1);
+
+                messageGroundFloorHouse1.SetActive(!groundFloorActive && groundFloorPanelHouse1.activeSelf);
+                messageFirstFloorHouse1.SetActive(!firstFloorActive && firstFloorPanelHouse1.activeSelf);
+                break;
+
+            case 2:
+                groundFloorActive = CheckActiveMaterialPanelForHouse(
+                    livingRoomMaterialPanelHouse2, drawingRoomMaterialPanelHouse2,
+                    guestRoomMaterialPanelHouse2, kitchenMaterialPanelHouse2);
+
+                firstFloorActive = CheckActiveMaterialPanelForHouse(
+                    bedroom1MaterialPanelHouse2, bedroom2MaterialPanelHouse2,
+                    masterBedroomMaterialPanelHouse2, loungeMaterialPanelHouse2);
+
+                messageGroundFloorHouse2.SetActive(!groundFloorActive && groundFloorPanelHouse2.activeSelf);
+                messageFirstFloorHouse2.SetActive(!firstFloorActive && firstFloorPanelHouse2.activeSelf);
+                break;
+
+            case 3:
+                groundFloorActive = CheckActiveMaterialPanelForHouse(
+                    livingRoomMaterialPanelHouse3, drawingRoomMaterialPanelHouse3,
+                    guestRoomMaterialPanelHouse3, kitchenMaterialPanelHouse3);
+
+                firstFloorActive = CheckActiveMaterialPanelForHouse(
+                    bedroom1MaterialPanelHouse3, bedroom2MaterialPanelHouse3,
+                    masterBedroomMaterialPanelHouse3, loungeMaterialPanelHouse3);
+
+                messageGroundFloorHouse3.SetActive(!groundFloorActive && groundFloorPanelHouse3.activeSelf);
+                messageFirstFloorHouse3.SetActive(!firstFloorActive && firstFloorPanelHouse3.activeSelf);
+                break;
+        }
+
+
+    }
+
+    private bool CheckActiveMaterialPanelForHouse(params GameObject[] panels)
+    {
+        foreach (var panel in panels)
+        {
+            if (panel.activeSelf)
+                return true;
+        }
+        return false;
+    }
+
 
 }
