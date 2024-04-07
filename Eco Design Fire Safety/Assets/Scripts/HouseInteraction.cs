@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class HouseInteraction : MonoBehaviour
 {
+    public GameObject crosshair;
+
     public GameObject messagePanelHouse1;
     public GameObject messagePanelHouse2;
     public GameObject messagePanelHouse3;
@@ -178,6 +180,7 @@ public class HouseInteraction : MonoBehaviour
             ShowCustomizationPanel(currentLampPost.tag);
             FreezeGame(true);
             isCustomizationPanelOpen = true;
+            crosshair.SetActive(false);
         }
         else if (IsAnyCustomizationPanelOpen())
         {
@@ -185,6 +188,7 @@ public class HouseInteraction : MonoBehaviour
             HideAllWallFloorPanels(); 
             FreezeGame(false);
             isCustomizationPanelOpen = false;
+            crosshair.SetActive(true);
         }
     }
 
