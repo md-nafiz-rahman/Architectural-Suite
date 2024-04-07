@@ -30,12 +30,18 @@ public class InventoryManager : MonoBehaviour
     public GameObject decorationEmptyText;
     public GameObject otherEmptyText;
 
+    public List<FurnitureItem> predefinedFurnitureItems = new List<FurnitureItem>();
 
 
     void Start()
     {
         inventoryCanvas.SetActive(false);
         CheckIfInventoryIsEmpty();
+
+        foreach (var furnitureItem in predefinedFurnitureItems)
+        {
+            AddItemToInventory(furnitureItem);
+        }
     }
 
     public void ShowConfirmationPanel(FurnitureItem item)

@@ -26,14 +26,16 @@ public class ItemPlacementHandler : MonoBehaviour
 
         ToggleColliders(currentItem, false);
         Time.timeScale = 1f;
-    }
 
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
     void Update()
     {
         if (isPlacing && currentItem != null)
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+            Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
@@ -52,7 +54,7 @@ public class ItemPlacementHandler : MonoBehaviour
         {
             currentRotation += (scrollInput > 0) ? 45f : -45f;
             currentRotation = (currentRotation + 360f) % 360f;
-            if (currentItem != null) 
+            if (currentItem != null)
                 currentItem.transform.rotation = Quaternion.Euler(Vector3.up * currentRotation);
         }
     }
@@ -65,6 +67,8 @@ public class ItemPlacementHandler : MonoBehaviour
             ToggleColliders(currentItem, true);
             currentItem = null;
             Time.timeScale = 1f;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 
