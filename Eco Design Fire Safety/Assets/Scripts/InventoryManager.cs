@@ -16,7 +16,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject confirmationPanel;
     public GameObject allFurnitureScrollView; 
     public GameObject bedsScrollView; 
-    private FurnitureItem selectedItemForPlacement;
+    public FurnitureItem selectedItemForPlacement;
 
     public GameObject tableDeskScrollView;
     public GameObject sofaChairScrollView;
@@ -30,7 +30,11 @@ public class InventoryManager : MonoBehaviour
     public GameObject decorationEmptyText;
     public GameObject otherEmptyText;
 
+    public Image selectedItemImage;
+
     public List<FurnitureItem> predefinedFurnitureItems = new List<FurnitureItem>();
+    public GameObject materialSelectionPanel;
+
 
 
     void Start()
@@ -44,11 +48,36 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void ShowMaterialSelectionPanel(FurnitureItem item)
+    {
+        selectedItemForPlacement = item;
+
+        Image selectedItemImage = materialSelectionPanel.transform.Find("SelectedItemImage").GetComponent<Image>();
+        if (selectedItemImage != null)
+        {
+            selectedItemImage.sprite = item.icon;
+        }
+        else
+        {
+            Debug.LogError("SelectedItemImage not found in the Material Selection Panel");
+        }
+
+        materialSelectionPanel.SetActive(true);
+        inventoryCanvas.SetActive(false);
+    }
+
+    public void ShowInventoryUI()
+    {
+        materialSelectionPanel.SetActive(false);
+        inventoryCanvas.SetActive(true);
+    }
+
     public void ShowConfirmationPanel(FurnitureItem item)
     {
-        selectedItemForPlacement = item; 
-        confirmationPanel.SetActive(true); 
+        selectedItemForPlacement = item;
+        confirmationPanel.SetActive(true);
     }
+
 
     public void HideConfirmationPanel()
     {
@@ -57,7 +86,8 @@ public class InventoryManager : MonoBehaviour
 
     public void ConfirmPlacement()
     {
-        placementManager.SelectItemForPlacement(selectedItemForPlacement); 
+        placementManager.SelectItemForPlacement(selectedItemForPlacement);
+        materialSelectionPanel.SetActive(false);
         HideInventoryUI();
         HideConfirmationPanel(); 
         CheckIfInventoryIsEmpty();
@@ -67,7 +97,7 @@ public class InventoryManager : MonoBehaviour
     public void ToggleInventoryUI()
     {
         inventoryCanvas.SetActive(!inventoryCanvas.activeSelf);
-
+        materialSelectionPanel.SetActive(false);
         if (inventoryCanvas.activeSelf)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -103,7 +133,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (data.button == PointerEventData.InputButton.Right)
         {
-            ShowConfirmationPanel(item);
+            ShowMaterialSelectionPanel(item);
         }
     }
 
@@ -187,7 +217,7 @@ public class InventoryManager : MonoBehaviour
         newSlot.GetComponent<Image>().sprite = item.icon;
 
         Button button = newSlot.GetComponent<Button>();
-        button.onClick.AddListener(() => ShowConfirmationPanel(item));
+        button.onClick.AddListener(() => ShowMaterialSelectionPanel(item));
 
         EventTrigger trigger = newSlot.GetComponent<EventTrigger>() ?? newSlot.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
@@ -209,7 +239,6 @@ public class InventoryManager : MonoBehaviour
     public void HideInventoryUI()
     {
         inventoryCanvas.SetActive(false);
- 
     }
 
     private void CheckIfInventoryIsEmpty()
@@ -301,8 +330,5 @@ public class InventoryManager : MonoBehaviour
         decorationScrollView.SetActive(false);
         otherScrollView.SetActive(false);
     }
-
-
-
 
 }
