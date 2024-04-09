@@ -3,8 +3,8 @@ using UnityEngine.UI;
 
 public class MaterialButtonFurniture : MonoBehaviour
 {
-    public Material material; 
-    public InventoryManager inventoryManager; 
+    public MaterialData materialData; 
+    public InventoryManager inventoryManager;
 
     void Start()
     {
@@ -25,10 +25,9 @@ public class MaterialButtonFurniture : MonoBehaviour
                 }
                 if (renderer != null)
                 {
-                    renderer.material = material;
+                    renderer.material = materialData.material;
                 }
             }
         }
     }
 }
-
