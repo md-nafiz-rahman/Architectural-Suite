@@ -13,13 +13,13 @@ public class MaterialSelection : MonoBehaviour
     }
 
     public Room livingRoomHouse1, drawingRoomHouse1, guestRoomHouse1, kitchenHouse1,
-                bedroom1House1, bedroom2House1, masterBedroomHouse1, loungeHouse1;
+                bedroom1House1, bedroom2House1, masterBedroomHouse1, loungeHouse1, roofTopHouse1;
 
     public Room livingRoomHouse2, drawingRoomHouse2, guestRoomHouse2, kitchenHouse2,
-                bedroom1House2, bedroom2House2, masterBedroomHouse2, loungeHouse2;
+                bedroom1House2, bedroom2House2, masterBedroomHouse2, loungeHouse2, roofTopHouse2;
 
     public Room livingRoomHouse3, drawingRoomHouse3, guestRoomHouse3, kitchenHouse3,
-                bedroom1House3, bedroom2House3, masterBedroomHouse3, loungeHouse3;
+                bedroom1House3, bedroom2House3, masterBedroomHouse3, loungeHouse3, roofTopHouse3;
 
     public void ApplyMaterial(string houseTag, string roomName, Material wallMaterial, Material floorMaterial)
     {
@@ -64,6 +64,7 @@ public class MaterialSelection : MonoBehaviour
             case "Bedroom2": return bedroom2House1;
             case "MasterBedroom": return masterBedroomHouse1;
             case "Lounge": return loungeHouse1;
+            case "RoofTop": return roofTopHouse1;
             default: return null;
         }
     }
@@ -80,6 +81,7 @@ public class MaterialSelection : MonoBehaviour
             case "Bedroom2": return bedroom2House2;
             case "MasterBedroom": return masterBedroomHouse2;
             case "Lounge": return loungeHouse2;
+            case "RoofTop": return roofTopHouse2;
             default: return null;
         }
     }
@@ -97,6 +99,7 @@ public class MaterialSelection : MonoBehaviour
             case "Bedroom2": return bedroom2House3;
             case "MasterBedroom": return masterBedroomHouse3;
             case "Lounge": return loungeHouse3;
+            case "RoofTop": return roofTopHouse3;
             default: return null;
         }
     }

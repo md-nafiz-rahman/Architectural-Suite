@@ -27,6 +27,7 @@ public class HouseInteraction : MonoBehaviour
     public GameObject bedroom2MaterialPanelHouse1;
     public GameObject masterBedroomMaterialPanelHouse1;
     public GameObject loungeMaterialPanelHouse1;
+    public GameObject roofTopMaterialPanelHouse1;
 
     public GameObject livingRoomMaterialPanelHouse2;
     public GameObject drawingRoomMaterialPanelHouse2;
@@ -36,6 +37,7 @@ public class HouseInteraction : MonoBehaviour
     public GameObject bedroom2MaterialPanelHouse2;
     public GameObject masterBedroomMaterialPanelHouse2;
     public GameObject loungeMaterialPanelHouse2;
+    public GameObject roofTopMaterialPanelHouse2;
 
     public GameObject livingRoomMaterialPanelHouse3;
     public GameObject drawingRoomMaterialPanelHouse3;
@@ -45,6 +47,7 @@ public class HouseInteraction : MonoBehaviour
     public GameObject bedroom2MaterialPanelHouse3;
     public GameObject masterBedroomMaterialPanelHouse3;
     public GameObject loungeMaterialPanelHouse3;
+    public GameObject roofTopMaterialPanelHouse3;
 
     public GameObject messageGroundFloorHouse1;
     public GameObject messageFirstFloorHouse1;
@@ -134,6 +137,8 @@ public class HouseInteraction : MonoBehaviour
                 return houseNumber == 1 ? masterBedroomMaterialPanelHouse1 : (houseNumber == 2 ? masterBedroomMaterialPanelHouse2 : masterBedroomMaterialPanelHouse3);
             case "Lounge":
                 return houseNumber == 1 ? loungeMaterialPanelHouse1 : (houseNumber == 2 ? loungeMaterialPanelHouse2 : loungeMaterialPanelHouse3);
+            case "RoofTop":
+                return houseNumber == 1 ? roofTopMaterialPanelHouse1 : (houseNumber == 2 ? roofTopMaterialPanelHouse2 : roofTopMaterialPanelHouse3);
         }
 
         return null;
@@ -151,6 +156,7 @@ public class HouseInteraction : MonoBehaviour
         bedroom2MaterialPanelHouse1.SetActive(false);
         masterBedroomMaterialPanelHouse1.SetActive(false);
         loungeMaterialPanelHouse1.SetActive(false);
+        roofTopMaterialPanelHouse1.SetActive(false);
 
         livingRoomMaterialPanelHouse2.SetActive(false);
         drawingRoomMaterialPanelHouse2.SetActive(false);
@@ -160,6 +166,7 @@ public class HouseInteraction : MonoBehaviour
         bedroom2MaterialPanelHouse2.SetActive(false);
         masterBedroomMaterialPanelHouse2.SetActive(false);
         loungeMaterialPanelHouse2.SetActive(false);
+        roofTopMaterialPanelHouse2.SetActive(false);
 
         livingRoomMaterialPanelHouse3.SetActive(false);
         drawingRoomMaterialPanelHouse3.SetActive(false);
@@ -169,6 +176,7 @@ public class HouseInteraction : MonoBehaviour
         bedroom2MaterialPanelHouse3.SetActive(false);
         masterBedroomMaterialPanelHouse3.SetActive(false);
         loungeMaterialPanelHouse3.SetActive(false);
+        roofTopMaterialPanelHouse3.SetActive(false);
 
     }
 
@@ -412,6 +420,12 @@ public class HouseInteraction : MonoBehaviour
         CheckAndToggleOnScreenMessageForHouse(1);
     }
 
+    public void OnRoofTopButtonClickedHouse1()
+    {
+        ShowRoomMaterialPanel("House1LampPost", "RoofTop");
+        CheckAndToggleOnScreenMessageForHouse(1);
+    }
+
     public void OnLivingRoomButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "LivingRoom");
@@ -457,6 +471,11 @@ public class HouseInteraction : MonoBehaviour
     public void OnLoungeButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "Lounge");
+        CheckAndToggleOnScreenMessageForHouse(2);
+    }
+    public void OnRoofTopButtonClickedHouse2()
+    {
+        ShowRoomMaterialPanel("House2LampPost", "RoofTop");
         CheckAndToggleOnScreenMessageForHouse(2);
     }
 
@@ -508,6 +527,12 @@ public class HouseInteraction : MonoBehaviour
         CheckAndToggleOnScreenMessageForHouse(3);
     }
 
+    public void OnRoofTopButtonClickedHouse3()
+    {
+        ShowRoomMaterialPanel("House3LampPost", "RoofTop");
+        CheckAndToggleOnScreenMessageForHouse(3);
+    }
+
     private void CheckAndToggleOnScreenMessageForHouse(int houseNumber)
     {
         bool groundFloorActive = false;
@@ -522,7 +547,7 @@ public class HouseInteraction : MonoBehaviour
 
                 firstFloorActive = CheckActiveMaterialPanelForHouse(
                     bedroom1MaterialPanelHouse1, bedroom2MaterialPanelHouse1,
-                    masterBedroomMaterialPanelHouse1, loungeMaterialPanelHouse1);
+                    masterBedroomMaterialPanelHouse1, loungeMaterialPanelHouse1, roofTopMaterialPanelHouse1);
 
                 messageGroundFloorHouse1.SetActive(!groundFloorActive && groundFloorPanelHouse1.activeSelf);
                 messageFirstFloorHouse1.SetActive(!firstFloorActive && firstFloorPanelHouse1.activeSelf);
@@ -535,7 +560,7 @@ public class HouseInteraction : MonoBehaviour
 
                 firstFloorActive = CheckActiveMaterialPanelForHouse(
                     bedroom1MaterialPanelHouse2, bedroom2MaterialPanelHouse2,
-                    masterBedroomMaterialPanelHouse2, loungeMaterialPanelHouse2);
+                    masterBedroomMaterialPanelHouse2, loungeMaterialPanelHouse2, roofTopMaterialPanelHouse2);
 
                 messageGroundFloorHouse2.SetActive(!groundFloorActive && groundFloorPanelHouse2.activeSelf);
                 messageFirstFloorHouse2.SetActive(!firstFloorActive && firstFloorPanelHouse2.activeSelf);
@@ -548,7 +573,7 @@ public class HouseInteraction : MonoBehaviour
 
                 firstFloorActive = CheckActiveMaterialPanelForHouse(
                     bedroom1MaterialPanelHouse3, bedroom2MaterialPanelHouse3,
-                    masterBedroomMaterialPanelHouse3, loungeMaterialPanelHouse3);
+                    masterBedroomMaterialPanelHouse3, loungeMaterialPanelHouse3, roofTopMaterialPanelHouse3);
 
                 messageGroundFloorHouse3.SetActive(!groundFloorActive && groundFloorPanelHouse3.activeSelf);
                 messageFirstFloorHouse3.SetActive(!firstFloorActive && firstFloorPanelHouse3.activeSelf);
