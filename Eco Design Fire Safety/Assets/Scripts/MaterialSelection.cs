@@ -12,13 +12,13 @@ public class MaterialSelection : MonoBehaviour
 
     }
 
-    public Room livingRoomHouse1, drawingRoomHouse1, guestRoomHouse1, kitchenHouse1,
+    public Room livingRoomHouse1, drawingRoomHouse1, guestRoomHouse1, kitchenHouse1, staircaseHouse1,
                 bedroom1House1, bedroom2House1, masterBedroomHouse1, loungeHouse1, roofTopHouse1;
 
-    public Room livingRoomHouse2, drawingRoomHouse2, guestRoomHouse2, kitchenHouse2,
+    public Room livingRoomHouse2, drawingRoomHouse2, guestRoomHouse2, kitchenHouse2, staircaseHouse2,
                 bedroom1House2, bedroom2House2, masterBedroomHouse2, loungeHouse2, roofTopHouse2;
 
-    public Room livingRoomHouse3, drawingRoomHouse3, guestRoomHouse3, kitchenHouse3,
+    public Room livingRoomHouse3, drawingRoomHouse3, guestRoomHouse3, kitchenHouse3, staircaseHouse3,
                 bedroom1House3, bedroom2House3, masterBedroomHouse3, loungeHouse3, roofTopHouse3;
 
     public void ApplyMaterial(string houseTag, string roomName, Material wallMaterial, Material floorMaterial)
@@ -60,6 +60,7 @@ public class MaterialSelection : MonoBehaviour
             case "DrawingRoom": return drawingRoomHouse1;
             case "GuestRoom": return guestRoomHouse1;
             case "Kitchen": return kitchenHouse1;
+            case "Staircase": return staircaseHouse1;
             case "Bedroom1": return bedroom1House1;
             case "Bedroom2": return bedroom2House1;
             case "MasterBedroom": return masterBedroomHouse1;
@@ -77,6 +78,7 @@ public class MaterialSelection : MonoBehaviour
             case "DrawingRoom": return drawingRoomHouse2;
             case "GuestRoom": return guestRoomHouse2;
             case "Kitchen": return kitchenHouse2;
+            case "Staircase": return staircaseHouse2;
             case "Bedroom1": return bedroom1House2;
             case "Bedroom2": return bedroom2House2;
             case "MasterBedroom": return masterBedroomHouse2;
@@ -95,6 +97,7 @@ public class MaterialSelection : MonoBehaviour
             case "DrawingRoom": return drawingRoomHouse3;
             case "GuestRoom": return guestRoomHouse3;
             case "Kitchen": return kitchenHouse3;
+            case "Staircase": return staircaseHouse3;
             case "Bedroom1": return bedroom1House3;
             case "Bedroom2": return bedroom2House3;
             case "MasterBedroom": return masterBedroomHouse3;

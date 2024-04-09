@@ -28,6 +28,7 @@ public class HouseInteraction : MonoBehaviour
     public GameObject masterBedroomMaterialPanelHouse1;
     public GameObject loungeMaterialPanelHouse1;
     public GameObject roofTopMaterialPanelHouse1;
+    public GameObject staircaseMaterialPanelHouse1;
 
     public GameObject livingRoomMaterialPanelHouse2;
     public GameObject drawingRoomMaterialPanelHouse2;
@@ -38,6 +39,7 @@ public class HouseInteraction : MonoBehaviour
     public GameObject masterBedroomMaterialPanelHouse2;
     public GameObject loungeMaterialPanelHouse2;
     public GameObject roofTopMaterialPanelHouse2;
+    public GameObject staircaseMaterialPanelHouse2;
 
     public GameObject livingRoomMaterialPanelHouse3;
     public GameObject drawingRoomMaterialPanelHouse3;
@@ -48,6 +50,7 @@ public class HouseInteraction : MonoBehaviour
     public GameObject masterBedroomMaterialPanelHouse3;
     public GameObject loungeMaterialPanelHouse3;
     public GameObject roofTopMaterialPanelHouse3;
+    public GameObject staircaseMaterialPanelHouse3;
 
     public GameObject messageGroundFloorHouse1;
     public GameObject messageFirstFloorHouse1;
@@ -129,6 +132,8 @@ public class HouseInteraction : MonoBehaviour
                 return houseNumber == 1 ? guestRoomMaterialPanelHouse1 : (houseNumber == 2 ? guestRoomMaterialPanelHouse2 : guestRoomMaterialPanelHouse3);
             case "Kitchen":
                 return houseNumber == 1 ? kitchenMaterialPanelHouse1 : (houseNumber == 2 ? kitchenMaterialPanelHouse2 : kitchenMaterialPanelHouse3);
+            case "Staircase":
+                return houseNumber == 1 ? staircaseMaterialPanelHouse1 : (houseNumber == 2 ? staircaseMaterialPanelHouse2 : staircaseMaterialPanelHouse3);
             case "Bedroom1":
                 return houseNumber == 1 ? bedroom1MaterialPanelHouse1 : (houseNumber == 2 ? bedroom1MaterialPanelHouse2 : bedroom1MaterialPanelHouse3);
             case "Bedroom2":
@@ -152,6 +157,7 @@ public class HouseInteraction : MonoBehaviour
         drawingRoomMaterialPanelHouse1.SetActive(false);
         guestRoomMaterialPanelHouse1.SetActive(false);
         kitchenMaterialPanelHouse1.SetActive(false);
+        staircaseMaterialPanelHouse1.SetActive(false);
         bedroom1MaterialPanelHouse1.SetActive(false);
         bedroom2MaterialPanelHouse1.SetActive(false);
         masterBedroomMaterialPanelHouse1.SetActive(false);
@@ -162,6 +168,7 @@ public class HouseInteraction : MonoBehaviour
         drawingRoomMaterialPanelHouse2.SetActive(false);
         guestRoomMaterialPanelHouse2.SetActive(false);
         kitchenMaterialPanelHouse2.SetActive(false);
+        staircaseMaterialPanelHouse2.SetActive(false);
         bedroom1MaterialPanelHouse2.SetActive(false);
         bedroom2MaterialPanelHouse2.SetActive(false);
         masterBedroomMaterialPanelHouse2.SetActive(false);
@@ -172,6 +179,7 @@ public class HouseInteraction : MonoBehaviour
         drawingRoomMaterialPanelHouse3.SetActive(false);
         guestRoomMaterialPanelHouse3.SetActive(false);
         kitchenMaterialPanelHouse3.SetActive(false);
+        staircaseMaterialPanelHouse3.SetActive(false);
         bedroom1MaterialPanelHouse3.SetActive(false);
         bedroom2MaterialPanelHouse3.SetActive(false);
         masterBedroomMaterialPanelHouse3.SetActive(false);
@@ -396,6 +404,12 @@ public class HouseInteraction : MonoBehaviour
         CheckAndToggleOnScreenMessageForHouse(1);
     }
 
+    public void OnStaircaseButtonClickedHouse1()
+    {
+        ShowRoomMaterialPanel("House1LampPost", "Staircase");
+        CheckAndToggleOnScreenMessageForHouse(1);
+    }
+
     public void OnBedroom1ButtonClickedHouse1()
     {
         ShowRoomMaterialPanel("House1LampPost", "Bedroom1");
@@ -447,6 +461,12 @@ public class HouseInteraction : MonoBehaviour
     public void OnKitchenButtonClickedHouse2()
     {
         ShowRoomMaterialPanel("House2LampPost", "Kitchen");
+        CheckAndToggleOnScreenMessageForHouse(2);
+    }
+
+    public void OnStaircaseButtonClickedHouse2()
+    {
+        ShowRoomMaterialPanel("House2LampPost", "Staircase");
         CheckAndToggleOnScreenMessageForHouse(2);
     }
 
@@ -503,6 +523,12 @@ public class HouseInteraction : MonoBehaviour
         CheckAndToggleOnScreenMessageForHouse(3);
     }
 
+    public void OnStaircaseButtonClickedHouse3()
+    {
+        ShowRoomMaterialPanel("House3LampPost", "Staircase");
+        CheckAndToggleOnScreenMessageForHouse(3);
+    }
+
     public void OnBedroom1ButtonClickedHouse3()
     {
         ShowRoomMaterialPanel("House3LampPost", "Bedroom1");
@@ -543,7 +569,7 @@ public class HouseInteraction : MonoBehaviour
             case 1:
                 groundFloorActive = CheckActiveMaterialPanelForHouse(
                     livingRoomMaterialPanelHouse1, drawingRoomMaterialPanelHouse1,
-                    guestRoomMaterialPanelHouse1, kitchenMaterialPanelHouse1);
+                    guestRoomMaterialPanelHouse1, kitchenMaterialPanelHouse1, staircaseMaterialPanelHouse1);
 
                 firstFloorActive = CheckActiveMaterialPanelForHouse(
                     bedroom1MaterialPanelHouse1, bedroom2MaterialPanelHouse1,
@@ -556,7 +582,7 @@ public class HouseInteraction : MonoBehaviour
             case 2:
                 groundFloorActive = CheckActiveMaterialPanelForHouse(
                     livingRoomMaterialPanelHouse2, drawingRoomMaterialPanelHouse2,
-                    guestRoomMaterialPanelHouse2, kitchenMaterialPanelHouse2);
+                    guestRoomMaterialPanelHouse2, kitchenMaterialPanelHouse2, staircaseMaterialPanelHouse2);
 
                 firstFloorActive = CheckActiveMaterialPanelForHouse(
                     bedroom1MaterialPanelHouse2, bedroom2MaterialPanelHouse2,
@@ -569,7 +595,7 @@ public class HouseInteraction : MonoBehaviour
             case 3:
                 groundFloorActive = CheckActiveMaterialPanelForHouse(
                     livingRoomMaterialPanelHouse3, drawingRoomMaterialPanelHouse3,
-                    guestRoomMaterialPanelHouse3, kitchenMaterialPanelHouse3);
+                    guestRoomMaterialPanelHouse3, kitchenMaterialPanelHouse3, staircaseMaterialPanelHouse3);
 
                 firstFloorActive = CheckActiveMaterialPanelForHouse(
                     bedroom1MaterialPanelHouse3, bedroom2MaterialPanelHouse3,
