@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: Steel
   material: {fileID: 2100000, guid: b3a004c37cb87344fa8c902506d30c6a, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 10
+  sustainabilityScore: 5

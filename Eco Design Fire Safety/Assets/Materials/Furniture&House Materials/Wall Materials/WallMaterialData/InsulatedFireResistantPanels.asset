@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: InsulatedFireResistantPanels
   material: {fileID: 2100000, guid: 2a663bc409b3410468673e218c6d08a5, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 10
+  sustainabilityScore: 7

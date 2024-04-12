@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: ConcreteFlooring
   material: {fileID: 2100000, guid: 5586ac7213ac7dc43b291e05dbd551e1, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 10
+  sustainabilityScore: 6

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: RecycledPlastic
   material: {fileID: 2100000, guid: 18407b7cbbe8c1547b9d2ce310394a1e, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 5
+  sustainabilityScore: 10

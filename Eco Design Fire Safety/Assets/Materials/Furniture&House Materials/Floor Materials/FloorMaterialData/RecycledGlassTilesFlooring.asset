@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: RecycledGlassTilesFlooring
   material: {fileID: 2100000, guid: 258e0cd20fd84cf43bd0731b9a67d4f6, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 10
+  sustainabilityScore: 10

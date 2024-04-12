@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: CalciumSilicateBoard
   material: {fileID: 2100000, guid: 935c25c95936be848a5b3e36f45f310a, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 8
+  sustainabilityScore: 7

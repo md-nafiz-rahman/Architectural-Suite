@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: FiberCementSiding
   material: {fileID: 2100000, guid: 23241b1eec58d7943bb019c9ca8f0c81, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 9
+  sustainabilityScore: 6

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: Cardboard
   material: {fileID: 2100000, guid: a4e1447cf5821c643842ef2e88a1f173, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 4
+  sustainabilityScore: 9

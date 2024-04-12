@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: LinoleumFlooring
   material: {fileID: 2100000, guid: 2f13b031691ad53418d5172f61f375a8, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 6
+  sustainabilityScore: 9

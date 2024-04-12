@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: CrossLaminatedTimber
   material: {fileID: 2100000, guid: 3e737903d083e284cbcb17c76e9cc1af, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 7
+  sustainabilityScore: 10

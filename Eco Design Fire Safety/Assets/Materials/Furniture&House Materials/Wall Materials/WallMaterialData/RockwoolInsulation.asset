@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: RockwoolInsulation
   material: {fileID: 2100000, guid: 6771da62536b0ad4cb65dcb95cd46240, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 10
+  sustainabilityScore: 10

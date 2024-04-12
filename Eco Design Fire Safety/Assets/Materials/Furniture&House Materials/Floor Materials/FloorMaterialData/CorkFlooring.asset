@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: CorkFlooring
   material: {fileID: 2100000, guid: 6dc285ce875bda840b1e6bfd4f8eb5ae, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 8
+  sustainabilityScore: 10

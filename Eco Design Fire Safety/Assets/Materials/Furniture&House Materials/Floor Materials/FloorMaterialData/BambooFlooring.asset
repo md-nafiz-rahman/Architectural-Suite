@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: BambooFlooring
   material: {fileID: 2100000, guid: d90c3e0648760ac4f8ddba064421ee12, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 7
+  sustainabilityScore: 10

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: ResinFlooring
   material: {fileID: 2100000, guid: 4d122eac8f5a20c41bb48dc54f4c26db, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 7
+  sustainabilityScore: 5

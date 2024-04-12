@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: InsulatedConcrete
   material: {fileID: 2100000, guid: 363b40b76174a50409184390a3dfbde8, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 10
+  sustainabilityScore: 6

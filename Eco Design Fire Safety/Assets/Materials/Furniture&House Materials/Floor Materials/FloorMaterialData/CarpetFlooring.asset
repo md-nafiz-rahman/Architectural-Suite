@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: Carpet Flooring
   material: {fileID: 2100000, guid: 0531079dd368ba647adeb24d9e117e7e, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 5
+  sustainabilityScore: 7

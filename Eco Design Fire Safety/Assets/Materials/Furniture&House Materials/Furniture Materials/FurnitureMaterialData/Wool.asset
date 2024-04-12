@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: Wool
   material: {fileID: 2100000, guid: ea57f95cd9c2e864d995a13c5fc60469, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 7
+  sustainabilityScore: 8

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: BasaltBasedCladding
   material: {fileID: 2100000, guid: 6687ce5935fb93446b6a9262c8fcb02c, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 8
+  sustainabilityScore: 8

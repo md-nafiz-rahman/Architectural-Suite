@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: WoodCarpetFlooring
   material: {fileID: 2100000, guid: 3186abfd25c8ea14fb92b03283b8be2d, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 8
+  sustainabilityScore: 8

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: HempFabric
   material: {fileID: 2100000, guid: c408fe0926c7fe34ea7d46ecba2b4466, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 6
+  sustainabilityScore: 9

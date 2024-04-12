@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: GypsumBoard
   material: {fileID: 2100000, guid: b5b31366c3f712a4d8d90bf25087b342, type: 2}
-  fireSafetyScore: 0
-  sustainabilityScore: 0
+  fireSafetyScore: 7
+  sustainabilityScore: 5
