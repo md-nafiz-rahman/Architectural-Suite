@@ -12,6 +12,8 @@ public class MaterialSelection : MonoBehaviour
 
     }
 
+    private Dictionary<string, MaterialData> currentMaterials = new Dictionary<string, MaterialData>();
+
     public Room livingRoomHouse1, drawingRoomHouse1, guestRoomHouse1, kitchenHouse1, staircaseHouse1,
                 bedroom1House1, bedroom2House1, masterBedroomHouse1, loungeHouse1, roofTopHouse1;
 
@@ -112,15 +114,11 @@ public class MaterialSelection : MonoBehaviour
         Room room = GetRoomByHouseAndName(houseTag, roomName);
         if (room != null)
         {
+            string key = houseTag + roomName + "Wall";
+            UpdateScoresForRoom(key, materialData);
+
             foreach (GameObject wall in room.walls)
-            {
                 wall.GetComponent<Renderer>().material = materialData.material;
-                HouseScoreManager.Instance.UpdateScores(
-                    GetHouseIndex(houseTag),
-                    materialData.fireSafetyScore,
-                    materialData.sustainabilityScore
-                );
-            }
         }
     }
 
@@ -129,22 +127,42 @@ public class MaterialSelection : MonoBehaviour
         Room room = GetRoomByHouseAndName(houseTag, roomName);
         if (room != null)
         {
+            string key = houseTag + roomName + "Floor";
+            UpdateScoresForRoom(key, materialData);
+
             foreach (GameObject floor in room.floors)
-            {
                 floor.GetComponent<Renderer>().material = materialData.material;
-                HouseScoreManager.Instance.UpdateScores(
-                    GetHouseIndex(houseTag),
-                    materialData.fireSafetyScore,
-                    materialData.sustainabilityScore
-                );
-            }
         }
     }
 
 
     private int GetHouseIndex(string houseTag)
     {
-        return int.Parse(houseTag.Replace("House", "").Replace("LampPost", "")) - 1;
+        string numberStr = System.Text.RegularExpressions.Regex.Match(houseTag, @"\d+").Value;
+        return int.Parse(numberStr) - 1;
+    }
+
+
+    private void UpdateScoresForRoom(string key, MaterialData newMaterial)
+    {
+        if (currentMaterials.ContainsKey(key))
+        {
+            var oldMaterial = currentMaterials[key];
+            HouseScoreManager.Instance.UpdateScores(
+                GetHouseIndex(key.Substring(0, 10)),
+                newMaterial.fireSafetyScore - oldMaterial.fireSafetyScore,
+                newMaterial.sustainabilityScore - oldMaterial.sustainabilityScore
+            );
+        }
+        else
+        {
+            HouseScoreManager.Instance.UpdateScores(
+                GetHouseIndex(key.Substring(0, 10)),
+                newMaterial.fireSafetyScore,
+                newMaterial.sustainabilityScore
+            );
+        }
+        currentMaterials[key] = newMaterial; 
     }
 
 
