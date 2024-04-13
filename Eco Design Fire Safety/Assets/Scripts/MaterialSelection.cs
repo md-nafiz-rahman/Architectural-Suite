@@ -107,28 +107,45 @@ public class MaterialSelection : MonoBehaviour
         }
     }
 
-    public void ApplyWallMaterial(string houseTag, string roomName, Material material)
+    public void ApplyWallMaterial(string houseTag, string roomName, MaterialData materialData)
     {
         Room room = GetRoomByHouseAndName(houseTag, roomName);
         if (room != null)
         {
             foreach (GameObject wall in room.walls)
             {
-                wall.GetComponent<Renderer>().material = material;
+                wall.GetComponent<Renderer>().material = materialData.material;
+                HouseScoreManager.Instance.UpdateScores(
+                    GetHouseIndex(houseTag),
+                    materialData.fireSafetyScore,
+                    materialData.sustainabilityScore
+                );
             }
         }
     }
 
-    public void ApplyFloorMaterial(string houseTag, string roomName, Material material)
+    public void ApplyFloorMaterial(string houseTag, string roomName, MaterialData materialData)
     {
         Room room = GetRoomByHouseAndName(houseTag, roomName);
         if (room != null)
         {
             foreach (GameObject floor in room.floors)
             {
-                floor.GetComponent<Renderer>().material = material;
+                floor.GetComponent<Renderer>().material = materialData.material;
+                HouseScoreManager.Instance.UpdateScores(
+                    GetHouseIndex(houseTag),
+                    materialData.fireSafetyScore,
+                    materialData.sustainabilityScore
+                );
             }
         }
     }
+
+
+    private int GetHouseIndex(string houseTag)
+    {
+        return int.Parse(houseTag.Replace("House", "").Replace("LampPost", "")) - 1;
+    }
+
 
 }

@@ -628,16 +628,16 @@ public class HouseInteraction : MonoBehaviour
         string roomName = parts[1];
 
         MaterialData selectedMaterialData = isWall ? wallMaterials[materialIndex] : floorMaterials[materialIndex];
-        Material selectedMaterial = selectedMaterialData.material;
 
         if (isWall)
         {
-            materialSelection.ApplyWallMaterial(houseTag, roomName, selectedMaterial);
+            materialSelection.ApplyWallMaterial(houseTag, roomName, selectedMaterialData);
         }
         else
         {
-            materialSelection.ApplyFloorMaterial(houseTag, roomName, selectedMaterial);
+            materialSelection.ApplyFloorMaterial(houseTag, roomName, selectedMaterialData);
         }
     }
+
 
 }
