@@ -5,17 +5,21 @@ using UnityEngine;
 public class ItemPlacementHandler : MonoBehaviour
 {
     private Camera cam;
-    private bool isPlacing = false;
+    public bool isPlacing = false;
     private GameObject currentItem;
     private float currentRotation = 0f;
+    private MaterialData currentMaterialData; 
+
 
     void Start()
     {
         cam = Camera.main;
     }
 
-    public void BeginPlacement(GameObject itemPrefab)
+    public void BeginPlacement(GameObject itemPrefab, MaterialData materialData)
     {
+        currentMaterialData = materialData; 
+
         if (currentItem != null)
         {
             Destroy(currentItem);
@@ -63,6 +67,10 @@ public class ItemPlacementHandler : MonoBehaviour
     {
         if (isPlacing && currentItem != null)
         {
+            int houseIndex = CheckHouseColliderArea(currentItem.transform.position); 
+            
+            FurnitureScoreManager.Instance.AddFurniturePlacement(houseIndex, currentMaterialData);
+
             isPlacing = false;
             ToggleColliders(currentItem, true);
             currentItem = null;
@@ -71,6 +79,21 @@ public class ItemPlacementHandler : MonoBehaviour
             Cursor.visible = false;
         }
     }
+
+    private int CheckHouseColliderArea(Vector3 position)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(position, 0.1f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("House1FurnitureArea")) return 0;
+            if (hitCollider.CompareTag("House2FurnitureArea")) return 1;
+            if (hitCollider.CompareTag("House3FurnitureArea")) return 2;
+        }
+
+        return -1; 
+    }
+
+
 
     private void ToggleColliders(GameObject item, bool state)
     {

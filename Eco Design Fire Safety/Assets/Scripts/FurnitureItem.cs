@@ -17,5 +17,6 @@ public class FurnitureItem : ScriptableObject
     public string itemName; 
     public Sprite icon; 
     public GameObject prefab;
-    public FurnitureCategory category; 
+    public FurnitureCategory category;
+    public MaterialData materialData;
 }

@@ -48,9 +48,10 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void ShowMaterialSelectionPanel(FurnitureItem item)
+    public void ShowMaterialSelectionPanel(FurnitureItem item, MaterialData materialData)
     {
         selectedItemForPlacement = item;
+        selectedItemForPlacement.materialData = materialData; 
 
         Image selectedItemImage = materialSelectionPanel.transform.Find("SelectedItemImage").GetComponent<Image>();
         if (selectedItemImage != null)
@@ -65,6 +66,7 @@ public class InventoryManager : MonoBehaviour
         materialSelectionPanel.SetActive(true);
         inventoryCanvas.SetActive(false);
     }
+
 
     public void ShowInventoryUI()
     {
@@ -133,7 +135,7 @@ public class InventoryManager : MonoBehaviour
     {
         if (data.button == PointerEventData.InputButton.Right)
         {
-            ShowMaterialSelectionPanel(item);
+            ShowMaterialSelectionPanel(item, item.materialData);
         }
     }
 
@@ -217,7 +219,7 @@ public class InventoryManager : MonoBehaviour
         newSlot.GetComponent<Image>().sprite = item.icon;
 
         Button button = newSlot.GetComponent<Button>();
-        button.onClick.AddListener(() => ShowMaterialSelectionPanel(item));
+        button.onClick.AddListener(() => ShowMaterialSelectionPanel(item, item.materialData));
 
         EventTrigger trigger = newSlot.GetComponent<EventTrigger>() ?? newSlot.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();

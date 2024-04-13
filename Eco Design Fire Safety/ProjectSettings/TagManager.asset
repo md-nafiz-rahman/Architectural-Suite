@@ -8,6 +8,9 @@ TagManager:
   - House2LampPost
   - House3LampPost
   - MaterialButton
+  - House1FurnitureArea
+  - House2FurnitureArea
+  - House3FurnitureArea
   layers:
   - Default
   - TransparentFX
