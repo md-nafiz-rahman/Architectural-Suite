@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class Furniture : MonoBehaviour
 {
-    public FurnitureItem furnitureItem; 
+    public FurnitureItem furnitureItem;
+    public MaterialData materialData;
 
 }
 

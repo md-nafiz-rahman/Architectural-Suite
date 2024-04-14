@@ -1,10 +1,22 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FurnitureScoreManager : MonoBehaviour
 {
+    [System.Serializable]
+    public class MaterialDataEntry
+    {
+        public string key;
+        public MaterialData value;
+    }
+
+
+    public List<MaterialDataEntry> materialEntries = new List<MaterialDataEntry>();
+    private Dictionary<string, MaterialData> allMaterials = new Dictionary<string, MaterialData>();
+
+    private List<Furniture>[] houseFurnitures;
     private float[] fireSafetyScores;
     private float[] sustainabilityScores;
-    private int[] furnitureCounts;
 
     public static FurnitureScoreManager Instance;
 
@@ -13,9 +25,19 @@ public class FurnitureScoreManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            fireSafetyScores = new float[3];
-            sustainabilityScores = new float[3];
-            furnitureCounts = new int[3];
+            int numHouses = 3;
+            houseFurnitures = new List<Furniture>[numHouses];
+            fireSafetyScores = new float[numHouses];
+            sustainabilityScores = new float[numHouses];
+            for (int i = 0; i < numHouses; i++)
+            {
+                houseFurnitures[i] = new List<Furniture>();
+            }
+
+            foreach (var entry in materialEntries)
+            {
+                allMaterials.Add(entry.key, entry.value);
+            }
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -24,45 +46,69 @@ public class FurnitureScoreManager : MonoBehaviour
         }
     }
 
-    public void AddFurniturePlacement(int houseIndex, MaterialData materialData)
+    public void AddFurniturePlacement(int houseIndex, Furniture furniture)
     {
-        if (houseIndex < 0 || houseIndex >= furnitureCounts.Length)
-            return;
-
-        if (materialData != null)
+        if (houseIndex < 0 || houseIndex >= fireSafetyScores.Length || furniture == null)
         {
-            furnitureCounts[houseIndex]++;
-
-            float weightedScore;
-            if (furnitureCounts[houseIndex] <= 10)
-            {
-                weightedScore = 5.0f;  // Max weighted score per furniture if <= 10 pieces
-            }
-            else
-            {
-                weightedScore = 50.0f / furnitureCounts[houseIndex];  // Adjust weighted score if > 10 pieces
-            }
-
-            // Scale the actual scores to a maximum of 10
-            float scaledFireSafetyScore = materialData.fireSafetyScore / 10.0f;
-            float scaledSustainabilityScore = materialData.sustainabilityScore / 10.0f;
-
-            // Multiply by weightedScore to adjust according to the number of furniture pieces
-            fireSafetyScores[houseIndex] += scaledFireSafetyScore * weightedScore;
-            sustainabilityScores[houseIndex] += scaledSustainabilityScore * weightedScore;
+            Debug.LogError("Invalid furniture addition attempt.");
+            return;
         }
 
-        Debug.Log($"House {houseIndex + 1} - Furniture count: {furnitureCounts[houseIndex]}, " +
-                  $"Total Fire Safety Score: {fireSafetyScores[houseIndex]}, " +
-                  $"Total Sustainability Score: {sustainabilityScores[houseIndex]}");
+        houseFurnitures[houseIndex].Add(furniture);
+        RecalculateScores(houseIndex);
     }
+
+    public void RemoveFurniturePlacement(int houseIndex, Furniture furniture)
+    {
+        if (houseIndex < 0 || houseIndex >= fireSafetyScores.Length)
+        {
+            Debug.LogError("Invalid house index for removal.");
+            return;
+        }
+
+        if (houseFurnitures[houseIndex].Contains(furniture))
+        {
+            houseFurnitures[houseIndex].Remove(furniture);
+            RecalculateScores(houseIndex);
+        }
+        else
+        {
+            Debug.LogError("Attempted to remove furniture not found in the current house.");
+        }
+    }
+
+    private void RecalculateScores(int houseIndex)
+    {
+        fireSafetyScores[houseIndex] = 0;
+        sustainabilityScores[houseIndex] = 0;
+        int totalItems = houseFurnitures[houseIndex].Count;
+
+        foreach (var furniture in houseFurnitures[houseIndex])
+        {
+            float weightedScore = CalculateWeightedScore(totalItems);
+            fireSafetyScores[houseIndex] += (furniture.materialData.fireSafetyScore / 10.0f) * weightedScore;
+            sustainabilityScores[houseIndex] += (furniture.materialData.sustainabilityScore / 10.0f) * weightedScore;
+        }
+
+        fireSafetyScores[houseIndex] = Mathf.Min(fireSafetyScores[houseIndex], 50.0f);
+        sustainabilityScores[houseIndex] = Mathf.Min(sustainabilityScores[houseIndex], 50.0f);
+        Debug.Log($"Updated Scores - House {houseIndex + 1}: Fire Safety: {fireSafetyScores[houseIndex]}, Sustainability: {sustainabilityScores[houseIndex]}");
+
+    }
+
+    private float CalculateWeightedScore(int count)
+    {
+        return count > 10 ? 50.0f / count : 5.0f;
+    }
+
+
 
     public float GetTotalFireSafetyScore(int houseIndex)
     {
         if (houseIndex < 0 || houseIndex >= fireSafetyScores.Length)
             return 0;
         return fireSafetyScores[houseIndex];
-    }
+    } 
 
     public float GetTotalSustainabilityScore(int houseIndex)
     {
@@ -70,4 +116,18 @@ public class FurnitureScoreManager : MonoBehaviour
             return 0;
         return sustainabilityScores[houseIndex];
     }
+
+    private class MaterialDataComparer : IEqualityComparer<MaterialData>
+    {
+        public bool Equals(MaterialData x, MaterialData y)
+        {
+            return x.materialName == y.materialName;
+        }
+
+        public int GetHashCode(MaterialData obj)
+        {
+            return obj.materialName.GetHashCode();
+        }
+    }
+
 }

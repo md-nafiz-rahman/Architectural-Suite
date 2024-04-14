@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b6d8ce96de502a468fde644e80b0df9, type: 3}
-  m_Name: Bamboo
+  m_Name: RecycledPlasticFurniture
   m_EditorClassIdentifier: 
-  materialName: Bamboo
-  material: {fileID: 2100000, guid: ebf30b0af8c0ce94a8d8583eb2afd45c, type: 2}
-  fireSafetyScore: 8
+  materialName: RecycledPlasticFurniture
+  material: {fileID: 2100000, guid: 18407b7cbbe8c1547b9d2ce310394a1e, type: 2}
+  fireSafetyScore: 5
   sustainabilityScore: 10

@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class InteractionManager : MonoBehaviour
 {
-    public InventoryManager inventoryManager; 
+    public InventoryManager inventoryManager;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) 
+        if (Input.GetKeyDown(KeyCode.E))
         {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -16,10 +16,30 @@ public class InteractionManager : MonoBehaviour
                 Furniture furnitureComponent = hit.collider.GetComponentInParent<Furniture>();
                 if (furnitureComponent != null)
                 {
+                    int houseIndex = IdentifyHouseIndex(furnitureComponent.transform.position);
+                    if (houseIndex != -1)
+                    {
+                        FurnitureScoreManager.Instance.RemoveFurniturePlacement(houseIndex, furnitureComponent);
+                    }
+
                     inventoryManager.AddItemToInventory(furnitureComponent.furnitureItem);
-                    furnitureComponent.gameObject.SetActive(false); 
+                    furnitureComponent.gameObject.SetActive(false);
                 }
             }
         }
+    }
+
+
+    private int IdentifyHouseIndex(Vector3 position)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(position, 0.1f);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("House1FurnitureArea")) return 0;
+            if (hitCollider.CompareTag("House2FurnitureArea")) return 1;
+            if (hitCollider.CompareTag("House3FurnitureArea")) return 2;
+        }
+
+        return -1; 
     }
 }

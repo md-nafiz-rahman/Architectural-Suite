@@ -89,16 +89,30 @@ public class ItemPlacementHandler : MonoBehaviour
         if (isPlacing && currentItem != null)
         {
             int houseIndex = CheckHouseColliderArea(currentItem.transform.position);
+            if (houseIndex != -1)
+            {
+                Furniture furnitureComponent = currentItem.GetComponent<Furniture>() ?? currentItem.AddComponent<Furniture>();
+                furnitureComponent.materialData = currentMaterialData; 
 
-            FurnitureScoreManager.Instance.AddFurniturePlacement(houseIndex, currentMaterialData);
+                FurnitureScoreManager.Instance.AddFurniturePlacement(houseIndex, furnitureComponent);
+            }
+            else
+            {
+                Debug.Log("Placed furniture outside of any designated house area. It will not contribute to scores.");
+            }
 
-            isPlacing = false;
-            ToggleColliders(currentItem, true);
-            currentItem = null;
-            Time.timeScale = 1f;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            FinalizePlacement();
         }
+    }
+
+    private void FinalizePlacement()
+    {
+        isPlacing = false;
+        ToggleColliders(currentItem, true);
+        currentItem = null;
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private int CheckHouseColliderArea(Vector3 position)

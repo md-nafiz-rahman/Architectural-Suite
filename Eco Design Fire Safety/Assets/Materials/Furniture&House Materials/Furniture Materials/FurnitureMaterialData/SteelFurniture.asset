@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b6d8ce96de502a468fde644e80b0df9, type: 3}
-  m_Name: Wool
+  m_Name: SteelFurniture
   m_EditorClassIdentifier: 
-  materialName: Wool
-  material: {fileID: 2100000, guid: ea57f95cd9c2e864d995a13c5fc60469, type: 2}
-  fireSafetyScore: 7
-  sustainabilityScore: 8
+  materialName: SteelFurniture
+  material: {fileID: 2100000, guid: b3a004c37cb87344fa8c902506d30c6a, type: 2}
+  fireSafetyScore: 10
+  sustainabilityScore: 5

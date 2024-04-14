@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b6d8ce96de502a468fde644e80b0df9, type: 3}
-  m_Name: Ecoboard
+  m_Name: AluminiumFurniture
   m_EditorClassIdentifier: 
-  materialName: Ecoboard
-  material: {fileID: 2100000, guid: ad0dfffa9d4902b439ef17858148950d, type: 2}
-  fireSafetyScore: 5
-  sustainabilityScore: 9
+  materialName: AluminiumFurniture
+  material: {fileID: 2100000, guid: 3c38e02885137534cab22eef8b9c0b60, type: 2}
+  fireSafetyScore: 10
+  sustainabilityScore: 7
