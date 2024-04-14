@@ -8,7 +8,9 @@ public class ItemPlacementHandler : MonoBehaviour
     public bool isPlacing = false;
     private GameObject currentItem;
     private float currentRotation = 0f;
-    private MaterialData currentMaterialData; 
+    private MaterialData currentMaterialData;
+    public Material defaultMaterial; 
+
 
 
     void Start()
@@ -18,13 +20,15 @@ public class ItemPlacementHandler : MonoBehaviour
 
     public void BeginPlacement(GameObject itemPrefab, MaterialData materialData)
     {
-        currentMaterialData = materialData; 
+        currentMaterialData = materialData;
 
         if (currentItem != null)
         {
             Destroy(currentItem);
         }
+
         currentItem = Instantiate(itemPrefab);
+        ApplyMaterial(currentItem, materialData);
         currentItem.transform.rotation = Quaternion.Euler(Vector3.up * currentRotation);
         isPlacing = true;
 
@@ -33,6 +37,23 @@ public class ItemPlacementHandler : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+
+    private void ApplyMaterial(GameObject item, MaterialData materialData)
+    {
+        Renderer renderer = item.GetComponent<Renderer>();
+        if (renderer == null)
+        {
+            renderer = item.GetComponentInChildren<Renderer>();
+        }
+        if (renderer != null)
+        {
+            renderer.material = materialData.material;
+        }
+        else
+        {
+            renderer.material = defaultMaterial;  
+        }
     }
 
     void Update()
@@ -67,8 +88,8 @@ public class ItemPlacementHandler : MonoBehaviour
     {
         if (isPlacing && currentItem != null)
         {
-            int houseIndex = CheckHouseColliderArea(currentItem.transform.position); 
-            
+            int houseIndex = CheckHouseColliderArea(currentItem.transform.position);
+
             FurnitureScoreManager.Instance.AddFurniturePlacement(houseIndex, currentMaterialData);
 
             isPlacing = false;
@@ -90,7 +111,7 @@ public class ItemPlacementHandler : MonoBehaviour
             if (hitCollider.CompareTag("House3FurnitureArea")) return 2;
         }
 
-        return -1; 
+        return -1;
     }
 
 

@@ -26,7 +26,7 @@ public class PlacementManager : MonoBehaviour
         if (itemPlacementHandler != null)
         {
             selectedItem = item;
-            itemPlacementHandler.BeginPlacement(item.prefab, item.materialData); 
+            itemPlacementHandler.BeginPlacement(item.prefab, item.materialData);
             inventoryManager.HideInventoryUI();
         }
     }

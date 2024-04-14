@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: Default Furniture Material
   material: {fileID: 2100000, guid: 591b0928b3d6dbb458b189515d2314b2, type: 2}
-  fireSafetyScore: 5
-  sustainabilityScore: 5
+  fireSafetyScore: 0
+  sustainabilityScore: 0

@@ -5,17 +5,17 @@ using UnityEngine.EventSystems;
 
 public class InventoryManager : MonoBehaviour
 {
-    public GameObject slotPrefab; 
+    public GameObject slotPrefab;
     public GameObject inventoryCanvas;
     public Transform inventoryContentPanel;
     public GameObject emptyInventoryText;
-    public GameObject bedsEmptyText; 
-    private List<GameObject> inventorySlots = new List<GameObject>(); 
-    private List<FurnitureItem> furnitureItems = new List<FurnitureItem>(); 
-    public PlacementManager placementManager; 
+    public GameObject bedsEmptyText;
+    private List<GameObject> inventorySlots = new List<GameObject>();
+    private List<FurnitureItem> furnitureItems = new List<FurnitureItem>();
+    public PlacementManager placementManager;
     public GameObject confirmationPanel;
-    public GameObject allFurnitureScrollView; 
-    public GameObject bedsScrollView; 
+    public GameObject allFurnitureScrollView;
+    public GameObject bedsScrollView;
     public FurnitureItem selectedItemForPlacement;
 
     public GameObject tableDeskScrollView;
@@ -34,6 +34,8 @@ public class InventoryManager : MonoBehaviour
 
     public List<FurnitureItem> predefinedFurnitureItems = new List<FurnitureItem>();
     public GameObject materialSelectionPanel;
+    public GameObject currentItemForPlacement = null;
+    public MaterialData defaultMaterialData; 
 
 
 
@@ -51,7 +53,7 @@ public class InventoryManager : MonoBehaviour
     public void ShowMaterialSelectionPanel(FurnitureItem item, MaterialData materialData)
     {
         selectedItemForPlacement = item;
-        selectedItemForPlacement.materialData = materialData; 
+        selectedItemForPlacement.materialData = materialData;
 
         Image selectedItemImage = materialSelectionPanel.transform.Find("SelectedItemImage").GetComponent<Image>();
         if (selectedItemImage != null)
@@ -67,6 +69,34 @@ public class InventoryManager : MonoBehaviour
         inventoryCanvas.SetActive(false);
     }
 
+    public void PrepareItemForPlacement(FurnitureItem item, MaterialData materialData)
+    {
+        MaterialData useMaterial = materialData ?? item.materialData;
+
+        if (currentItemForPlacement != null)
+            Destroy(currentItemForPlacement);
+
+        GameObject itemInstance = Instantiate(item.prefab);
+        ApplyMaterialToInstance(itemInstance, useMaterial);
+
+        currentItemForPlacement = itemInstance;
+    }
+
+    private void ApplyMaterialToInstance(GameObject instance, MaterialData materialData)
+    {
+        Renderer[] renderers = instance.GetComponentsInChildren<Renderer>();
+        if (renderers.Length > 0)
+        {
+            foreach (Renderer rend in renderers)
+            {
+                rend.material = materialData.material;
+            }
+        }
+        else
+        {
+            Debug.LogError("No Renderer found on the instance to apply material.");
+        }
+    }
 
     public void ShowInventoryUI()
     {
@@ -80,18 +110,22 @@ public class InventoryManager : MonoBehaviour
         confirmationPanel.SetActive(true);
     }
 
-
     public void HideConfirmationPanel()
     {
-        confirmationPanel.SetActive(false); 
+        confirmationPanel.SetActive(false);
     }
 
     public void ConfirmPlacement()
     {
+        if (currentItemForPlacement == null)
+        {
+            PrepareItemForPlacement(selectedItemForPlacement, selectedItemForPlacement.materialData);
+        }
+
         placementManager.SelectItemForPlacement(selectedItemForPlacement);
         materialSelectionPanel.SetActive(false);
         HideInventoryUI();
-        HideConfirmationPanel(); 
+        HideConfirmationPanel();
         CheckIfInventoryIsEmpty();
     }
 
@@ -104,13 +138,13 @@ public class InventoryManager : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            Time.timeScale = 0f; 
+            Time.timeScale = 0f;
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            Time.timeScale = 1f; 
+            Time.timeScale = 1f;
         }
         UpdateInventoryUI();
     }
@@ -141,7 +175,7 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItemToInventory(FurnitureItem furnitureItem)
     {
-        furnitureItems.Add(furnitureItem); 
+        furnitureItems.Add(furnitureItem);
         UpdateInventoryUI();
         CheckIfInventoryIsEmpty();
     }
@@ -151,9 +185,9 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (GameObject slot in inventorySlots)
         {
-            Destroy(slot); 
+            Destroy(slot);
         }
-        inventorySlots.Clear(); 
+        inventorySlots.Clear();
     }
 
     private void UpdateInventoryUI()
@@ -246,10 +280,10 @@ public class InventoryManager : MonoBehaviour
     private void CheckIfInventoryIsEmpty()
     {
         bool isInventoryEmpty = furnitureItems.Count == 0;
-        emptyInventoryText.SetActive(isInventoryEmpty && allFurnitureScrollView.activeSelf); 
+        emptyInventoryText.SetActive(isInventoryEmpty && allFurnitureScrollView.activeSelf);
 
         bool isBedsEmpty = furnitureItems.FindAll(item => item.category == FurnitureCategory.Bed).Count == 0;
-        bedsEmptyText.SetActive(isBedsEmpty && bedsScrollView.activeSelf); 
+        bedsEmptyText.SetActive(isBedsEmpty && bedsScrollView.activeSelf);
     }
 
 
@@ -258,7 +292,7 @@ public class InventoryManager : MonoBehaviour
         if (furnitureItems.Contains(itemToRemove))
         {
             furnitureItems.Remove(itemToRemove);
-            UpdateInventoryUI(); 
+            UpdateInventoryUI();
             CheckIfInventoryIsEmpty();
         }
     }

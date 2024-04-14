@@ -15,19 +15,13 @@ public class MaterialButtonFurniture : MonoBehaviour
     {
         if (inventoryManager.selectedItemForPlacement != null)
         {
-            var prefab = inventoryManager.selectedItemForPlacement.prefab;
-            if (prefab != null)
-            {
-                Renderer renderer = prefab.GetComponent<Renderer>();
-                if (renderer == null)
-                {
-                    renderer = prefab.GetComponentInChildren<Renderer>();
-                }
-                if (renderer != null)
-                {
-                    renderer.material = materialData.material;
-                }
-            }
+            MaterialData materialToApply = materialData ?? inventoryManager.selectedItemForPlacement.materialData;
+
+            inventoryManager.PrepareItemForPlacement(inventoryManager.selectedItemForPlacement, materialToApply);
+
+            inventoryManager.ShowMaterialSelectionPanel(inventoryManager.selectedItemForPlacement, materialToApply);
+
         }
     }
+
 }
