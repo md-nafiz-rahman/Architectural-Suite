@@ -88,13 +88,34 @@ public class FurnitureScoreManager : MonoBehaviour
             float weightedScore = CalculateWeightedScore(totalItems);
             fireSafetyScores[houseIndex] += (furniture.materialData.fireSafetyScore / 10.0f) * weightedScore;
             sustainabilityScores[houseIndex] += (furniture.materialData.sustainabilityScore / 10.0f) * weightedScore;
+
+            if (IsInDoorObstructionZone(furniture.gameObject, houseIndex))
+            {
+                fireSafetyScores[houseIndex] -= 5; 
+            }
+        }
+        if (fireSafetyScores[houseIndex] < 0)
+        {
+            fireSafetyScores[houseIndex] = 0;
         }
 
         fireSafetyScores[houseIndex] = Mathf.Min(fireSafetyScores[houseIndex], 50.0f);
         sustainabilityScores[houseIndex] = Mathf.Min(sustainabilityScores[houseIndex], 50.0f);
         Debug.Log($"Updated Scores - House {houseIndex + 1}: Fire Safety: {fireSafetyScores[houseIndex]}, Sustainability: {sustainabilityScores[houseIndex]}");
-
     }
+
+    private bool IsInDoorObstructionZone(GameObject furniture, int houseIndex)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(furniture.transform.position, 0.1f);
+        string obstructionTag = $"DoorObstruction{houseIndex + 1}";
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag(obstructionTag))
+                return true;
+        }
+        return false;
+    }
+
 
     private float CalculateWeightedScore(int count)
     {
@@ -108,7 +129,7 @@ public class FurnitureScoreManager : MonoBehaviour
         if (houseIndex < 0 || houseIndex >= fireSafetyScores.Length)
             return 0;
         return fireSafetyScores[houseIndex];
-    } 
+    }
 
     public float GetTotalSustainabilityScore(int houseIndex)
     {

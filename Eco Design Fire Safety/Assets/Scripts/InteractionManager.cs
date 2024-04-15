@@ -9,9 +9,12 @@ public class InteractionManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             RaycastHit hit;
+            int layerMask = 1 << LayerMask.NameToLayer("IgnoreColliderRaycast");
+            layerMask = ~layerMask;
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit, 100.0f))
+            if (Physics.Raycast(ray, out hit, 100.0f, layerMask))
             {
                 Furniture furnitureComponent = hit.collider.GetComponentInParent<Furniture>();
                 if (furnitureComponent != null)
@@ -29,7 +32,6 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
-
     private int IdentifyHouseIndex(Vector3 position)
     {
         Collider[] hitColliders = Physics.OverlapSphere(position, 0.1f);
@@ -40,6 +42,6 @@ public class InteractionManager : MonoBehaviour
             if (hitCollider.CompareTag("House3FurnitureArea")) return 2;
         }
 
-        return -1; 
+        return -1;
     }
 }

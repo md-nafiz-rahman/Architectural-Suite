@@ -11,11 +11,12 @@ TagManager:
   - House1FurnitureArea
   - House2FurnitureArea
   - House3FurnitureArea
+  - DoorObstruction1
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - IgnoreColliderRaycast
   - Water
   - UI
   - 

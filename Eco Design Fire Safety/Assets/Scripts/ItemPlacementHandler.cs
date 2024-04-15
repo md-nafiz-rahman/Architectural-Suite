@@ -62,7 +62,11 @@ public class ItemPlacementHandler : MonoBehaviour
         {
             Ray ray = cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2));
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
+
+            int layerMask = LayerMask.GetMask("IgnoreColliderRaycast");
+            layerMask = ~layerMask; 
+
+            if (Physics.Raycast(ray, out hit, 100.0f, layerMask))
             {
                 currentItem.transform.position = hit.point;
                 currentItem.transform.rotation = Quaternion.Euler(Vector3.up * currentRotation);
@@ -72,6 +76,7 @@ public class ItemPlacementHandler : MonoBehaviour
             RotateItem(scroll);
         }
     }
+
 
     private void RotateItem(float scrollInput)
     {
