@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,8 @@ public class FurnitureScoreManager : MonoBehaviour
     private float[] sustainabilityScores;
 
     public static FurnitureScoreManager Instance;
+    public event Action OnScoresUpdated;
+
 
     private void Awake()
     {
@@ -108,6 +111,8 @@ public class FurnitureScoreManager : MonoBehaviour
 
         fireSafetyScores[houseIndex] = Mathf.Min(fireSafetyScores[houseIndex], 50.0f);
         sustainabilityScores[houseIndex] = Mathf.Min(sustainabilityScores[houseIndex], 50.0f);
+        OnScoresUpdated?.Invoke();
+
         Debug.Log($"Updated Scores - House {houseIndex + 1}: Fire Safety: {fireSafetyScores[houseIndex]}, Sustainability: {sustainabilityScores[houseIndex]}");
     }
 

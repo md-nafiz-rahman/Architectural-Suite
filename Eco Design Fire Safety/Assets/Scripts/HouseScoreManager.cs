@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class HouseScoreManager : MonoBehaviour
@@ -5,7 +6,9 @@ public class HouseScoreManager : MonoBehaviour
     public static HouseScoreManager Instance;
 
     private float[] fireSafetyScores; 
-    private float[] sustainabilityScores; 
+    private float[] sustainabilityScores;
+    public event Action OnScoresUpdated;
+
 
     private void Awake()
     {
@@ -30,6 +33,8 @@ public class HouseScoreManager : MonoBehaviour
 
         fireSafetyScores[houseIndex] += fireSafetyDelta * 0.25f; ;
         sustainabilityScores[houseIndex] += sustainabilityDelta * 0.25f;
+
+        OnScoresUpdated?.Invoke();
 
         Debug.Log($"Updated House {houseIndex + 1} Scores - Fire Safety: {fireSafetyScores[houseIndex]}, Sustainability: {sustainabilityScores[houseIndex]}");
     }
