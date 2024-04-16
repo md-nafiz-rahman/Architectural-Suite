@@ -12,6 +12,8 @@ TagManager:
   - House2FurnitureArea
   - House3FurnitureArea
   - DoorObstruction1
+  - DoorObstruction2
+  - DoorObstruction3
   layers:
   - Default
   - TransparentFX
