@@ -10,7 +10,7 @@ public class FurnitureScoreManager : MonoBehaviour
         public MaterialData value;
     }
 
-
+    public DoorObstructionPopup doorObstructionPopup;
     public List<MaterialDataEntry> materialEntries = new List<MaterialDataEntry>();
     private Dictionary<string, MaterialData> allMaterials = new Dictionary<string, MaterialData>();
 
@@ -82,6 +82,7 @@ public class FurnitureScoreManager : MonoBehaviour
         fireSafetyScores[houseIndex] = 0;
         sustainabilityScores[houseIndex] = 0;
         int totalItems = houseFurnitures[houseIndex].Count;
+        bool isObstructed = false;
 
         foreach (var furniture in houseFurnitures[houseIndex])
         {
@@ -91,9 +92,15 @@ public class FurnitureScoreManager : MonoBehaviour
 
             if (IsInDoorObstructionZone(furniture.gameObject, houseIndex))
             {
-                fireSafetyScores[houseIndex] -= 5; 
+                fireSafetyScores[houseIndex] -= 5;
+                isObstructed = true;
             }
         }
+        if (isObstructed && doorObstructionPopup != null)
+        {
+            doorObstructionPopup.ShowPopup();
+        }
+
         if (fireSafetyScores[houseIndex] < 0)
         {
             fireSafetyScores[houseIndex] = 0;
