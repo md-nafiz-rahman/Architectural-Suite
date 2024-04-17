@@ -268,7 +268,7 @@ public class InventoryManager : MonoBehaviour
         newSlot.GetComponent<Image>().sprite = furnitureItem.icon;
 
         TMP_Text quantityText = newSlot.transform.Find("QuantityText").GetComponent<TMP_Text>();
-        quantityText.text = "x" + furnitureCounts[furnitureItem]; // Update count text
+        quantityText.text = "x" + furnitureCounts[furnitureItem]; 
 
         Button button = newSlot.GetComponent<Button>();
         button.onClick.AddListener(() => ShowMaterialSelectionPanel(furnitureItem, furnitureItem.materialData));
