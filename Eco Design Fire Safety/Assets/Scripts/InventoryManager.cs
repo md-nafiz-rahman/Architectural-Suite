@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using TMPro;
+using System.Linq;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -10,8 +12,9 @@ public class InventoryManager : MonoBehaviour
     public Transform inventoryContentPanel;
     public GameObject emptyInventoryText;
     public GameObject bedsEmptyText;
-    private List<GameObject> inventorySlots = new List<GameObject>();
-    private List<FurnitureItem> furnitureItems = new List<FurnitureItem>();
+    private Dictionary<FurnitureItem, GameObject> inventorySlots = new Dictionary<FurnitureItem, GameObject>();
+    private Dictionary<FurnitureItem, int> furnitureCounts = new Dictionary<FurnitureItem, int>();
+
     public PlacementManager placementManager;
     public GameObject confirmationPanel;
     public GameObject allFurnitureScrollView;
@@ -35,15 +38,13 @@ public class InventoryManager : MonoBehaviour
     public List<FurnitureItem> predefinedFurnitureItems = new List<FurnitureItem>();
     public GameObject materialSelectionPanel;
     public GameObject currentItemForPlacement = null;
-    public MaterialData defaultMaterialData; 
+    public MaterialData defaultMaterialData;
 
 
 
     void Start()
     {
         inventoryCanvas.SetActive(false);
-        CheckIfInventoryIsEmpty();
-
         foreach (var furnitureItem in predefinedFurnitureItems)
         {
             AddItemToInventory(furnitureItem);
@@ -149,22 +150,6 @@ public class InventoryManager : MonoBehaviour
         UpdateInventoryUI();
     }
 
-    public void AddFurnitureToInventory(FurnitureItem furnitureItem)
-    {
-        GameObject newSlot = Instantiate(slotPrefab, inventoryContentPanel);
-        newSlot.GetComponent<Image>().sprite = furnitureItem.icon;
-        furnitureItems.Add(furnitureItem);
-        inventorySlots.Add(newSlot);
-
-        EventTrigger trigger = newSlot.AddComponent<EventTrigger>();
-        var entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerClick;
-        entry.callback.AddListener((data) => {
-            OnRightClick((PointerEventData)data, furnitureItem);
-        });
-        trigger.triggers.Add(entry);
-    }
-
     public void OnRightClick(PointerEventData data, FurnitureItem item)
     {
         if (data.button == PointerEventData.InputButton.Right)
@@ -175,20 +160,29 @@ public class InventoryManager : MonoBehaviour
 
     public void AddItemToInventory(FurnitureItem furnitureItem)
     {
-        furnitureItems.Add(furnitureItem);
-        UpdateInventoryUI();
+        if (furnitureCounts.TryGetValue(furnitureItem, out var count))
+        {
+            furnitureCounts[furnitureItem] = count + 1;
+            UpdateSlotCount(furnitureItem);
+        }
+        else
+        {
+            furnitureCounts[furnitureItem] = 1;
+            CreateSlotForItem(furnitureItem, inventoryContentPanel);
+        }
         CheckIfInventoryIsEmpty();
     }
 
 
-    public void ClearInventory()
+    private void UpdateSlotCount(FurnitureItem furnitureItem)
     {
-        foreach (GameObject slot in inventorySlots)
+        if (inventorySlots.TryGetValue(furnitureItem, out var slot))
         {
-            Destroy(slot);
+            TMP_Text quantityText = slot.transform.Find("QuantityText").GetComponent<TMP_Text>();
+            quantityText.text = "x" + furnitureCounts[furnitureItem];
         }
-        inventorySlots.Clear();
     }
+
 
     private void UpdateInventoryUI()
     {
@@ -200,23 +194,45 @@ public class InventoryManager : MonoBehaviour
         ClearInventorySlots(decorationScrollView.transform.Find("Viewport/Content"));
         ClearInventorySlots(otherScrollView.transform.Find("Viewport/Content"));
 
-        foreach (FurnitureItem item in furnitureItems)
+        foreach (var item in furnitureCounts)
         {
-            CreateSlotForItem(item, allFurnitureScrollView.transform.Find("Viewport/Content"));
-        }
+            TMP_Text quantityText = inventorySlots[item.Key].transform.Find("QuantityText").GetComponent<TMP_Text>();
+            quantityText.text = "x" + item.Value;
 
-        if (bedsScrollView.activeSelf || tableDeskScrollView.activeSelf || sofaChairScrollView.activeSelf ||
-           cabinetScrollView.activeSelf || decorationScrollView.activeSelf || otherScrollView.activeSelf)
-        {
-            foreach (FurnitureItem item in furnitureItems)
+            CreateSlotForItemInAllCategory(item.Key);
+
+            if (item.Key.category != null) 
             {
-                Transform targetContentPanel = GetContentPanelForCategory(item.category);
-                CreateSlotForItem(item, targetContentPanel);
+                CreateSlotForItem(item.Key, GetContentPanelForCategory(item.Key.category)); 
             }
         }
 
         UpdateEmptyTexts();
     }
+
+    private void CreateSlotForItemInAllCategory(FurnitureItem furnitureItem)
+    {
+
+        GameObject slotInAll = Instantiate(slotPrefab, allFurnitureScrollView.transform.Find("Viewport/Content"));
+        slotInAll.GetComponent<Image>().sprite = furnitureItem.icon;
+
+        TMP_Text quantityText = slotInAll.transform.Find("QuantityText").GetComponent<TMP_Text>();
+        if (quantityText != null)
+        {
+            quantityText.text = "x" + furnitureCounts[furnitureItem];
+        }
+
+        Button button = slotInAll.GetComponent<Button>();
+        button.onClick.AddListener(() => ShowMaterialSelectionPanel(furnitureItem, furnitureItem.materialData));
+
+        EventTrigger trigger = slotInAll.AddComponent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
+        entry.callback.AddListener((data) => OnRightClick((PointerEventData)data, furnitureItem));
+        trigger.triggers.Add(entry);
+
+        inventorySlots[furnitureItem] = slotInAll;
+    }
+
 
     private Transform GetContentPanelForCategory(FurnitureCategory category)
     {
@@ -246,31 +262,35 @@ public class InventoryManager : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
-
-    private void CreateSlotForItem(FurnitureItem item, Transform contentPanel)
+    private void CreateSlotForItem(FurnitureItem furnitureItem, Transform contentPanel)
     {
         GameObject newSlot = Instantiate(slotPrefab, contentPanel);
-        newSlot.GetComponent<Image>().sprite = item.icon;
+        newSlot.GetComponent<Image>().sprite = furnitureItem.icon;
+
+        TMP_Text quantityText = newSlot.transform.Find("QuantityText").GetComponent<TMP_Text>();
+        quantityText.text = "x" + furnitureCounts[furnitureItem]; // Update count text
 
         Button button = newSlot.GetComponent<Button>();
-        button.onClick.AddListener(() => ShowMaterialSelectionPanel(item, item.materialData));
+        button.onClick.AddListener(() => ShowMaterialSelectionPanel(furnitureItem, furnitureItem.materialData));
 
-        EventTrigger trigger = newSlot.GetComponent<EventTrigger>() ?? newSlot.AddComponent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry();
-        entry.eventID = EventTriggerType.PointerClick;
-        entry.callback.AddListener((data) => OnRightClick((PointerEventData)data, item));
+        EventTrigger trigger = newSlot.AddComponent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
+        entry.callback.AddListener((data) => OnRightClick((PointerEventData)data, furnitureItem));
         trigger.triggers.Add(entry);
+
+        inventorySlots[furnitureItem] = newSlot;
     }
 
     private void UpdateEmptyTexts()
     {
-        bedsEmptyText.SetActive(furnitureItems.FindAll(item => item.category == FurnitureCategory.Bed).Count == 0);
-        tableDeskEmptyText.SetActive(furnitureItems.FindAll(item => item.category == FurnitureCategory.TableDesk).Count == 0);
-        sofaChairEmptyText.SetActive(furnitureItems.FindAll(item => item.category == FurnitureCategory.SofaChair).Count == 0);
-        cabinetEmptyText.SetActive(furnitureItems.FindAll(item => item.category == FurnitureCategory.Cabinet).Count == 0);
-        decorationEmptyText.SetActive(furnitureItems.FindAll(item => item.category == FurnitureCategory.Decoration).Count == 0);
-        otherEmptyText.SetActive(furnitureItems.FindAll(item => item.category == FurnitureCategory.Other).Count == 0);
+        bedsEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.Bed));
+        tableDeskEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.TableDesk));
+        sofaChairEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.SofaChair));
+        cabinetEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.Cabinet));
+        decorationEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.Decoration));
+        otherEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.Other));
     }
+
 
     public void HideInventoryUI()
     {
@@ -279,21 +299,35 @@ public class InventoryManager : MonoBehaviour
 
     private void CheckIfInventoryIsEmpty()
     {
-        bool isInventoryEmpty = furnitureItems.Count == 0;
-        emptyInventoryText.SetActive(isInventoryEmpty && allFurnitureScrollView.activeSelf);
 
-        bool isBedsEmpty = furnitureItems.FindAll(item => item.category == FurnitureCategory.Bed).Count == 0;
-        bedsEmptyText.SetActive(isBedsEmpty && bedsScrollView.activeSelf);
+        bool isInventoryEmpty = !furnitureCounts.Any();
+        emptyInventoryText.SetActive(isInventoryEmpty && allFurnitureScrollView.activeSelf);
+        bedsEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.Bed) && bedsScrollView.activeSelf);
+        tableDeskEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.TableDesk) && tableDeskScrollView.activeSelf);
+        sofaChairEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.SofaChair) && sofaChairScrollView.activeSelf);
+        cabinetEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.Cabinet) && cabinetScrollView.activeSelf);
+        decorationEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.Decoration) && decorationScrollView.activeSelf);
+        otherEmptyText.SetActive(!furnitureCounts.Any(kv => kv.Key.category == FurnitureCategory.Other) && otherScrollView.activeSelf);
     }
+
 
 
     public void RemoveFurnitureFromInventory(FurnitureItem itemToRemove)
     {
-        if (furnitureItems.Contains(itemToRemove))
+        if (furnitureCounts.ContainsKey(itemToRemove) && furnitureCounts[itemToRemove] > 0)
         {
-            furnitureItems.Remove(itemToRemove);
+            furnitureCounts[itemToRemove]--;
+            if (furnitureCounts[itemToRemove] == 0)
+            {
+                Destroy(inventorySlots[itemToRemove]);
+                inventorySlots.Remove(itemToRemove);
+                furnitureCounts.Remove(itemToRemove);
+            }
+            else
+            {
+                UpdateSlotCount(itemToRemove); 
+            }
             UpdateInventoryUI();
-            CheckIfInventoryIsEmpty();
         }
     }
 

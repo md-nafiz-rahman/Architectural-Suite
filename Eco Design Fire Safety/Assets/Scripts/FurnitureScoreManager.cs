@@ -88,7 +88,6 @@ public class FurnitureScoreManager : MonoBehaviour
         fireSafetyScores[houseIndex] = 0;
         sustainabilityScores[houseIndex] = 0;
         int totalItems = houseFurnitures[houseIndex].Count;
-        List<Furniture> newlyObstructed = new List<Furniture>();
 
         foreach (var furniture in houseFurnitures[houseIndex])
         {
@@ -96,17 +95,15 @@ public class FurnitureScoreManager : MonoBehaviour
             fireSafetyScores[houseIndex] += (furniture.materialData.fireSafetyScore / 10.0f) * weightedScore;
             sustainabilityScores[houseIndex] += (furniture.materialData.sustainabilityScore / 10.0f) * weightedScore;
 
-            if (IsInDoorObstructionZone(furniture.gameObject, houseIndex) && !obstructedFurnitures[houseIndex].Contains(furniture))
+            if (IsInDoorObstructionZone(furniture.gameObject, houseIndex))
             {
                 fireSafetyScores[houseIndex] -= 5;
-                newlyObstructed.Add(furniture);
+                if (!obstructedFurnitures[houseIndex].Contains(furniture))
+                {
+                    obstructedFurnitures[houseIndex].Add(furniture);
+                    doorObstructionPopup.ShowPopup();
+                }
             }
-        }
-
-        foreach (var furniture in newlyObstructed)
-        {
-            obstructedFurnitures[houseIndex].Add(furniture);
-            doorObstructionPopup.ShowPopup();  
         }
 
         obstructedFurnitures[houseIndex].RemoveAll(furniture => !IsInDoorObstructionZone(furniture.gameObject, houseIndex));
@@ -122,6 +119,9 @@ public class FurnitureScoreManager : MonoBehaviour
 
         Debug.Log($"Updated Scores - House {houseIndex + 1}: Fire Safety: {fireSafetyScores[houseIndex]}, Sustainability: {sustainabilityScores[houseIndex]}");
     }
+
+
+
 
 
     private bool IsInDoorObstructionZone(GameObject furniture, int houseIndex)
