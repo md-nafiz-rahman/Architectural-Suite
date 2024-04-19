@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class HouseInteraction : MonoBehaviour
@@ -638,6 +640,68 @@ public class HouseInteraction : MonoBehaviour
             materialSelection.ApplyFloorMaterial(houseTag, roomName, selectedMaterialData);
         }
     }
+
+    public HouseMaterialData GetMaterialSelections(int houseNumber)
+    {
+        HouseMaterialData houseMaterial = new HouseMaterialData { houseTag = $"House{houseNumber}LampPost" };
+        foreach (var key in materialSelection.currentMaterials.Keys)
+        {
+            if (key.StartsWith(houseMaterial.houseTag))
+            {
+                var materialData = materialSelection.currentMaterials[key];
+                var selectionData = new MaterialSelectionData
+                {
+                    roomName = key.Substring(houseMaterial.houseTag.Length).Replace("Wall", "").Replace("Floor", ""),
+                    materialName = materialData.materialName
+                };
+
+                if (key.EndsWith("Wall"))
+                {
+                    houseMaterial.roomWallMaterials.Add(selectionData);
+                }
+                else if (key.EndsWith("Floor"))
+                {
+                    houseMaterial.roomFloorMaterials.Add(selectionData);
+                }
+            }
+        }
+        return houseMaterial;
+    }
+
+
+    public void ApplySavedMaterials(HouseMaterialData houseMaterial)
+    {
+        foreach (var selection in houseMaterial.roomWallMaterials)
+        {
+            var wallMaterialData = Resources.Load<MaterialData>($"Furniture&House Materials/Wall Materials/WallMaterialData/{selection.materialName}");
+            if (wallMaterialData != null)
+            {
+                materialSelection.ApplyWallMaterial(houseMaterial.houseTag, selection.roomName, wallMaterialData);
+            }
+            else
+            {
+                Debug.LogError($"Failed to load wall material: {selection.materialName}");
+            }
+        }
+
+        foreach (var selection in houseMaterial.roomFloorMaterials)
+        {
+            var floorMaterialData = Resources.Load<MaterialData>($"Furniture&House Materials/Floor Materials/FloorMaterialData/{selection.materialName}");
+            if (floorMaterialData != null)
+            {
+                materialSelection.ApplyFloorMaterial(houseMaterial.houseTag, selection.roomName, floorMaterialData);
+            }
+            else
+            {
+                Debug.LogError($"Failed to load floor material: {selection.materialName}");
+            }
+        }
+    }
+
+
+
+
+
 
 
 }

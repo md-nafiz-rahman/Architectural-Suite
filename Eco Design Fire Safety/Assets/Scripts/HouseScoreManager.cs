@@ -39,6 +39,15 @@ public class HouseScoreManager : MonoBehaviour
         Debug.Log($"Updated House {houseIndex + 1} Scores - Fire Safety: {fireSafetyScores[houseIndex]}, Sustainability: {sustainabilityScores[houseIndex]}");
     }
 
+    public void ResetScores()
+    {
+        for (int i = 0; i < fireSafetyScores.Length; i++)
+        {
+            fireSafetyScores[i] = 0;
+            sustainabilityScores[i] = 0;
+        }
+        OnScoresUpdated?.Invoke();
+    }
 
     public float GetTotalFireSafetyScore(int houseIndex)
     {

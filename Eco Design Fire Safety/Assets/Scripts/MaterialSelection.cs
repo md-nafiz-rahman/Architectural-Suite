@@ -12,7 +12,10 @@ public class MaterialSelection : MonoBehaviour
 
     }
 
-    private Dictionary<string, MaterialData> currentMaterials = new Dictionary<string, MaterialData>();
+    public MaterialData defaultWallMaterialData; 
+    public MaterialData defaultFloorMaterialData;
+
+    public Dictionary<string, MaterialData> currentMaterials = new Dictionary<string, MaterialData>();
 
     public Room livingRoomHouse1, drawingRoomHouse1, guestRoomHouse1, kitchenHouse1, staircaseHouse1,
                 bedroom1House1, bedroom2House1, masterBedroomHouse1, loungeHouse1, roofTopHouse1;
@@ -23,21 +26,6 @@ public class MaterialSelection : MonoBehaviour
     public Room livingRoomHouse3, drawingRoomHouse3, guestRoomHouse3, kitchenHouse3, staircaseHouse3,
                 bedroom1House3, bedroom2House3, masterBedroomHouse3, loungeHouse3, roofTopHouse3;
 
-    public void ApplyMaterial(string houseTag, string roomName, Material wallMaterial, Material floorMaterial)
-    {
-        Room room = GetRoomByHouseAndName(houseTag, roomName);
-        if (room != null)
-        {
-            foreach (GameObject wall in room.walls)
-            {
-                wall.GetComponent<Renderer>().material = wallMaterial;
-            }
-            foreach (GameObject floor in room.floors)
-            {
-                floor.GetComponent<Renderer>().material = floorMaterial;
-            }
-        }
-    }
 
     private Room GetRoomByHouseAndName(string houseTag, string roomName)
     {
@@ -111,27 +99,47 @@ public class MaterialSelection : MonoBehaviour
 
     public void ApplyWallMaterial(string houseTag, string roomName, MaterialData materialData)
     {
+        int houseIndex = GetHouseIndex(houseTag);
         Room room = GetRoomByHouseAndName(houseTag, roomName);
         if (room != null)
         {
-            string key = houseTag + roomName + "Wall";
-            UpdateScoresForRoom(key, materialData);
-
             foreach (GameObject wall in room.walls)
+            {
                 wall.GetComponent<Renderer>().material = materialData.material;
+            }
+            string key = houseTag + roomName + "Wall";
+            if (currentMaterials.ContainsKey(key))
+            {
+                HouseScoreManager.Instance.UpdateScores(houseIndex, materialData.fireSafetyScore - currentMaterials[key].fireSafetyScore, materialData.sustainabilityScore - currentMaterials[key].sustainabilityScore);
+            }
+            else
+            {
+                HouseScoreManager.Instance.UpdateScores(houseIndex, materialData.fireSafetyScore, materialData.sustainabilityScore);
+            }
+            currentMaterials[key] = materialData;
         }
     }
 
     public void ApplyFloorMaterial(string houseTag, string roomName, MaterialData materialData)
     {
+        int houseIndex = GetHouseIndex(houseTag);
         Room room = GetRoomByHouseAndName(houseTag, roomName);
         if (room != null)
         {
-            string key = houseTag + roomName + "Floor";
-            UpdateScoresForRoom(key, materialData);
-
             foreach (GameObject floor in room.floors)
+            {
                 floor.GetComponent<Renderer>().material = materialData.material;
+            }
+            string key = houseTag + roomName + "Floor";
+            if (currentMaterials.ContainsKey(key))
+            {
+                HouseScoreManager.Instance.UpdateScores(houseIndex, materialData.fireSafetyScore - currentMaterials[key].fireSafetyScore, materialData.sustainabilityScore - currentMaterials[key].sustainabilityScore);
+            }
+            else
+            {
+                HouseScoreManager.Instance.UpdateScores(houseIndex, materialData.fireSafetyScore, materialData.sustainabilityScore);
+            }
+            currentMaterials[key] = materialData;
         }
     }
 
@@ -164,6 +172,50 @@ public class MaterialSelection : MonoBehaviour
         }
         currentMaterials[key] = newMaterial; 
     }
+
+    public void ResetAndReapplyScores()
+    {
+        HouseScoreManager.Instance.ResetScores(); 
+
+        foreach (var key in currentMaterials.Keys)
+        {
+            var materialData = currentMaterials[key];
+            int houseIndex = GetHouseIndex(key);
+            if (houseIndex >= 0 && houseIndex < 3)
+            {
+                HouseScoreManager.Instance.UpdateScores(houseIndex, materialData.fireSafetyScore, materialData.sustainabilityScore);
+            }
+        }
+    }
+
+
+
+    public void ClearAllMaterials()
+    {
+        var allRooms = new List<Room> {
+        livingRoomHouse1, drawingRoomHouse1, guestRoomHouse1, kitchenHouse1, staircaseHouse1,
+        bedroom1House1, bedroom2House1, masterBedroomHouse1, loungeHouse1, roofTopHouse1,
+        livingRoomHouse2, drawingRoomHouse2, guestRoomHouse2, kitchenHouse2, staircaseHouse2,
+        bedroom1House2, bedroom2House2, masterBedroomHouse2, loungeHouse2, roofTopHouse2,
+        livingRoomHouse3, drawingRoomHouse3, guestRoomHouse3, kitchenHouse3, staircaseHouse3,
+        bedroom1House3, bedroom2House3, masterBedroomHouse3, loungeHouse3, roofTopHouse3
+    };
+
+        foreach (var room in allRooms)
+        {
+            foreach (var wall in room.walls)
+            {
+                wall.GetComponent<Renderer>().material = defaultWallMaterialData.material;
+            }
+            foreach (var floor in room.floors)
+            {
+                floor.GetComponent<Renderer>().material = defaultFloorMaterialData.material;
+            }
+        }
+
+        currentMaterials.Clear();
+    }
+
 
 
 }

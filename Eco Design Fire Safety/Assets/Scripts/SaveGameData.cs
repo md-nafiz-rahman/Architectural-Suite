@@ -10,8 +10,9 @@ public class GameData
 {
     public Vector3 playerPosition;
     public List<FurnitureData> furnitures = new List<FurnitureData>();
-    public List<InventoryItem> inventoryItems = new List<InventoryItem>(); 
-    public string saveTime; 
+    public List<InventoryItem> inventoryItems = new List<InventoryItem>();
+    public List<HouseMaterialData> houseMaterials = new List<HouseMaterialData>();
+    public string saveTime;
 }
 [System.Serializable]
 public class FurnitureData
@@ -27,6 +28,20 @@ public class InventoryItem
 {
     public string itemName;
     public int count;
+}
+[System.Serializable]
+public class MaterialSelectionData
+{
+    public string roomName;
+    public string materialName;
+}
+
+[System.Serializable]
+public class HouseMaterialData
+{
+    public string houseTag;
+    public List<MaterialSelectionData> roomWallMaterials = new List<MaterialSelectionData>();
+    public List<MaterialSelectionData> roomFloorMaterials = new List<MaterialSelectionData>();
 }
 
 
@@ -60,6 +75,16 @@ public class SaveGameData : MonoBehaviour
             else
             {
                 Debug.Log("Skipping furniture with no item data: " + furniture.name);
+            }
+        }
+
+        for (int i = 1; i <= 3; i++)
+        {
+            HouseInteraction houseInteraction = FindObjectOfType<HouseInteraction>();
+            if (houseInteraction != null)
+            {
+                HouseMaterialData houseMaterial = houseInteraction.GetMaterialSelections(i);
+                data.houseMaterials.Add(houseMaterial);
             }
         }
 

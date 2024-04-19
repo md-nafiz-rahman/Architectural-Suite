@@ -30,6 +30,25 @@ public class LoadGameData : MonoBehaviour
                 LoadFurniture(furniture);
             }
 
+            var houseInteraction = FindObjectOfType<HouseInteraction>();
+            var materialSelection = FindObjectOfType<MaterialSelection>();
+            if (materialSelection != null)
+            {
+                materialSelection.ClearAllMaterials();
+                HouseScoreManager.Instance.ResetScores();
+            }
+            if (houseInteraction != null)
+            {
+                foreach (var houseMaterial in data.houseMaterials)
+                {
+                    houseInteraction.ApplySavedMaterials(houseMaterial);
+                }
+            }
+            if (materialSelection != null)
+            {
+                materialSelection.ResetAndReapplyScores(); 
+            }
+
             InventoryManager.Instance.ClearInventory();
             foreach (var inventoryItem in data.inventoryItems)
             {
