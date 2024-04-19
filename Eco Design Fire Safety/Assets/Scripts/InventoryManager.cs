@@ -5,8 +5,16 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System.Linq;
 
+[System.Serializable]
+public class FurnitureItemWithCount
+{
+    public FurnitureItem item;
+    public int initialCount;
+}
+
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager Instance { get; private set; }
     public GameObject slotPrefab;
     public GameObject inventoryCanvas;
     public Transform inventoryContentPanel;
@@ -35,21 +43,37 @@ public class InventoryManager : MonoBehaviour
 
     public Image selectedItemImage;
 
-    public List<FurnitureItem> predefinedFurnitureItems = new List<FurnitureItem>();
+    public List<FurnitureItemWithCount> predefinedFurnitureItemsWithCount = new List<FurnitureItemWithCount>();
     public GameObject materialSelectionPanel;
     public GameObject currentItemForPlacement = null;
     public MaterialData defaultMaterialData;
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); 
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject); 
+        }
+    }
 
 
     void Start()
     {
         inventoryCanvas.SetActive(false);
-        foreach (var furnitureItem in predefinedFurnitureItems)
+        foreach (var furnitureItemWithCount in predefinedFurnitureItemsWithCount)
         {
-            AddItemToInventory(furnitureItem);
+            for (int i = 0; i < furnitureItemWithCount.initialCount; i++)
+            {
+                AddItemToInventory(furnitureItemWithCount.item);
+            }
         }
     }
+
 
     public void ShowMaterialSelectionPanel(FurnitureItem item, MaterialData materialData)
     {
@@ -99,6 +123,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+
     public void ShowInventoryUI()
     {
         materialSelectionPanel.SetActive(false);
@@ -128,6 +153,7 @@ public class InventoryManager : MonoBehaviour
         HideInventoryUI();
         HideConfirmationPanel();
         CheckIfInventoryIsEmpty();
+        Debug.Log("Confirming placement of " + selectedItemForPlacement.name);
     }
 
 
@@ -262,6 +288,35 @@ public class InventoryManager : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
+
+    public void ClearInventory()
+    {
+        furnitureCounts.Clear();
+        foreach (Transform child in inventoryContentPanel)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        CheckIfInventoryIsEmpty();
+    }
+
+
+
+    public Dictionary<string, int> GetInventoryCounts()
+    {
+        var inventoryCounts = new Dictionary<string, int>();
+        foreach (var pair in furnitureCounts)
+        {
+            if (pair.Value > 0) 
+            {
+                inventoryCounts[pair.Key.itemName] = pair.Value;
+                Debug.Log($"Saving {pair.Key.itemName} with count {pair.Value}");
+            }
+        }
+        return inventoryCounts;
+    }
+
+
+
     private void CreateSlotForItem(FurnitureItem furnitureItem, Transform contentPanel)
     {
         GameObject newSlot = Instantiate(slotPrefab, contentPanel);
@@ -312,11 +367,11 @@ public class InventoryManager : MonoBehaviour
 
 
 
-    public void RemoveFurnitureFromInventory(FurnitureItem itemToRemove)
+    public void RemoveFurnitureFromInventory(FurnitureItem itemToRemove, int quantity = 1)
     {
-        if (furnitureCounts.ContainsKey(itemToRemove) && furnitureCounts[itemToRemove] > 0)
+        if (furnitureCounts.ContainsKey(itemToRemove) && furnitureCounts[itemToRemove] >= quantity)
         {
-            furnitureCounts[itemToRemove]--;
+            furnitureCounts[itemToRemove] -= quantity;
             if (furnitureCounts[itemToRemove] == 0)
             {
                 Destroy(inventorySlots[itemToRemove]);
@@ -325,11 +380,12 @@ public class InventoryManager : MonoBehaviour
             }
             else
             {
-                UpdateSlotCount(itemToRemove); 
+                UpdateSlotCount(itemToRemove);
             }
             UpdateInventoryUI();
         }
     }
+
 
 
     void Update()

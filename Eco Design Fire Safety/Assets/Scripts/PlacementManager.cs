@@ -29,6 +29,8 @@ public class PlacementManager : MonoBehaviour
             itemPlacementHandler.BeginPlacement(item.prefab, item.materialData);
             inventoryManager.HideInventoryUI();
         }
+        Debug.Log("Selecting item for placement: " + item.name);
+
     }
 
 }

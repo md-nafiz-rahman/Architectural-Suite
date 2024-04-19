@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   furnitureItem: {fileID: 11400000, guid: 1b2724165287b0240b7b28af385f327c, type: 2}
+  materialData: {fileID: 0}
 --- !u!33 &5094750393437968449
 MeshFilter:
   m_ObjectHideFlags: 0

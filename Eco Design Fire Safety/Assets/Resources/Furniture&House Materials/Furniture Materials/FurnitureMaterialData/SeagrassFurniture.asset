@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b6d8ce96de502a468fde644e80b0df9, type: 3}
+  m_Name: SeagrassFurniture
+  m_EditorClassIdentifier: 
+  materialName: SeagrassFurniture
+  material: {fileID: 2100000, guid: 92db064361c18a24f8876cd8510ca5c5, type: 2}
+  fireSafetyScore: 6
+  sustainabilityScore: 9

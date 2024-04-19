@@ -37,6 +37,8 @@ public class ItemPlacementHandler : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Debug.Log("Beginning placement of item: " + itemPrefab.name);
+
     }
 
     private void ApplyMaterial(GameObject item, MaterialData materialData)
@@ -120,7 +122,7 @@ public class ItemPlacementHandler : MonoBehaviour
         Cursor.visible = false;
     }
 
-    private int CheckHouseColliderArea(Vector3 position)
+    public int CheckHouseColliderArea(Vector3 position)
     {
         Collider[] hitColliders = Physics.OverlapSphere(position, 0.1f);
         foreach (var hitCollider in hitColliders)
