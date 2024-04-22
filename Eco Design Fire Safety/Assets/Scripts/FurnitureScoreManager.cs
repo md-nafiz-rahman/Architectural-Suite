@@ -52,6 +52,7 @@ public class FurnitureScoreManager : MonoBehaviour
         }
     }
 
+
     public void AddFurniturePlacement(int houseIndex, Furniture furniture)
     {
         if (furniture == null || houseIndex < 0 || houseIndex >= houseFurnitures.Length)

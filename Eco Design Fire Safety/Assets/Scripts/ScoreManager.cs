@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
         return totalSustainabilityScores[Mathf.Clamp(houseIndex, 0, totalSustainabilityScores.Length - 1)];
     }
 
-    private void CalculateTotalScores()
+    public void CalculateTotalScores()
     {
         for (int i = 0; i < 3; i++)
         {

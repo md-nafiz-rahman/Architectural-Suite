@@ -5,17 +5,38 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameObject mainMenu;
+    public GameObject loadMenu;
+
 
     public void StartNewDesign()
     {
         PlayerPrefs.SetString("SceneToLoad", "ModernHomes");
+        PlayerPrefs.SetInt("LoadSlot", -1); 
         SceneManager.LoadScene("LoadingScreen");
     }
 
 
-    public void LoadDesign()
+
+    public void OpenLoadPanel()
     {
-        Debug.Log("Load Design functionality not implemented yet.");
+        mainMenu.SetActive(false);
+        loadMenu.SetActive(true);
+    }
+
+    public void BackMainMenu()
+    {
+        mainMenu.SetActive(true);
+        loadMenu.SetActive(false);
+    }
+
+
+    public void LoadDesign(int slot)
+    {
+        loadMenu.SetActive(false);
+        PlayerPrefs.SetInt("LoadSlot", slot);
+        PlayerPrefs.SetString("SceneToLoad", "ModernHomes");
+        SceneManager.LoadScene("LoadingScreen");
     }
 
     public void Options()

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using TMPro;
 using System.Linq;
+using System.Net;
 
 [System.Serializable]
 public class FurnitureItemWithCount
@@ -47,6 +48,7 @@ public class InventoryManager : MonoBehaviour
     public GameObject materialSelectionPanel;
     public GameObject currentItemForPlacement = null;
     public MaterialData defaultMaterialData;
+    public HouseInteraction houseInteraction;
 
     void Awake()
     {
@@ -61,19 +63,16 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-
     void Start()
     {
-        inventoryCanvas.SetActive(false);
-        foreach (var furnitureItemWithCount in predefinedFurnitureItemsWithCount)
+        foreach (var item in predefinedFurnitureItemsWithCount)
         {
-            for (int i = 0; i < furnitureItemWithCount.initialCount; i++)
+            for (int i = 0; i < item.initialCount; i++)
             {
-                AddItemToInventory(furnitureItemWithCount.item);
+                AddItemToInventory(item.item);
             }
         }
     }
-
 
     public void ShowMaterialSelectionPanel(FurnitureItem item, MaterialData materialData)
     {
@@ -89,7 +88,7 @@ public class InventoryManager : MonoBehaviour
         {
             Debug.LogError("SelectedItemImage not found in the Material Selection Panel");
         }
-
+        houseInteraction.crosshair.SetActive(false);
         materialSelectionPanel.SetActive(true);
         inventoryCanvas.SetActive(false);
     }
@@ -150,6 +149,7 @@ public class InventoryManager : MonoBehaviour
 
         placementManager.SelectItemForPlacement(selectedItemForPlacement);
         materialSelectionPanel.SetActive(false);
+        houseInteraction.crosshair.SetActive(true);
         HideInventoryUI();
         HideConfirmationPanel();
         CheckIfInventoryIsEmpty();
@@ -161,6 +161,7 @@ public class InventoryManager : MonoBehaviour
     {
         inventoryCanvas.SetActive(!inventoryCanvas.activeSelf);
         materialSelectionPanel.SetActive(false);
+        houseInteraction.crosshair.SetActive(true);
         if (inventoryCanvas.activeSelf)
         {
             Cursor.lockState = CursorLockMode.None;
@@ -210,7 +211,7 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-    private void UpdateInventoryUI()
+    public void UpdateInventoryUI()
     {
         ClearInventorySlots(allFurnitureScrollView.transform.Find("Viewport/Content"));
         ClearInventorySlots(bedsScrollView.transform.Find("Viewport/Content"));
@@ -292,12 +293,14 @@ public class InventoryManager : MonoBehaviour
     public void ClearInventory()
     {
         furnitureCounts.Clear();
-        foreach (Transform child in inventoryContentPanel)
+        foreach (var slot in inventorySlots.Values)
         {
-            GameObject.Destroy(child.gameObject);
+            Destroy(slot.gameObject);
         }
-        CheckIfInventoryIsEmpty();
+        inventorySlots.Clear();
+        UpdateInventoryUI();
     }
+
 
 
 

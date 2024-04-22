@@ -16,7 +16,9 @@ namespace SojaExiles
 
         void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         void Update()

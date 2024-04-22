@@ -31,7 +31,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        Debug.Log("Pause called. pauseMenuUI active state: " + pauseMenuUI.activeSelf);
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None; 
@@ -40,7 +39,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Resume()
     {
-        Debug.Log("Resume called. pauseMenuUI active state: " + pauseMenuUI.activeSelf);
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f; 
         Cursor.lockState = CursorLockMode.Locked;

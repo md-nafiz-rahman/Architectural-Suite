@@ -9,6 +9,7 @@ public class DontDestroy : MonoBehaviour
     private void Awake()
     {
         ObjectID = name + transform.position.ToString() + transform.eulerAngles.ToString();
+
     }
 
     private void Start()

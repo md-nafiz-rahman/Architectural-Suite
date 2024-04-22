@@ -3,12 +3,16 @@ using System.IO;
 using TMPro; 
 using SojaExiles;
 using System.Linq;
+using System.Collections;
 
 public class LoadGameData : MonoBehaviour
 {
     public TextMeshProUGUI[] loadButtons;
     public ItemPlacementHandler placementHandler;
     public InventoryManager inventoryManager;
+    public GameObject helpMenuPanel;
+    public PauseMenu pauseMenu;
+
 
     public void LoadGame(int slot)
     {
@@ -54,13 +58,25 @@ public class LoadGameData : MonoBehaviour
             {
                 LoadInventoryItem(inventoryItem.itemName, inventoryItem.count);
             }
+
         }
         else
         {
             Debug.LogError("Save file not found at: " + path);
         }
-
+        StartCoroutine(RecalculateScoresAfterLoad());
         UpdateButtonLabels();
+    }
+
+
+    private IEnumerator RecalculateScoresAfterLoad()
+    {
+        yield return new WaitForEndOfFrame();
+        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+        if (scoreManager != null)
+        {
+            scoreManager.CalculateTotalScores();
+        }
     }
 
     private void LoadFurniture(FurnitureData furniture)
@@ -154,7 +170,7 @@ public class LoadGameData : MonoBehaviour
     }
 
 
-    private void ClearExistingFurniture()
+    public void ClearExistingFurniture()
     {
         Furniture[] existingFurnitures = FindObjectsOfType<Furniture>();
         foreach (var furniture in existingFurnitures)
@@ -195,8 +211,30 @@ public class LoadGameData : MonoBehaviour
         }
     }
 
+    public void ShowHelpMenu()
+    {
+        if (pauseMenu.pauseMenuUI.activeSelf)
+        {
+            pauseMenu.pauseMenuUI.SetActive(false);
+        }
+        helpMenuPanel.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void HideHelpMenu()
+    {
+        helpMenuPanel.SetActive(false);
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     void Start()
     {
         UpdateButtonLabels();
+        ShowHelpMenu(); 
+
     }
 }

@@ -8,6 +8,7 @@ public class SaveLoadPanelController : MonoBehaviour
     public GameObject loadCanvas; 
     public PauseMenu pausemenu;
 
+
     public void ActivateSaveCanvas()
     {
         saveCanvas.SetActive(true);
