@@ -28,4 +28,5 @@ public class DoorObstructionPopup : MonoBehaviour
             popupObject.SetActive(false);
         }
     }
+
 }
