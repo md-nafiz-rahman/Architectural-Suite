@@ -12,6 +12,7 @@ public class FurnitureScoreManager : MonoBehaviour
     }
 
     public DoorObstructionPopup doorObstructionPopup;
+    public CloseToFirePopup closeToFirePopup;
     public List<MaterialDataEntry> materialEntries = new List<MaterialDataEntry>();
     private Dictionary<string, MaterialData> allMaterials = new Dictionary<string, MaterialData>();
 
@@ -21,6 +22,7 @@ public class FurnitureScoreManager : MonoBehaviour
 
     public static FurnitureScoreManager Instance;
     private List<Furniture>[] obstructedFurnitures;
+    private List<Furniture>[] closeToFireFurnitures;
     public event Action OnScoresUpdated;
 
 
@@ -32,12 +34,14 @@ public class FurnitureScoreManager : MonoBehaviour
             int numHouses = 3;
             houseFurnitures = new List<Furniture>[numHouses];
             obstructedFurnitures = new List<Furniture>[numHouses];
+            closeToFireFurnitures = new List<Furniture>[numHouses];
             fireSafetyScores = new float[numHouses];
             sustainabilityScores = new float[numHouses];
             for (int i = 0; i < numHouses; i++)
             {
                 houseFurnitures[i] = new List<Furniture>();
                 obstructedFurnitures[i] = new List<Furniture>();
+                closeToFireFurnitures[i] = new List<Furniture>();
             }
 
             foreach (var entry in materialEntries)
@@ -104,7 +108,7 @@ public class FurnitureScoreManager : MonoBehaviour
             {
                 houseFurnitures[i].Remove(furniture);
                 RecalculateScores(i);
-                break; 
+                break;
             }
         }
     }
@@ -139,9 +143,20 @@ public class FurnitureScoreManager : MonoBehaviour
                     doorObstructionPopup.ShowPopup();
                 }
             }
+
+            if (IsCloseToFire(furniture.gameObject, houseIndex))
+            {
+                fireSafetyScores[houseIndex] -= 5;
+                if (!closeToFireFurnitures[houseIndex].Contains(furniture))
+                {
+                    closeToFireFurnitures[houseIndex].Add(furniture);
+                    closeToFirePopup.ShowPopup();
+                }
+            }
         }
 
         obstructedFurnitures[houseIndex].RemoveAll(furniture => !IsInDoorObstructionZone(furniture.gameObject, houseIndex));
+        closeToFireFurnitures[houseIndex].RemoveAll(furniture => !IsCloseToFire(furniture.gameObject, houseIndex));
 
         if (fireSafetyScores[houseIndex] < 0)
         {
@@ -158,11 +173,22 @@ public class FurnitureScoreManager : MonoBehaviour
 
 
 
-
     private bool IsInDoorObstructionZone(GameObject furniture, int houseIndex)
     {
         Collider[] hitColliders = Physics.OverlapSphere(furniture.transform.position, 0.1f);
         string obstructionTag = $"DoorObstruction{houseIndex + 1}";
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag(obstructionTag))
+                return true;
+        }
+        return false;
+    }
+
+    private bool IsCloseToFire(GameObject furniture, int houseIndex)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(furniture.transform.position, 0.1f);
+        string obstructionTag = $"CloseToFire{houseIndex + 1}";
         foreach (var hitCollider in hitColliders)
         {
             if (hitCollider.CompareTag(obstructionTag))
