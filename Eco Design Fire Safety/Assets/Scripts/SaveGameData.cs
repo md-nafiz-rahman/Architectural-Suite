@@ -50,6 +50,10 @@ public class SaveGameData : MonoBehaviour
     public TextMeshProUGUI[] saveButtons; 
     public ItemPlacementHandler placementHandler;
 
+    private void Start()
+    {
+        LoadGameData.UpdateButtonLabels(saveButtons);
+    }
     public void SaveGame(int slot)
     {
         GameData data = new GameData();
@@ -99,6 +103,8 @@ public class SaveGameData : MonoBehaviour
         {
             saveButtons[slot].text = "Slot " + (slot + 1) + "\nSaved: " + data.saveTime;
         }
+        LoadGameData.UpdateButtonLabels(saveButtons);
+
     }
     private int IdentifyHouseIndex(Vector3 position)
     {

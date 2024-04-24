@@ -65,7 +65,7 @@ public class LoadGameData : MonoBehaviour
             Debug.LogError("Save file not found at: " + path);
         }
         StartCoroutine(RecalculateScoresAfterLoad());
-        UpdateButtonLabels();
+        UpdateButtonLabels(loadButtons);
     }
 
 
@@ -197,23 +197,24 @@ public class LoadGameData : MonoBehaviour
         return -1; 
     }
 
-    void UpdateButtonLabels()
+    public static void UpdateButtonLabels(TextMeshProUGUI[] buttons)
     {
-        for (int i = 0; i < loadButtons.Length; i++)
+        for (int i = 0; i < buttons.Length; i++)
         {
             string path = Application.persistentDataPath + "/gameSave" + i + ".json";
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
                 GameData data = JsonUtility.FromJson<GameData>(json);
-                loadButtons[i].text = "Slot " + (i + 1) + "\nSaved: " + data.saveTime;
+                buttons[i].text = "Slot " + (i + 1) + "\nSaved: " + data.saveTime;
             }
             else
             {
-                loadButtons[i].text = "Slot " + (i + 1) + "\nEmpty";
+                buttons[i].text = "Slot " + (i + 1) + "\nEmpty";
             }
         }
     }
+
 
     public void ShowHelpMenu()
     {
@@ -237,7 +238,7 @@ public class LoadGameData : MonoBehaviour
 
     void Start()
     {
-        UpdateButtonLabels();
+        UpdateButtonLabels(loadButtons);
         ShowHelpMenu(); 
 
     }
