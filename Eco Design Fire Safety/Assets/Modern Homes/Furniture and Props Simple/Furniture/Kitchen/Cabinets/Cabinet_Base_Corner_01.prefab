@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 3785760876756273057}
   - component: {fileID: 1913021417504215489}
   - component: {fileID: 6447363312054082602}
+  - component: {fileID: -2383212044737845539}
   m_Layer: 0
   m_Name: Cabinet_Base_Corner_01
   m_TagString: Untagged
@@ -465,6 +466,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 281854930238610966, guid: 2a83511a782a6aa4dafed1f5a2bd3803, type: 3}
+--- !u!114 &-2383212044737845539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5546436795134103488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureItem: {fileID: 11400000, guid: c47b09c51477c024e8783554a41dab89, type: 2}
+  materialData: {fileID: 0}
 --- !u!1 &8861791055120437142
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +492,6 @@ GameObject:
   - component: {fileID: 635780726696194969}
   - component: {fileID: 5461191705349619975}
   - component: {fileID: 745671375}
-  - component: {fileID: 745671374}
   m_Layer: 0
   m_Name: Door_L.007
   m_TagString: Untagged
@@ -573,24 +587,3 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5320998437054024567, guid: 2a83511a782a6aa4dafed1f5a2bd3803, type: 3}
---- !u!95 &745671374
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8861791055120437142}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 099e6cc38da8ff74bb68d0bf29e24642, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
