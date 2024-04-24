@@ -7,7 +7,7 @@ public class HouseScoreManager : MonoBehaviour
 
     private float[] fireSafetyScores; 
     private float[] sustainabilityScores;
-    public event Action OnScoresUpdated;
+    public event Action<int> OnScoresUpdated;
 
 
     private void Awake()
@@ -34,7 +34,7 @@ public class HouseScoreManager : MonoBehaviour
         fireSafetyScores[houseIndex] += fireSafetyDelta * 0.25f; ;
         sustainabilityScores[houseIndex] += sustainabilityDelta * 0.25f;
 
-        OnScoresUpdated?.Invoke();
+        OnScoresUpdated?.Invoke(houseIndex);
 
         Debug.Log($"Updated House {houseIndex + 1} Scores - Fire Safety: {fireSafetyScores[houseIndex]}, Sustainability: {sustainabilityScores[houseIndex]}");
     }
@@ -45,8 +45,8 @@ public class HouseScoreManager : MonoBehaviour
         {
             fireSafetyScores[i] = 0;
             sustainabilityScores[i] = 0;
+            OnScoresUpdated?.Invoke(i);
         }
-        OnScoresUpdated?.Invoke();
     }
 
     public float GetTotalFireSafetyScore(int houseIndex)

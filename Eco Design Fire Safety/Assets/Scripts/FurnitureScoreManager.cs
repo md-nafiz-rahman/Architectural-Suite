@@ -23,7 +23,7 @@ public class FurnitureScoreManager : MonoBehaviour
     public static FurnitureScoreManager Instance;
     private List<Furniture>[] obstructedFurnitures;
     private List<Furniture>[] closeToFireFurnitures;
-    public event Action OnScoresUpdated;
+    public event Action<int> OnScoresUpdated;
 
 
     private void Awake()
@@ -165,7 +165,7 @@ public class FurnitureScoreManager : MonoBehaviour
 
         fireSafetyScores[houseIndex] = Mathf.Min(fireSafetyScores[houseIndex], 50.0f);
         sustainabilityScores[houseIndex] = Mathf.Min(sustainabilityScores[houseIndex], 50.0f);
-        OnScoresUpdated?.Invoke();
+        OnScoresUpdated?.Invoke(houseIndex);
 
         Debug.Log($"Updated Scores - House {houseIndex + 1}: Fire Safety: {fireSafetyScores[houseIndex]}, Sustainability: {sustainabilityScores[houseIndex]}");
     }

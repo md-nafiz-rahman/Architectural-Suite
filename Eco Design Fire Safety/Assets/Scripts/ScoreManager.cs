@@ -4,20 +4,22 @@ public class ScoreManager : MonoBehaviour
 {
     public FurnitureScoreManager furnitureScoreManager;
     public HouseScoreManager houseScoreManager;
+    public ScoreUpdatePopup scoreUpdatePopup;
+
 
     private float[] totalFireSafetyScores = new float[3];
     private float[] totalSustainabilityScores = new float[3];
 
     void Start()
     {
-        furnitureScoreManager.OnScoresUpdated += CalculateTotalScores;
-        houseScoreManager.OnScoresUpdated += CalculateTotalScores;
+        furnitureScoreManager.OnScoresUpdated += (index) => CalculateTotalScores(index);
+        houseScoreManager.OnScoresUpdated += (index) => CalculateTotalScores(index);
     }
 
     void OnDestroy()
     {
-        furnitureScoreManager.OnScoresUpdated -= CalculateTotalScores;
-        houseScoreManager.OnScoresUpdated -= CalculateTotalScores;
+        furnitureScoreManager.OnScoresUpdated -= (index) => CalculateTotalScores(index);
+        houseScoreManager.OnScoresUpdated -= (index) => CalculateTotalScores(index);
     }
 
     public float GetTotalFireSafetyScore(int houseIndex)
@@ -30,12 +32,15 @@ public class ScoreManager : MonoBehaviour
         return totalSustainabilityScores[Mathf.Clamp(houseIndex, 0, totalSustainabilityScores.Length - 1)];
     }
 
-    public void CalculateTotalScores()
+    public void CalculateTotalScores(int houseIndex)
     {
-        for (int i = 0; i < 3; i++)
+        totalFireSafetyScores[houseIndex] = furnitureScoreManager.GetTotalFireSafetyScore(houseIndex) + houseScoreManager.GetTotalFireSafetyScore(houseIndex);
+        totalSustainabilityScores[houseIndex] = furnitureScoreManager.GetTotalSustainabilityScore(houseIndex) + houseScoreManager.GetTotalSustainabilityScore(houseIndex);
+
+        if (scoreUpdatePopup != null)
         {
-            totalFireSafetyScores[i] = furnitureScoreManager.GetTotalFireSafetyScore(i) + houseScoreManager.GetTotalFireSafetyScore(i);
-            totalSustainabilityScores[i] = furnitureScoreManager.GetTotalSustainabilityScore(i) + houseScoreManager.GetTotalSustainabilityScore(i);
+            string message = $"House {houseIndex + 1} Scores Updated: Fire Safety: {totalFireSafetyScores[houseIndex]}, Sustainability: {totalSustainabilityScores[houseIndex]}";
+            scoreUpdatePopup.ShowScoreUpdate(message);
         }
     }
 }

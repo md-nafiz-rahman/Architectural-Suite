@@ -37,7 +37,6 @@ namespace SojaExiles
             {
                 velocity.y = Mathf.Sqrt(2f * -gravity * jumpHeight) * 1.5f;
             }
-            Debug.Log($"Velocity Y: {velocity.y}, Is Grounded: {isGrounded}");
         }
 
         void FixedUpdate()

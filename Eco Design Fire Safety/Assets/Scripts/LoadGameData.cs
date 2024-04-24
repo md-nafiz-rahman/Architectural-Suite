@@ -75,9 +75,13 @@ public class LoadGameData : MonoBehaviour
         ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
         if (scoreManager != null)
         {
-            scoreManager.CalculateTotalScores();
+            for (int i = 0; i < 3; i++)
+            {
+                scoreManager.CalculateTotalScores(i);
+            }
         }
     }
+
 
     private void LoadFurniture(FurnitureData furniture)
     {
