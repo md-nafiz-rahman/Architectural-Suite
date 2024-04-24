@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MaterialSelection : MonoBehaviour
@@ -12,8 +13,25 @@ public class MaterialSelection : MonoBehaviour
 
     }
 
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            Debug.Log("MaterialSelection Instance set.");
+        }
+        else if (Instance != this)
+        {
+            Debug.Log("Duplicate MaterialSelection instance found, destroying duplicate.");
+            Destroy(gameObject);
+        }
+    }
+
     public MaterialData defaultWallMaterialData; 
     public MaterialData defaultFloorMaterialData;
+    public static MaterialSelection Instance { get; private set; }
+
 
     public Dictionary<string, MaterialData> currentMaterials = new Dictionary<string, MaterialData>();
 
@@ -214,6 +232,43 @@ public class MaterialSelection : MonoBehaviour
         }
 
         currentMaterials.Clear();
+    }
+
+    public bool HasMaterialChanges(int houseIndex)
+    {
+        string houseTag = $"House{houseIndex + 1}LampPost";
+        return currentMaterials.Keys.Any(key => key.StartsWith(houseTag));
+    }
+
+    public bool AllMaterialsChanged(int houseIndex)
+    {
+        Room[] rooms = GetRoomsByHouseIndex(houseIndex);
+        foreach (var room in rooms)
+        {
+            if (room.walls.Concat(room.floors).Any(obj => obj.GetComponent<Renderer>().material.name == defaultWallMaterialData.material.name ||
+                                                         obj.GetComponent<Renderer>().material.name == defaultFloorMaterialData.material.name))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Room[] GetRoomsByHouseIndex(int houseIndex)
+    {
+        switch (houseIndex)
+        {
+            case 0:
+                return new Room[] { livingRoomHouse1, drawingRoomHouse1, guestRoomHouse1, kitchenHouse1, staircaseHouse1,
+                                        bedroom1House1, bedroom2House1, masterBedroomHouse1, loungeHouse1, roofTopHouse1 };
+            case 1:
+                return new Room[] { livingRoomHouse2, drawingRoomHouse2, guestRoomHouse2, kitchenHouse2, staircaseHouse2,
+                                        bedroom1House2, bedroom2House2, masterBedroomHouse2, loungeHouse2, roofTopHouse2 };
+            case 2:
+                return new Room[] { livingRoomHouse3, drawingRoomHouse3, guestRoomHouse3, kitchenHouse3, staircaseHouse3,
+                                        bedroom1House3, bedroom2House3, masterBedroomHouse3, loungeHouse3, roofTopHouse3 };
+            default: return null;
+        }
     }
 
 

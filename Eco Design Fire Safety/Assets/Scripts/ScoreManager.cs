@@ -9,6 +9,21 @@ public class ScoreManager : MonoBehaviour
 
     private float[] totalFireSafetyScores = new float[3];
     private float[] totalSustainabilityScores = new float[3];
+    public static ScoreManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
 
     void Start()
     {

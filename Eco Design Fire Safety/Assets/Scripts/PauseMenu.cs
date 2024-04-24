@@ -12,6 +12,11 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
+    private void Awake()
+    {
+        pauseMenuUI.SetActive(false);
+    }
+
 
     void Update()
     {

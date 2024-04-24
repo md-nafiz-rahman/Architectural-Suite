@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FurnitureScoreManager : MonoBehaviour
@@ -231,5 +232,16 @@ public class FurnitureScoreManager : MonoBehaviour
             return obj.materialName.GetHashCode();
         }
     }
+
+    public bool CheckDoorObstruction(int houseIndex)
+    {
+        return obstructedFurnitures[houseIndex].Any();
+    }
+
+    public bool CheckCloseProximityToFire(int houseIndex)
+    {
+        return closeToFireFurnitures[houseIndex].Any();
+    }
+
 
 }
