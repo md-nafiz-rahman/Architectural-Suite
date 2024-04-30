@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 using System.Text;
+using System.IO;
+using System.Collections;
 
 public class FeedBackManager : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class FeedBackManager : MonoBehaviour
     public GameObject feedbackCanvas;
     public HouseInteraction houseInteraction;
     private int activeHouseIndex = -1;
+    public GameObject exportFeedbackPanel;
 
 
     private void Awake()
@@ -53,6 +56,41 @@ public class FeedBackManager : MonoBehaviour
         }
         activeHouseIndex = -1;
     }
+
+    public void ExportFeedback()
+    {
+        string fileName = "Feedback_House_" + (activeHouseIndex + 1) + ".txt";
+        string filePath = Path.Combine(Application.persistentDataPath, fileName);
+        StringBuilder fileContent = new StringBuilder();
+
+        fileContent.AppendLine("Eco-Design & Safety Architectural Suite");
+        fileContent.AppendLine("Feedback Report");
+        fileContent.AppendLine("Date and Time: " + System.DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"));
+        fileContent.AppendLine("");
+        fileContent.AppendLine("Feedback Details:");
+        fileContent.AppendLine("");
+        fileContent.AppendLine(feedbackText.text);
+
+        try
+        {
+            File.WriteAllText(filePath, fileContent.ToString());
+            StartCoroutine(ShowExportSuccessMessage("Feedback exported successfully to: " + filePath));
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("Failed to export feedback: " + ex.Message);
+        }
+    }
+
+    IEnumerator ShowExportSuccessMessage(string message)
+    {
+        exportFeedbackPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = message;
+        exportFeedbackPanel.SetActive(true);
+        yield return new WaitForSeconds(2);
+        exportFeedbackPanel.SetActive(false);
+    }
+
+
 
     private string GenerateFeedback(int houseIndex)
     {
