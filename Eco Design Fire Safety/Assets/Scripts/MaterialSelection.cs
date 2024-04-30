@@ -1,3 +1,7 @@
+
+// MaterialSelection.cs is responsible for applying materials to the specific room's wall or floor of a house. It is also responsible for
+// calculating score of fire-safety and sustainability score based on material selection of walls and floors of a house using the HouseScoreManager.cs  
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -115,6 +119,8 @@ public class MaterialSelection : MonoBehaviour
         }
     }
 
+
+    // Applies wall materials to a specific room's walls and updates house scores.
     public void ApplyWallMaterial(string houseTag, string roomName, MaterialData materialData)
     {
         int houseIndex = GetHouseIndex(houseTag);
@@ -138,6 +144,7 @@ public class MaterialSelection : MonoBehaviour
         }
     }
 
+    // Applies floor materials to a specific room's floors and updates house scores.
     public void ApplyFloorMaterial(string houseTag, string roomName, MaterialData materialData)
     {
         int houseIndex = GetHouseIndex(houseTag);
@@ -169,28 +176,7 @@ public class MaterialSelection : MonoBehaviour
     }
 
 
-    private void UpdateScoresForRoom(string key, MaterialData newMaterial)
-    {
-        if (currentMaterials.ContainsKey(key))
-        {
-            var oldMaterial = currentMaterials[key];
-            HouseScoreManager.Instance.UpdateScores(
-                GetHouseIndex(key.Substring(0, 10)),
-                newMaterial.fireSafetyScore - oldMaterial.fireSafetyScore,
-                newMaterial.sustainabilityScore - oldMaterial.sustainabilityScore
-            );
-        }
-        else
-        {
-            HouseScoreManager.Instance.UpdateScores(
-                GetHouseIndex(key.Substring(0, 10)),
-                newMaterial.fireSafetyScore,
-                newMaterial.sustainabilityScore
-            );
-        }
-        currentMaterials[key] = newMaterial; 
-    }
-
+    // Helper method used in LoadGameState.cs to reset and apply scores based on material selection retrieved from the save file.
     public void ResetAndReapplyScores()
     {
         HouseScoreManager.Instance.ResetScores(); 
@@ -207,7 +193,7 @@ public class MaterialSelection : MonoBehaviour
     }
 
 
-
+    // Helper method used in LoadGameData.cs to reset the floor and wall materials before a game file is loaded.
     public void ClearAllMaterials()
     {
         var allRooms = new List<Room> {
@@ -234,12 +220,14 @@ public class MaterialSelection : MonoBehaviour
         currentMaterials.Clear();
     }
 
+    // Helper method to check if any wall or floor material has been changed for a house.
     public bool HasMaterialChanges(int houseIndex)
     {
         string houseTag = $"House{houseIndex + 1}LampPost";
         return currentMaterials.Keys.Any(key => key.StartsWith(houseTag));
     }
 
+    // Helper method to check if all rooms floor and wall material has been changed for a specific house.
     public bool AllMaterialsChanged(int houseIndex)
     {
         Room[] rooms = GetRoomsByHouseIndex(houseIndex);

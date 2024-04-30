@@ -1,3 +1,6 @@
+
+// ScoreUpdatePopup.cs manages the display of popup notifications for score updates.
+
 using UnityEngine;
 using TMPro;
 

@@ -1,3 +1,6 @@
+
+// FeedBackManager.cs is responsible for generating feedback based on score, displaying feedback and exporting feedback.
+
 using UnityEngine;
 using TMPro;
 using System.Text;
@@ -27,6 +30,7 @@ public class FeedBackManager : MonoBehaviour
         }
     }
 
+    // Display feedback for a specific house using houseIndex.
     public void ShowFeedback(int houseIndex)
     {
         string feedback = GenerateFeedback(houseIndex);
@@ -57,6 +61,7 @@ public class FeedBackManager : MonoBehaviour
         activeHouseIndex = -1;
     }
 
+    // Export feedback as a .txt file with title, date, time and generated feedback for a specific house
     public void ExportFeedback()
     {
         string fileName = "Feedback_House_" + (activeHouseIndex + 1) + ".txt";
@@ -82,6 +87,7 @@ public class FeedBackManager : MonoBehaviour
         }
     }
 
+    // Couritine to automatically display and hide success message for exporting feedback.
     IEnumerator ShowExportSuccessMessage(string message)
     {
         exportFeedbackPanel.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = message;
@@ -91,7 +97,7 @@ public class FeedBackManager : MonoBehaviour
     }
 
 
-
+    // Generate feedback for a specific house index based on various parameters and conditions.
     private string GenerateFeedback(int houseIndex)
     {
         StringBuilder feedbackBuilder = new StringBuilder();

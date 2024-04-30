@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿
+// PlayerMovement.cs provides the functionality for player movement, gravity application, and jumping within a 3D environment.
+// This script is part of the Modular First Person Controller from the Unity Asset Store and has been adapted to include player jump functionality.
+// Reference: Unity Asset Store, "Modular First Person Controller." https://assetstore.unity.com/packages/3d/characters/modular-first-person-controller-189884 (accessed Jan. 2, 2024).
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

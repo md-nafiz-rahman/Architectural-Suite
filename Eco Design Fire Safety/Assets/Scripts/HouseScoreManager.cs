@@ -1,3 +1,6 @@
+
+// HouseScoreManager.cs handles the scoring system for fire safety and sustainability based on material selection of walls and floors in MaterialSelection.cs within each house.
+
 using System;
 using UnityEngine;
 
@@ -26,6 +29,7 @@ public class HouseScoreManager : MonoBehaviour
         }
     }
 
+    // Updates scores for a house and triggers an event to notify listeners.
     public void UpdateScores(int houseIndex, float fireSafetyDelta, float sustainabilityDelta)
     {
         if (houseIndex < 0 || houseIndex >= fireSafetyScores.Length)
@@ -39,6 +43,7 @@ public class HouseScoreManager : MonoBehaviour
         Debug.Log($"Updated House {houseIndex + 1} Scores - Fire Safety: {fireSafetyScores[houseIndex]}, Sustainability: {sustainabilityScores[houseIndex]}");
     }
 
+    // Reset scores for all houses to zero and notifies listeners.
     public void ResetScores()
     {
         for (int i = 0; i < fireSafetyScores.Length; i++)

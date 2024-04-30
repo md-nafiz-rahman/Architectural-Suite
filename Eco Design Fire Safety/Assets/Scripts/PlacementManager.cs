@@ -1,3 +1,6 @@
+
+// PlacementManager.cs handles the interaction of placing furniture within the scene, it coordinates between user input and the ItemPlacementHandler.
+
 using UnityEngine;
 
 public class PlacementManager : MonoBehaviour
@@ -5,6 +8,7 @@ public class PlacementManager : MonoBehaviour
     public InventoryManager inventoryManager;
     private FurnitureItem selectedItem;
 
+    // Checks if an item is selected and the player presses the 'F' key to place it to begin placement process.
     void Update()
     {
         if (selectedItem != null && Input.GetKeyDown(KeyCode.F))
@@ -19,7 +23,7 @@ public class PlacementManager : MonoBehaviour
         }
     }
 
-
+    // Initialize the selected furniture for placement with ItemPlacementHandler.cs
     public void SelectItemForPlacement(FurnitureItem item)
     {
         var itemPlacementHandler = FindObjectOfType<ItemPlacementHandler>();

@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+
+// MainMenu.cs handles user interactions in the main menu, including starting new designs, loading saved designs, and exiting the game.
+
 using UnityEngine;
 using UnityEngine.SceneManagement; 
 
@@ -9,14 +10,13 @@ public class MainMenu : MonoBehaviour
     public GameObject loadMenu;
 
 
+    // Starts a new design session.
     public void StartNewDesign()
     {
         PlayerPrefs.SetString("SceneToLoad", "ModernHomes");
         PlayerPrefs.SetInt("LoadSlot", -1); 
         SceneManager.LoadScene("LoadingScreen");
     }
-
-
 
     public void OpenLoadPanel()
     {

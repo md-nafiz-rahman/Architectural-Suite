@@ -1,8 +1,11 @@
+
+// LoadGameData.cs script is responsible for loading the game data from JSON file. The game data inlcude player's position, furniture count and applied material, inventory state, 
+// and material selections of room walls and floors for a specific house. 
+
 using UnityEngine;
 using System.IO;
 using TMPro; 
 using SojaExiles;
-using System.Linq;
 using System.Collections;
 
 public class LoadGameData : MonoBehaviour
@@ -14,6 +17,7 @@ public class LoadGameData : MonoBehaviour
     public PauseMenu pauseMenu;
 
 
+    // Load game data from a JSON file and restore the game state.
     public void LoadGame(int slot)
     {
         string path = Application.persistentDataPath + "/gameSave" + slot + ".json";
@@ -68,7 +72,7 @@ public class LoadGameData : MonoBehaviour
         UpdateButtonLabels(loadButtons);
     }
 
-
+    // Recalculate the scores after the game data has been loaded.
     private IEnumerator RecalculateScoresAfterLoad()
     {
         yield return new WaitForEndOfFrame();
@@ -82,7 +86,7 @@ public class LoadGameData : MonoBehaviour
         }
     }
 
-
+    // Initialise furniture in the scene based on the loaded data.
     private void LoadFurniture(FurnitureData furniture)
     {
         if (furniture.position == Vector3.zero) return;
@@ -108,7 +112,7 @@ public class LoadGameData : MonoBehaviour
         }
     }
 
-
+    // Applies the saved material to the loaded furniture.
     private bool ApplyMaterial(GameObject obj, string materialName)
     {
         string cleanMaterialName = materialName.Replace(" (Instance)", "");
@@ -129,7 +133,7 @@ public class LoadGameData : MonoBehaviour
     }
 
 
-
+    // Registers the loaded furniture in the score management list for FurnitueScoreManager.cs
     private void RegisterFurniture(GameObject obj, int houseIndex)
     {
         Furniture furnitureComponent = obj.GetComponent<Furniture>();
@@ -155,7 +159,7 @@ public class LoadGameData : MonoBehaviour
 
 
 
-
+    // Loads the inventory items based on the saved data.
     private void LoadInventoryItem(string itemName, int count)
     {
         Debug.Log($"Loading {count} of {itemName}");
@@ -174,6 +178,7 @@ public class LoadGameData : MonoBehaviour
     }
 
 
+    // Removes all existing furniture from the scene before loading new data.
     public void ClearExistingFurniture()
     {
         Furniture[] existingFurnitures = FindObjectsOfType<Furniture>();
@@ -184,19 +189,7 @@ public class LoadGameData : MonoBehaviour
         }
     }
 
-
-    private int IdentifyHouseIndex(Vector3 position)
-    {
-        Collider[] hitColliders = Physics.OverlapSphere(position, 0.1f);
-        for (int i = 0; i < hitColliders.Length; i++)
-        {
-            if (hitColliders[i].CompareTag("House1FurnitureArea")) return 0;
-            if (hitColliders[i].CompareTag("House2FurnitureArea")) return 1;
-            if (hitColliders[i].CompareTag("House3FurnitureArea")) return 2;
-        }
-        return -1; 
-    }
-
+    // Updates the UI labels for load buttons based on the save file's time stamp.
     public static void UpdateButtonLabels(TextMeshProUGUI[] buttons)
     {
         for (int i = 0; i < buttons.Length; i++)

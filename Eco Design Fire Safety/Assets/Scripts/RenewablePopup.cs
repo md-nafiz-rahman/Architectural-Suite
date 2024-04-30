@@ -1,9 +1,11 @@
 using UnityEngine;
 
+// RenewablePopup.cs is responsible for automatically displaying and hiding popup when placing renewable energy sources (Solar Panel).
 public class RenewablePopup : MonoBehaviour
 {
     public GameObject popupObject;
 
+    // Ensure popup hidden at start.
     void Start()
     {
         if (popupObject != null)
@@ -12,6 +14,7 @@ public class RenewablePopup : MonoBehaviour
         }
     }
 
+    // Activate the popup for 2 seconds.
     public void ShowPopup()
     {
         if (popupObject != null)
@@ -21,6 +24,7 @@ public class RenewablePopup : MonoBehaviour
         }
     }
 
+    // Hide the popup.
     public void HidePopup()
     {
         if (popupObject != null)

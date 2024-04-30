@@ -1,3 +1,6 @@
+
+// InteractionManager.cs manages user interactions with game objects, specifically picking up furniture.
+
 using UnityEngine;
 
 public class InteractionManager : MonoBehaviour

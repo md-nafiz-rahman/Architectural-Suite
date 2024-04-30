@@ -1,10 +1,12 @@
+
+// InventoryManager.cs manages the inventory system, allowing users to add, manage, and interact with furniture items within the inventory.
+
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using TMPro;
 using System.Linq;
-using System.Net;
 
 [System.Serializable]
 public class FurnitureItemWithCount
@@ -63,6 +65,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    // Initializes inventory with predefined furniture items on start.
     void Start()
     {
         foreach (var item in predefinedFurnitureItemsWithCount)
@@ -74,6 +77,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    // Displays the material selection panel for the selected furniture item from inventory.
     public void ShowMaterialSelectionPanel(FurnitureItem item, MaterialData materialData)
     {
         selectedItemForPlacement = item;
@@ -93,6 +97,7 @@ public class InventoryManager : MonoBehaviour
         inventoryCanvas.SetActive(false);
     }
 
+    // Prepares a furniture instance for placement by applying its material in the scene.
     public void PrepareItemForPlacement(FurnitureItem item, MaterialData materialData)
     {
         MaterialData useMaterial = materialData ?? item.materialData;
@@ -106,6 +111,7 @@ public class InventoryManager : MonoBehaviour
         currentItemForPlacement = itemInstance;
     }
 
+    // Applies the specified material to the instantiated furniture item.
     private void ApplyMaterialToInstance(GameObject instance, MaterialData materialData)
     {
         Renderer[] renderers = instance.GetComponentsInChildren<Renderer>();
@@ -140,6 +146,7 @@ public class InventoryManager : MonoBehaviour
         confirmationPanel.SetActive(false);
     }
 
+    // Finalizes the placement of a furniture item and updates inventory and UI state.
     public void ConfirmPlacement()
     {
         if (currentItemForPlacement == null)
@@ -177,6 +184,7 @@ public class InventoryManager : MonoBehaviour
         UpdateInventoryUI();
     }
 
+    // Handles left-click interactions on furniture items in inventory to show material selection panel or show confirmation panel for item that cannot have different materials.
     public void OnLeftClick(PointerEventData data, FurnitureItem item)
     {
         if (data.button == PointerEventData.InputButton.Left) 
@@ -193,7 +201,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-
+    // Adds a furniture item to the inventory and updates the UI.
     public void AddItemToInventory(FurnitureItem furnitureItem)
     {
         if (furnitureCounts.TryGetValue(furnitureItem, out var count))
@@ -209,7 +217,7 @@ public class InventoryManager : MonoBehaviour
         CheckIfInventoryIsEmpty();
     }
 
-
+    // Updates the count display for a furniture item in the inventory.
     private void UpdateSlotCount(FurnitureItem furnitureItem)
     {
         if (inventorySlots.TryGetValue(furnitureItem, out var slot))
@@ -219,7 +227,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-
+    // Updates the inventory UI to reflect current state and item counts.
     public void UpdateInventoryUI()
     {
         ClearInventorySlots(allFurnitureScrollView.transform.Find("Viewport/Content"));
@@ -246,6 +254,7 @@ public class InventoryManager : MonoBehaviour
         UpdateEmptyTexts();
     }
 
+    // Creates an inventory slot for an item in the "All" category.
     private void CreateSlotForItemInAllCategory(FurnitureItem furnitureItem)
     {
 
@@ -278,7 +287,7 @@ public class InventoryManager : MonoBehaviour
         inventorySlots[furnitureItem] = slotInAll;
     }
 
-
+    // Retrieves the content panel for a specific furniture category.
     private Transform GetContentPanelForCategory(FurnitureCategory category)
     {
         switch (category)
@@ -308,6 +317,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    // Method used in LoadGameData.cs to reset the inventory before a game file is loaded.
     public void ClearInventory()
     {
         furnitureCounts.Clear();
@@ -321,7 +331,7 @@ public class InventoryManager : MonoBehaviour
 
 
 
-
+    // Returns a dictionary containing the counts of each item in the inventory. Used to save the state of inventory in game file
     public Dictionary<string, int> GetInventoryCounts()
     {
         var inventoryCounts = new Dictionary<string, int>();
@@ -337,7 +347,7 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-
+    // Creates a slot for a furniture item with its count in the designated content panel.
     private void CreateSlotForItem(FurnitureItem furnitureItem, Transform contentPanel)
     {
         GameObject newSlot = Instantiate(slotPrefab, contentPanel);
@@ -387,7 +397,7 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-
+    // Removes one furniture item from the inventory and updates the UI when user places the furniture in the scene.
     public void RemoveFurnitureFromInventory(FurnitureItem itemToRemove, int quantity = 1)
     {
         if (furnitureCounts.ContainsKey(itemToRemove) && furnitureCounts[itemToRemove] >= quantity)
@@ -408,7 +418,7 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-
+    // Opens inventory on user input of button I. 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
@@ -417,6 +427,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    // Methods to display specific category scroll view of furniture.
 
     public void ShowAllFurniture()
     {

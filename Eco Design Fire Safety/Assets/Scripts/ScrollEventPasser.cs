@@ -1,3 +1,7 @@
+
+// ScrollEventPasser.cs is responsible for passing of scroll events to a parent ScrollRect to handle nested scrolling effectively. 
+// The script specifically handles the scroll event of inventory system as it is populated by furniture prefab buttons that blocks the scroll event to the parent scrollrect of the scrollview. 
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

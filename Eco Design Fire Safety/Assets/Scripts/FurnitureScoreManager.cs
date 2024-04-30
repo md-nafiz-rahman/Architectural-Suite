@@ -1,3 +1,6 @@
+
+// FurnitureScoreManager.cs is responsible for calculating fire-safety and sustainability score based on furniture placement and material selection within specific house.
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +30,7 @@ public class FurnitureScoreManager : MonoBehaviour
     public RenewablePopup renewablePopup;
     public event Action<int> OnScoresUpdated;
 
-
+    // Initializes the furniture score manager setup.
     private void Awake()
     {
         if (Instance == null)
@@ -58,7 +61,7 @@ public class FurnitureScoreManager : MonoBehaviour
         }
     }
 
-
+    // Adds a furniture to a list for a specific house and call to recalculate scores.
     public void AddFurniturePlacement(int houseIndex, Furniture furniture)
     {
         if (furniture == null || houseIndex < 0 || houseIndex >= houseFurnitures.Length)
@@ -82,7 +85,7 @@ public class FurnitureScoreManager : MonoBehaviour
     }
 
 
-
+    // Removes a furniture from a specific house and call to recalculate scores.
     public void RemoveFurniturePlacement(int houseIndex, Furniture furniture)
     {
         if (houseIndex < 0 || houseIndex >= fireSafetyScores.Length)
@@ -102,6 +105,7 @@ public class FurnitureScoreManager : MonoBehaviour
         }
     }
 
+    // Overloaded version to remove furniture without specifying house index, used in LoadGameData to reset number of furniture placed in a house before loading new game data.
     public void RemoveFurniturePlacement(Furniture furniture)
     {
         for (int i = 0; i < houseFurnitures.Length; i++)
@@ -116,7 +120,7 @@ public class FurnitureScoreManager : MonoBehaviour
     }
 
 
-
+    // Calculate the fire safety and sustainability scores for a house specific house based on furniture placement and material selection.
     private void RecalculateScores(int houseIndex)
     {
         fireSafetyScores[houseIndex] = 0;
@@ -181,7 +185,7 @@ public class FurnitureScoreManager : MonoBehaviour
 
 
 
-
+    // Checks if furniture is in a door obstruction zone.
     private bool IsInDoorObstructionZone(GameObject furniture, int houseIndex)
     {
         Collider[] hitColliders = Physics.OverlapSphere(furniture.transform.position, 0.1f);
@@ -194,6 +198,7 @@ public class FurnitureScoreManager : MonoBehaviour
         return false;
     }
 
+    // Checks if furniture is too close to a fire source.
     private bool IsCloseToFire(GameObject furniture, int houseIndex)
     {
         Collider[] hitColliders = Physics.OverlapSphere(furniture.transform.position, 0.1f);
@@ -206,6 +211,7 @@ public class FurnitureScoreManager : MonoBehaviour
         return false;
     }
 
+    // Checks if furniture is placed on a rooftop.
     private bool IsInRooftopZone(GameObject furniture, int houseIndex)
     {
         Collider[] hitColliders = Physics.OverlapSphere(furniture.transform.position, 0.1f);
@@ -219,7 +225,7 @@ public class FurnitureScoreManager : MonoBehaviour
     }
 
 
-
+    // Calculates weighted score for a piece of furniture based on its count.
     private float CalculateWeightedScore(int count)
     {
         return count > 10 ? 50.0f / count : 5.0f;
@@ -241,6 +247,7 @@ public class FurnitureScoreManager : MonoBehaviour
         return sustainabilityScores[houseIndex];
     }
 
+    // Utility class to compare material data.
     private class MaterialDataComparer : IEqualityComparer<MaterialData>
     {
         public bool Equals(MaterialData x, MaterialData y)

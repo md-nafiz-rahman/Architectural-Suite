@@ -1,5 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+
+// SaveLoadPanelController.cs script is responsible for displaying and controlling the save and load UI panels, managing game state during interactions with save and load UI panels.
+
 using UnityEngine;
 
 public class SaveLoadPanelController : MonoBehaviour

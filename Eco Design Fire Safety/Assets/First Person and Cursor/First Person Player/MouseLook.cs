@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿
+// MouseLook.cs handles camera control for a first-person perspective, allowing the player to look around with the mouse.
+// This script is part of the Modular First Person Controller from the Unity Asset Store.
+// Reference: Unity Asset Store, "Modular First Person Controller." https://assetstore.unity.com/packages/3d/characters/modular-first-person-controller-189884 (accessed Jan. 2, 2024).
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

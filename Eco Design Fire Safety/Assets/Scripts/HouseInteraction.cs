@@ -1,5 +1,6 @@
-using System.Collections.Generic;
-using System;
+
+// HouseInteraction.cs is responsible for managing interactions with three house's interaction menu and their component.
+
 using UnityEngine;
 
 public class HouseInteraction : MonoBehaviour
@@ -77,6 +78,7 @@ public class HouseInteraction : MonoBehaviour
         }
     }
 
+    // Display material panel based on the house and room.
     public void ShowRoomMaterialPanel(string houseTag, string room)
     {
         HideAllRoomMaterialPanels();
@@ -103,6 +105,7 @@ public class HouseInteraction : MonoBehaviour
         }
     }
 
+    // Hide material selection message for a specific house.
     private void HideSelectionMessage(string houseTag)
     {
         switch (houseTag)
@@ -122,6 +125,7 @@ public class HouseInteraction : MonoBehaviour
         }
     }
 
+    // Retrieve material panel for a specific room in a specific house.
     private GameObject GetRoomPanelForHouse(string room, int houseNumber)
     {
         switch (room)
@@ -152,7 +156,7 @@ public class HouseInteraction : MonoBehaviour
     }
 
 
-
+    // Hide all material panels for all rooms in all houses
     private void HideAllRoomMaterialPanels()
     {
         livingRoomMaterialPanelHouse1.SetActive(false);
@@ -190,7 +194,7 @@ public class HouseInteraction : MonoBehaviour
 
     }
 
-
+    // Control the visibility of customisation panel for a house.
     private void ToggleCustomizationPanel()
     {
         if (currentLampPost != null && !isCustomizationPanelOpen)
@@ -210,6 +214,7 @@ public class HouseInteraction : MonoBehaviour
         }
     }
 
+    // Method to check the status of any customisation panel.
     private bool IsAnyCustomizationPanelOpen()
     {
         return customizationPanelHouse1.activeSelf ||
@@ -239,7 +244,7 @@ public class HouseInteraction : MonoBehaviour
         CheckAndToggleOnScreenMessageForHouse(houseNumber);
     }
 
-
+    // Helper method to display the correct floor panel
     private void ActivateFloorPanel(string houseTag, bool isGroundFloor)
     {
         GameObject panelToShow = null;
@@ -278,6 +283,7 @@ public class HouseInteraction : MonoBehaviour
         }
     }
 
+    // Retrieve house number from the object lamp post's collider tag.
     private int GetHouseNumberFromLampPostTag(string tag)
     {
         if (tag.Contains("House1")) return 1;
@@ -286,7 +292,7 @@ public class HouseInteraction : MonoBehaviour
         return 0; 
     }
 
-
+    // Hide all wall and floor selection panels.
     private void HideAllWallFloorPanels()
     {
         groundFloorPanelHouse1.SetActive(false);
@@ -561,6 +567,7 @@ public class HouseInteraction : MonoBehaviour
         CheckAndToggleOnScreenMessageForHouse(3);
     }
 
+    // Handle on screen message for material selection panel.
     private void CheckAndToggleOnScreenMessageForHouse(int houseNumber)
     {
         bool groundFloorActive = false;
@@ -621,6 +628,7 @@ public class HouseInteraction : MonoBehaviour
         return false;
     }
 
+    // Identify house, room and material. Apply correct material to specific room's floor or wall using helper method from MaterialSelection.cs.
     public void OnMaterialSelected(string identifier, int materialIndex, bool isWall)
     {
         string[] parts = identifier.Split('-');
@@ -641,6 +649,7 @@ public class HouseInteraction : MonoBehaviour
         }
     }
 
+    // Retrieve the current material selections for a specific house.
     public HouseMaterialData GetMaterialSelections(int houseNumber)
     {
         HouseMaterialData houseMaterial = new HouseMaterialData { houseTag = $"House{houseNumber}LampPost" };
@@ -668,7 +677,7 @@ public class HouseInteraction : MonoBehaviour
         return houseMaterial;
     }
 
-
+    // Apply the saved materials to the walls and floors of the specified house.
     public void ApplySavedMaterials(HouseMaterialData houseMaterial)
     {
         foreach (var selection in houseMaterial.roomWallMaterials)

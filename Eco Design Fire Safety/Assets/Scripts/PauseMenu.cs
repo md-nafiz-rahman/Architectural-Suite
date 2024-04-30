@@ -1,3 +1,6 @@
+
+// PauseMenu.cs manages the pause state of the game. The script handles resume, going to main menu, restart, saving the game and loading previous saved games.
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

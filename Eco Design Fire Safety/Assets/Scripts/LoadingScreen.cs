@@ -1,3 +1,6 @@
+
+// LoadingScreenManager.cs manages the loading of scenes with a delay.
+ 
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;

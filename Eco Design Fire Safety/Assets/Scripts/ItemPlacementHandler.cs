@@ -1,7 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
+// ItemPlacementHandler.cs manages the placement mechanisms and rotation of items within the scene, allowing users to interactively place and orient furniture.
+
+using UnityEngine;
 public class ItemPlacementHandler : MonoBehaviour
 {
     private Camera cam;
@@ -18,6 +18,7 @@ public class ItemPlacementHandler : MonoBehaviour
         cam = Camera.main;
     }
 
+    // Beging placement process of the furniture, it is called from PlacementManager.cs when user presses on F. 
     public void BeginPlacement(GameObject itemPrefab, MaterialData materialData)
     {
         currentMaterialData = materialData;
@@ -41,6 +42,7 @@ public class ItemPlacementHandler : MonoBehaviour
 
     }
 
+    // Apply the selected material to the currently placed item.
     private void ApplyMaterial(GameObject item, MaterialData materialData)
     {
         Renderer renderer = item.GetComponent<Renderer>();
@@ -58,6 +60,7 @@ public class ItemPlacementHandler : MonoBehaviour
         }
     }
 
+    // Update item position and rotation based on user input during placement.
     void Update()
     {
         if (isPlacing && currentItem != null)
@@ -91,6 +94,7 @@ public class ItemPlacementHandler : MonoBehaviour
         }
     }
 
+    // Finalizes the placement of the current item and updates the scene state.
     public void PlaceItem()
     {
         if (isPlacing && currentItem != null)
@@ -112,6 +116,7 @@ public class ItemPlacementHandler : MonoBehaviour
         }
     }
 
+    // Update scene state
     private void FinalizePlacement()
     {
         isPlacing = false;

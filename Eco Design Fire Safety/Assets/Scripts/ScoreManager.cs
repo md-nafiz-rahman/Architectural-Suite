@@ -1,3 +1,6 @@
+
+// ScoreManager.cs is responsible for managing and aggregating fire-safety and sustainability scores from both FurnitureScoreManager.cs and HouseScoreManager.cs. 
+
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
@@ -47,6 +50,7 @@ public class ScoreManager : MonoBehaviour
         return totalSustainabilityScores[Mathf.Clamp(houseIndex, 0, totalSustainabilityScores.Length - 1)];
     }
 
+    // Calculates and updates the total scores by adding scores from both furniture and house score managers.
     public void CalculateTotalScores(int houseIndex)
     {
         totalFireSafetyScores[houseIndex] = furnitureScoreManager.GetTotalFireSafetyScore(houseIndex) + houseScoreManager.GetTotalFireSafetyScore(houseIndex);

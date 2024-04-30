@@ -1,3 +1,7 @@
+
+// SaveGameData.cs is responsible for saving the current game state, including player position, furniture count and applied material, inventory state, 
+// and material selections of room walls and floors for a specific house into a JSON file.
+
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
@@ -54,6 +58,8 @@ public class SaveGameData : MonoBehaviour
     {
         LoadGameData.UpdateButtonLabels(saveButtons);
     }
+
+    // Creates and fill game data structure with the current state, it converts data to a JSON file and saves in local computer
     public void SaveGame(int slot)
     {
         GameData data = new GameData();

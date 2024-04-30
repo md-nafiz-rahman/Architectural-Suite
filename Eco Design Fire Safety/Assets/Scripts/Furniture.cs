@@ -1,3 +1,6 @@
+
+// Furniture object in game
+
 using UnityEngine;
 
 public class Furniture : MonoBehaviour

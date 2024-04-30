@@ -1,6 +1,8 @@
+
+// ScorePanelManager.cs is responsible for managing the UI panels that display the fire-safety and sustainability scores for each house.
+
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class ScorePanelManager : MonoBehaviour
 {
@@ -40,6 +42,7 @@ public class ScorePanelManager : MonoBehaviour
         houseCustomizationPanels[houseIndex].SetActive(true);
     }
 
+    // Sets scores in the UI for fire safety or sustainability for a specific house.
     private void SetScores(int houseIndex, bool isFireSafety)
     {
         CloseAllPanels();

@@ -1,3 +1,6 @@
+
+// MaterialButtonFurniture.cs script is responsible for handling the UI material button that applies material to selected furniture from the inventory.
+
 using UnityEngine;
 using UnityEngine.UI;
 

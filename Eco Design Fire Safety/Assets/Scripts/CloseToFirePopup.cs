@@ -1,11 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
+// CloseToFirePopup.cs is responsible for automatically displaying and hiding popup when furniture is placed close to fire hazards.
+
+using UnityEngine;
 public class CloseToFirePopup : MonoBehaviour
 {
     public GameObject popupObject;
 
+    // Ensure popup hidden at start.
     void Start()
     {
         if (popupObject != null)
@@ -14,6 +15,7 @@ public class CloseToFirePopup : MonoBehaviour
         }
     }
 
+    // Activate the popup for 2 seconds.
     public void ShowPopup()
     {
         if (popupObject != null)
@@ -23,6 +25,7 @@ public class CloseToFirePopup : MonoBehaviour
         }
     }
 
+    // Hide the popup.
     public void HidePopup()
     {
         if (popupObject != null)
