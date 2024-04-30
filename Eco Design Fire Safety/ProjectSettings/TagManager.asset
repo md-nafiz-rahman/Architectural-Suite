@@ -17,6 +17,9 @@ TagManager:
   - CloseToFire1
   - CloseToFire2
   - CloseToFire3
+  - Rooftop1
+  - Rooftop2
+  - Rooftop3
   layers:
   - Default
   - TransparentFX

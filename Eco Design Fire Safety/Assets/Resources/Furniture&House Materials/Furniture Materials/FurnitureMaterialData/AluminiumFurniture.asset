@@ -15,4 +15,4 @@ MonoBehaviour:
   materialName: AluminiumFurniture
   material: {fileID: 2100000, guid: 3c38e02885137534cab22eef8b9c0b60, type: 2}
   fireSafetyScore: 10
-  sustainabilityScore: 7
+  sustainabilityScore: 8

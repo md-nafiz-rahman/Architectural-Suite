@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: TilesFlooring
   material: {fileID: 2100000, guid: 9de40444df40dc74da495af5b63f478a, type: 2}
-  fireSafetyScore: 10
-  sustainabilityScore: 6
+  fireSafetyScore: 8
+  sustainabilityScore: 7

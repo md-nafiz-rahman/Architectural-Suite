@@ -15,4 +15,4 @@ MonoBehaviour:
   materialName: EcoboardFurniture
   material: {fileID: 2100000, guid: ad0dfffa9d4902b439ef17858148950d, type: 2}
   fireSafetyScore: 5
-  sustainabilityScore: 9
+  sustainabilityScore: 10

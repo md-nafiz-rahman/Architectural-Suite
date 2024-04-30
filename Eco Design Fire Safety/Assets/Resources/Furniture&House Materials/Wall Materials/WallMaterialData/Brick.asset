@@ -15,4 +15,4 @@ MonoBehaviour:
   materialName: Brick
   material: {fileID: 2100000, guid: 08fc9be7856092047ab58dd72209918e, type: 2}
   fireSafetyScore: 9
-  sustainabilityScore: 4
+  sustainabilityScore: 7

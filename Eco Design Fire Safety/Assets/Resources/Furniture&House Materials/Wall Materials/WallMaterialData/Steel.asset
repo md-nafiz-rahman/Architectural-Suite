@@ -15,4 +15,4 @@ MonoBehaviour:
   materialName: Steel
   material: {fileID: 2100000, guid: 19e373a06e99c6940969b0cd5b898345, type: 2}
   fireSafetyScore: 10
-  sustainabilityScore: 4
+  sustainabilityScore: 6

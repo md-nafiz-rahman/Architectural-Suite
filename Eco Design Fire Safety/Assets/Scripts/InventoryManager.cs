@@ -177,13 +177,22 @@ public class InventoryManager : MonoBehaviour
         UpdateInventoryUI();
     }
 
-    public void OnRightClick(PointerEventData data, FurnitureItem item)
+    public void OnLeftClick(PointerEventData data, FurnitureItem item)
     {
-        if (data.button == PointerEventData.InputButton.Right)
+        if (data.button == PointerEventData.InputButton.Left) 
         {
-            ShowMaterialSelectionPanel(item, item.materialData);
+            if (item.itemName == "SolarPanel")
+            {
+                selectedItemForPlacement = item;
+                ShowConfirmationPanel(item); 
+            }
+            else if (item.itemName != "SolarPanel") 
+            {
+                ShowMaterialSelectionPanel(item, item.materialData); 
+            }
         }
     }
+
 
     public void AddItemToInventory(FurnitureItem furnitureItem)
     {
@@ -250,11 +259,20 @@ public class InventoryManager : MonoBehaviour
         }
 
         Button button = slotInAll.GetComponent<Button>();
-        button.onClick.AddListener(() => ShowMaterialSelectionPanel(furnitureItem, furnitureItem.materialData));
+        button.onClick.AddListener(() => {
+            if (furnitureItem.itemName == "SolarPanel")
+            {
+                ShowConfirmationPanel(furnitureItem);
+            }
+            else
+            {
+                ShowMaterialSelectionPanel(furnitureItem, furnitureItem.materialData);
+            }
+        });
 
         EventTrigger trigger = slotInAll.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
-        entry.callback.AddListener((data) => OnRightClick((PointerEventData)data, furnitureItem));
+        entry.callback.AddListener((data) => OnLeftClick((PointerEventData)data, furnitureItem));
         trigger.triggers.Add(entry);
 
         inventorySlots[furnitureItem] = slotInAll;
@@ -333,7 +351,7 @@ public class InventoryManager : MonoBehaviour
 
         EventTrigger trigger = newSlot.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
-        entry.callback.AddListener((data) => OnRightClick((PointerEventData)data, furnitureItem));
+        entry.callback.AddListener((data) => OnLeftClick((PointerEventData)data, furnitureItem));
         trigger.triggers.Add(entry);
 
         inventorySlots[furnitureItem] = newSlot;

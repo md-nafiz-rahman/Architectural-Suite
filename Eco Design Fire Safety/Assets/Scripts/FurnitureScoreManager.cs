@@ -24,6 +24,7 @@ public class FurnitureScoreManager : MonoBehaviour
     public static FurnitureScoreManager Instance;
     private List<Furniture>[] obstructedFurnitures;
     private List<Furniture>[] closeToFireFurnitures;
+    public RenewablePopup renewablePopup;
     public event Action<int> OnScoresUpdated;
 
 
@@ -135,6 +136,13 @@ public class FurnitureScoreManager : MonoBehaviour
             fireSafetyScores[houseIndex] += (furniture.materialData.fireSafetyScore / 10.0f) * weightedScore;
             sustainabilityScores[houseIndex] += (furniture.materialData.sustainabilityScore / 10.0f) * weightedScore;
 
+            if (IsInRooftopZone(furniture.gameObject, houseIndex) && furniture.furnitureItem != null && furniture.furnitureItem.itemName == "SolarPanel")
+            {
+                sustainabilityScores[houseIndex] += 5;
+                renewablePopup.ShowPopup();
+
+            }
+
             if (IsInDoorObstructionZone(furniture.gameObject, houseIndex))
             {
                 fireSafetyScores[houseIndex] -= 5;
@@ -197,6 +205,19 @@ public class FurnitureScoreManager : MonoBehaviour
         }
         return false;
     }
+
+    private bool IsInRooftopZone(GameObject furniture, int houseIndex)
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(furniture.transform.position, 0.1f);
+        string rooftopTag = $"Rooftop{houseIndex + 1}";
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag(rooftopTag))
+                return true;
+        }
+        return false;
+    }
+
 
 
     private float CalculateWeightedScore(int count)

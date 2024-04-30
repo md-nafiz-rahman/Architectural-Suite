@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   materialName: RecycledWoodFurniture
   material: {fileID: 2100000, guid: 97e303b6482283042b484cbe5edf42d8, type: 2}
-  fireSafetyScore: 7
+  fireSafetyScore: 6
   sustainabilityScore: 10

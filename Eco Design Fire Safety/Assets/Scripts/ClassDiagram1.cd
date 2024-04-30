@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SojaExiles.MouseLook" Collapsed="true">
+    <Position X="11" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAIAAAACAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAQ=</HashCode>
+      <FileName>Assets\First Person and Cursor\First Person Player\MouseLook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SojaExiles.PlayerMovement" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAgAAgAgAAEAAAAAIAAAAAAAAQAIEAQAAAAAAQA=</HashCode>
+      <FileName>Assets\First Person and Cursor\First Person Player\PlayerMovement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CloseToFirePopup" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAACAAAAAAAAAgACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\CloseToFirePopup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DontDestroy" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\DontDestroy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoorObstructionPopup" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAACAAAAAAAAAgACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\DoorObstructionPopup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FeedBackManager" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AADAAAAAAEACAAAAAAAAAAAEAAAAAAEAQAEAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\FeedBackManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Furniture" Collapsed="true">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Furniture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureItem" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAIAAIAAAAAAAAAAQAIAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\FurnitureItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FurnitureScoreManager" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>YAAAAEBAAAAAUBBAKAAQAIAgAAAABIAARFAAIAACAEA=</HashCode>
+      <FileName>Assets\Scripts\FurnitureScoreManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HouseInteraction" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>jrx5AJCAgABCyGPDQwAA4AiKGAF3J6EcSODoAYAKJCA=</HashCode>
+      <FileName>Assets\Scripts\HouseInteraction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HouseScoreManager" Collapsed="true">
+    <Position X="9.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAgAAAABIAQQBAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\HouseScoreManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InteractionManager" Collapsed="true">
+    <Position X="11" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Assets\Scripts\InteractionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="InventoryManager" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>LgSgiSQCAiAAIohESYEAAAGAACWIaBAhVgcQyAQAiEA=</HashCode>
+      <FileName>Assets\Scripts\InventoryManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemPlacementHandler" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AASABACAACAAACAAABAAAEAAAAAQAAFEAAYAAAAAQAA=</HashCode>
+      <FileName>Assets\Scripts\ItemPlacementHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadGameData" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAABAAGAIEAAAABAAAAKAAIAIIAAAEAAAAAAgAAE=</HashCode>
+      <FileName>Assets\Scripts\LoadGameData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadingScreenManager" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAgAAACAAAAAAgAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\LoadingScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenu" Collapsed="true">
+    <Position X="11" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAAAAAEAAAgAAAAABAACAAEAgAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\MainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaterialButton" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAACAAAAAAAAABAAAAAQAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MaterialButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaterialButtonFurniture" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAACAAAAIAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\MaterialButtonFurniture.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaterialData" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAACAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\MaterialData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MaterialSelection" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>B4BCAIgAQMABoAAA4gLwOACAAARAABQAQAAgAIASAMA=</HashCode>
+      <FileName>Assets\Scripts\MaterialSelection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PauseMenu" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EBQgAAAAACAQAAAAAAAAAAAAAAAAAAAQAAAAAAgAAEA=</HashCode>
+      <FileName>Assets\Scripts\PauseMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlacementManager" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAEAAAAAIAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Assets\Scripts\PlacementManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveLoadPanelController" Collapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAABAAAAAAAAAAQAAAAAAAQAQAIACAAAAIAgAAAA=</HashCode>
+      <FileName>Assets\Scripts\SaveLoadPanelController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveGameData" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAQQAAAAAAAAAAAAAAAAAAAAAAAAAAgAAE=</HashCode>
+      <FileName>Assets\Scripts\SaveGameData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScoreManager" Collapsed="true">
+    <Position X="4" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAEAAgiAAAAAAAAAAAgAgAAAAAIAAQAAAAAgAAEI=</HashCode>
+      <FileName>Assets\Scripts\ScoreManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScorePanelManager" Collapsed="true">
+    <Position X="5.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAgBgQgAAQBQAAACAAAAAAABEAAAgEAEgAQAA=</HashCode>
+      <FileName>Assets\Scripts\ScorePanelManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScoreUpdatePopup" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACgAAQAAAAAgACAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScoreUpdatePopup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScrollEventPasser" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAABAEAAAAAAAACQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScrollEventPasser.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

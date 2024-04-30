@@ -15,4 +15,4 @@ MonoBehaviour:
   materialName: HardwoodFlooring
   material: {fileID: 2100000, guid: 930612cb021e09340923d107a120a748, type: 2}
   fireSafetyScore: 7
-  sustainabilityScore: 10
+  sustainabilityScore: 6
