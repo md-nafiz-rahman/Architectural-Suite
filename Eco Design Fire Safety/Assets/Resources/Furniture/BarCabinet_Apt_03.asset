@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ffc193c401ae845b374358e7ab6358, type: 3}
+  m_Name: BarCabinet_Apt_03
+  m_EditorClassIdentifier: 
+  itemName: BarCabinet_Apt_03
+  icon: {fileID: 21300000, guid: 86d91de35ec23144b8e02ae877d34d1a, type: 3}
+  prefab: {fileID: 1577178251646154, guid: f193bec3a0b87ca45a9dc2e7af25e968, type: 3}
+  category: 3
+  materialData: {fileID: 11400000, guid: cc46f1eb7b120f743847a0b8fc112e8e, type: 2}

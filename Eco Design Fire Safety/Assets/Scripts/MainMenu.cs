@@ -39,10 +39,6 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("LoadingScreen");
     }
 
-    public void Options()
-    {
-        Debug.Log("Options functionality not implemented yet.");
-    }
 
     public void ExitGame()
     {

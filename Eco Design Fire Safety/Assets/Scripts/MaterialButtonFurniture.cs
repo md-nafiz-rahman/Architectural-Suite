@@ -18,13 +18,15 @@ public class MaterialButtonFurniture : MonoBehaviour
     {
         if (inventoryManager.selectedItemForPlacement != null)
         {
+            // Determine the material to apply: either the current materialData or the selected item's default material
             MaterialData materialToApply = materialData ?? inventoryManager.selectedItemForPlacement.materialData;
 
+            // Prepare the selected item for placement by setting up its prefab and applying the chosen material
             inventoryManager.PrepareItemForPlacement(inventoryManager.selectedItemForPlacement, materialToApply);
 
             inventoryManager.ShowMaterialSelectionPanel(inventoryManager.selectedItemForPlacement, materialToApply);
-
         }
     }
+
 
 }

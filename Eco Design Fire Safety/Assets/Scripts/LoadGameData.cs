@@ -194,12 +194,12 @@ public class LoadGameData : MonoBehaviour
     {
         for (int i = 0; i < buttons.Length; i++)
         {
-            string path = Application.persistentDataPath + "/gameSave" + i + ".json";
+            string path = Application.persistentDataPath + "/gameSave" + i + ".json"; // Construct the file path and name for each game save file.
             if (File.Exists(path))
             {
                 string json = File.ReadAllText(path);
-                GameData data = JsonUtility.FromJson<GameData>(json);
-                buttons[i].text = "Slot " + (i + 1) + "\nSaved: " + data.saveTime;
+                GameData data = JsonUtility.FromJson<GameData>(json); // Deserialize the JSON content to a GameData object.
+                buttons[i].text = "Slot " + (i + 1) + "\nSaved: " + data.saveTime; // Set the button's text to display the slot number and the saved time.
             }
             else
             {
@@ -211,15 +211,17 @@ public class LoadGameData : MonoBehaviour
 
     public void ShowHelpMenu()
     {
+        // If the pause menu is currently displayed, hide it
         if (pauseMenu.pauseMenuUI.activeSelf)
         {
             pauseMenu.pauseMenuUI.SetActive(false);
         }
-        helpMenuPanel.SetActive(true);
-        Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        helpMenuPanel.SetActive(true); // Activate help menu panel
+        Time.timeScale = 0f; // Stop game time
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor so it can be moved freely
+        Cursor.visible = true; // Make the cursor visible on the screen
     }
+
 
     public void HideHelpMenu()
     {

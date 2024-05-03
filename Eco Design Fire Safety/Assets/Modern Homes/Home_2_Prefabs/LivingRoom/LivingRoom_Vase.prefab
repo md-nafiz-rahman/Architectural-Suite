@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4000013557069208}
   - component: {fileID: 33000011182886752}
   - component: {fileID: 23000010017331088}
+  - component: {fileID: 2199543711306601176}
   m_Layer: 0
   m_Name: LivingRoom_Vase
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2199543711306601176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000014118409822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureItem: {fileID: 11400000, guid: f53959379fd77b542ab90590067241c7, type: 2}
+  materialData: {fileID: 0}

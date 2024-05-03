@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33000011510804756}
   - component: {fileID: 23000012385016266}
   - component: {fileID: 65000011731976400}
+  - component: {fileID: 7549648586948137847}
   m_Layer: 0
   m_Name: DiningSet1_Chair
   m_TagString: Untagged
@@ -106,6 +107,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.47791243, y: 0.46234643, z: 0.5591929}
   m_Center: {x: 0, y: 0.23091632, z: 0.05378157}
+--- !u!114 &7549648586948137847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010430532536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureItem: {fileID: 11400000, guid: 79d20ae636688f5408e88c15cc388afb, type: 2}
+  materialData: {fileID: 0}
 --- !u!1 &1000013547860386
 GameObject:
   m_ObjectHideFlags: 0

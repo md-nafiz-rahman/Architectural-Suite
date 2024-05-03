@@ -18,7 +18,8 @@ public class ItemPlacementHandler : MonoBehaviour
         cam = Camera.main;
     }
 
-    // Beging placement process of the furniture, it is called from PlacementManager.cs when user presses on F. 
+    // Beging placement process of the furniture, it is called from PlacementManager.cs when user clicks on 'The Place Furniture' button
+    // in material selection panel for furniture. 
     public void BeginPlacement(GameObject itemPrefab, MaterialData materialData)
     {
         currentMaterialData = materialData;
@@ -94,7 +95,7 @@ public class ItemPlacementHandler : MonoBehaviour
         }
     }
 
-    // Finalizes the placement of the current item and updates the scene state.
+    // Finalizes the placement of the current item, find the correct house index and updates the score for the house.
     public void PlaceItem()
     {
         if (isPlacing && currentItem != null)
@@ -116,17 +117,6 @@ public class ItemPlacementHandler : MonoBehaviour
         }
     }
 
-    // Update scene state
-    private void FinalizePlacement()
-    {
-        isPlacing = false;
-        ToggleColliders(currentItem, true);
-        currentItem = null;
-        Time.timeScale = 1f;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
     public int CheckHouseColliderArea(Vector3 position)
     {
         Collider[] hitColliders = Physics.OverlapSphere(position, 0.1f);
@@ -140,6 +130,16 @@ public class ItemPlacementHandler : MonoBehaviour
         return -1;
     }
 
+    // Update scene state
+    private void FinalizePlacement()
+    {
+        isPlacing = false;
+        ToggleColliders(currentItem, true);
+        currentItem = null;
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
 
     private void ToggleColliders(GameObject item, bool state)

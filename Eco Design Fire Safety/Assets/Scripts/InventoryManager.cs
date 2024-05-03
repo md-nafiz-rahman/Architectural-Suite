@@ -77,6 +77,22 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    // Adds a furniture item to the inventory and updates the UI.
+    public void AddItemToInventory(FurnitureItem furnitureItem)
+    {
+        if (furnitureCounts.TryGetValue(furnitureItem, out var count))
+        {
+            furnitureCounts[furnitureItem] = count + 1;
+            UpdateSlotCount(furnitureItem);
+        }
+        else
+        {
+            furnitureCounts[furnitureItem] = 1;
+            CreateSlotForItem(furnitureItem, inventoryContentPanel);
+        }
+        CheckIfInventoryIsEmpty();
+    }
+
     // Displays the material selection panel for the selected furniture item from inventory.
     public void ShowMaterialSelectionPanel(FurnitureItem item, MaterialData materialData)
     {
@@ -201,22 +217,6 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    // Adds a furniture item to the inventory and updates the UI.
-    public void AddItemToInventory(FurnitureItem furnitureItem)
-    {
-        if (furnitureCounts.TryGetValue(furnitureItem, out var count))
-        {
-            furnitureCounts[furnitureItem] = count + 1;
-            UpdateSlotCount(furnitureItem);
-        }
-        else
-        {
-            furnitureCounts[furnitureItem] = 1;
-            CreateSlotForItem(furnitureItem, inventoryContentPanel);
-        }
-        CheckIfInventoryIsEmpty();
-    }
-
     // Updates the count display for a furniture item in the inventory.
     private void UpdateSlotCount(FurnitureItem furnitureItem)
     {
@@ -287,7 +287,7 @@ public class InventoryManager : MonoBehaviour
         inventorySlots[furnitureItem] = slotInAll;
     }
 
-    // Retrieves the content panel for a specific furniture category.
+    // Retrieves the content panel for a specific furniture category from scroll view.
     private Transform GetContentPanelForCategory(FurnitureCategory category)
     {
         switch (category)
@@ -308,6 +308,27 @@ public class InventoryManager : MonoBehaviour
                 return allFurnitureScrollView.transform.Find("Viewport/Content");
         }
     }
+
+    // Creates a slot for a furniture item with its count in the designated content panel.
+    private void CreateSlotForItem(FurnitureItem furnitureItem, Transform contentPanel)
+    {
+        GameObject newSlot = Instantiate(slotPrefab, contentPanel); // Creates a new slot in the specified content panel.
+        newSlot.GetComponent<Image>().sprite = furnitureItem.icon; // Sets the furniture icon.
+
+        TMP_Text quantityText = newSlot.transform.Find("QuantityText").GetComponent<TMP_Text>(); // Finds and sets the quantity text.
+        quantityText.text = "x" + furnitureCounts[furnitureItem]; // Updates text to show the current count of this furniture type.
+
+        Button button = newSlot.GetComponent<Button>(); // Gets the button component.
+        button.onClick.AddListener(() => ShowMaterialSelectionPanel(furnitureItem, furnitureItem.materialData)); // Adds listener for material selection.
+
+        EventTrigger trigger = newSlot.AddComponent<EventTrigger>(); // Adds an event trigger to handle click events.
+        EventTrigger.Entry entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
+        entry.callback.AddListener((data) => OnLeftClick((PointerEventData)data, furnitureItem)); // Adds a callback for left-click.
+        trigger.triggers.Add(entry);
+
+        inventorySlots[furnitureItem] = newSlot; // Stores the slot in a dictionary for future reference.
+    }
+
 
     private void ClearInventorySlots(Transform contentPanel)
     {
@@ -344,27 +365,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return inventoryCounts;
-    }
-
-
-    // Creates a slot for a furniture item with its count in the designated content panel.
-    private void CreateSlotForItem(FurnitureItem furnitureItem, Transform contentPanel)
-    {
-        GameObject newSlot = Instantiate(slotPrefab, contentPanel);
-        newSlot.GetComponent<Image>().sprite = furnitureItem.icon;
-
-        TMP_Text quantityText = newSlot.transform.Find("QuantityText").GetComponent<TMP_Text>();
-        quantityText.text = "x" + furnitureCounts[furnitureItem]; 
-
-        Button button = newSlot.GetComponent<Button>();
-        button.onClick.AddListener(() => ShowMaterialSelectionPanel(furnitureItem, furnitureItem.materialData));
-
-        EventTrigger trigger = newSlot.AddComponent<EventTrigger>();
-        EventTrigger.Entry entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
-        entry.callback.AddListener((data) => OnLeftClick((PointerEventData)data, furnitureItem));
-        trigger.triggers.Add(entry);
-
-        inventorySlots[furnitureItem] = newSlot;
     }
 
     private void UpdateEmptyTexts()

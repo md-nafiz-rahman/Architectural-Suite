@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ffc193c401ae845b374358e7ab6358, type: 3}
+  m_Name: SofaChairSet1 2
+  m_EditorClassIdentifier: 
+  itemName: SofaChairSet1 2
+  icon: {fileID: 21300000, guid: 5473c767b740d6f4f908b3089d051f2d, type: 3}
+  prefab: {fileID: 1000012052652042, guid: 215c51b16605d8d4abfadb4a62db958f, type: 3}
+  category: 2
+  materialData: {fileID: 11400000, guid: cc46f1eb7b120f743847a0b8fc112e8e, type: 2}

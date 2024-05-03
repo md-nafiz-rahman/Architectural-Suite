@@ -136,10 +136,14 @@ public class FurnitureScoreManager : MonoBehaviour
                 houseFurnitures[houseIndex].RemoveAt(i);
                 continue;
             }
-            float weightedScore = CalculateWeightedScore(totalItems);
+
+            float weightedScore = CalculateWeightedScore(totalItems);  // Calculate weighted score for the furniture based on total number of furniture user placed inside a house.
+
+            // Update fire safety and sustainability scores for each furniture's material data's weighted score for fire-safety and sustainability.
             fireSafetyScores[houseIndex] += (furniture.materialData.fireSafetyScore / 10.0f) * weightedScore;
             sustainabilityScores[houseIndex] += (furniture.materialData.sustainabilityScore / 10.0f) * weightedScore;
 
+            // Check if furniture is in the rooftop zone and is a solar panel; add 5 to sustainability score.
             if (IsInRooftopZone(furniture.gameObject, houseIndex) && furniture.furnitureItem != null && furniture.furnitureItem.itemName == "SolarPanel")
             {
                 sustainabilityScores[houseIndex] += 5;
@@ -147,6 +151,7 @@ public class FurnitureScoreManager : MonoBehaviour
 
             }
 
+            // Check if furniture is in door obstruction zone, deduct 5 from fire-safety score and add the furniture to list of obstructing furniture, display popup for door obstruction.
             if (IsInDoorObstructionZone(furniture.gameObject, houseIndex))
             {
                 fireSafetyScores[houseIndex] -= 5;
@@ -157,6 +162,7 @@ public class FurnitureScoreManager : MonoBehaviour
                 }
             }
 
+            // Check if furniture is close to fire hazard, deduct 5 from fire-safety score and add the furniture to list of furniture close to fire hazards, display popup for fire hazard.
             if (IsCloseToFire(furniture.gameObject, houseIndex))
             {
                 fireSafetyScores[houseIndex] -= 5;

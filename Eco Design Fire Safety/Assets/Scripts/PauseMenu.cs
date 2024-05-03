@@ -39,11 +39,12 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        Cursor.lockState = CursorLockMode.None; 
-        Cursor.visible = true;
+        pauseMenuUI.SetActive(true); // Activate pause menu panel
+        Time.timeScale = 0f; // Stop game time
+        Cursor.lockState = CursorLockMode.None; // Unlock the cursor so it can be moved freely
+        Cursor.visible = true; // Make the cursor visible on the screen
     }
+
 
     public void Resume()
     {

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 23000012508152196}
   - component: {fileID: 65000011242426800}
   - component: {fileID: 65000010084942560}
+  - component: {fileID: 779218057252618841}
   m_Layer: 0
   m_Name: TerraceDeck_Chair1
   m_TagString: Untagged
@@ -127,3 +128,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.23445809, y: 1.0675024, z: 0.71965945}
   m_Center: {x: -0.2690636, y: 0.5337512, z: -0.00000047683716}
+--- !u!114 &779218057252618841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013902708408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureItem: {fileID: 11400000, guid: e271af6e3ae3fb243948da89847c7d51, type: 2}
+  materialData: {fileID: 0}

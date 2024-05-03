@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ffc193c401ae845b374358e7ab6358, type: 3}
+  m_Name: BarCabinet_Apt_02_CenterTower
+  m_EditorClassIdentifier: 
+  itemName: BarCabinet_Apt_02_CenterTower
+  icon: {fileID: 21300000, guid: 5e336c4f0a7b47b48a283e6ff0b2ef78, type: 3}
+  prefab: {fileID: 1134232648000790, guid: f0f8347ddc1d5ed4bb8d2379f9008300, type: 3}
+  category: 3
+  materialData: {fileID: 11400000, guid: cc46f1eb7b120f743847a0b8fc112e8e, type: 2}

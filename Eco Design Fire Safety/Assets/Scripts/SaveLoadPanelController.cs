@@ -12,24 +12,31 @@ public class SaveLoadPanelController : MonoBehaviour
 
     public void ActivateSaveCanvas()
     {
-        saveCanvas.SetActive(true);
+        saveCanvas.SetActive(true); // Activate save menu panel
         pausemenu.pauseMenuUI.SetActive(false);
         loadCanvas.SetActive(false); 
         FreezeGame(true);
+    }
+
+    public void ActivateLoadCanvas()
+    {
+        pausemenu.pauseMenuUI.SetActive(false);
+        loadCanvas.SetActive(true); // Activate load menu panel
+        saveCanvas.SetActive(false); 
+        FreezeGame(true);
+    }
+
+    private void FreezeGame(bool freeze)
+    {
+        Time.timeScale = freeze ? 0 : 1;
+        Cursor.lockState = freeze ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = freeze;
     }
 
     public void DeactivateSaveCanvas()
     {
         saveCanvas.SetActive(false);
         CheckAndUnfreezeGame();
-    }
-
-    public void ActivateLoadCanvas()
-    {
-        pausemenu.pauseMenuUI.SetActive(false);
-        loadCanvas.SetActive(true);
-        saveCanvas.SetActive(false); 
-        FreezeGame(true);
     }
 
     public void DeactivateLoadCanvas()
@@ -44,12 +51,5 @@ public class SaveLoadPanelController : MonoBehaviour
         {
             FreezeGame(false);
         }
-    }
-
-    private void FreezeGame(bool freeze)
-    {
-        Time.timeScale = freeze ? 0 : 1;
-        Cursor.lockState = freeze ? CursorLockMode.None : CursorLockMode.Locked;
-        Cursor.visible = freeze;
     }
 }

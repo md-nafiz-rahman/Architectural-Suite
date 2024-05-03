@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4000013555930178}
   - component: {fileID: 33000010507658804}
   - component: {fileID: 23000013217654188}
+  - component: {fileID: 9058964059721587672}
   m_Layer: 0
   m_Name: LivingRoom_SideTable
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &9058964059721587672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010218135782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureItem: {fileID: 11400000, guid: f129c55c2a77db844a88d87969d30e1a, type: 2}
+  materialData: {fileID: 0}

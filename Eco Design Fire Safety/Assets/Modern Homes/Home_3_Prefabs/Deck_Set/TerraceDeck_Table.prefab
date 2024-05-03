@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33000013729287568}
   - component: {fileID: 23000010414988110}
   - component: {fileID: 65000010884375204}
+  - component: {fileID: 7068386822424669853}
   m_Layer: 0
   m_Name: TerraceDeck_Table
   m_TagString: Untagged
@@ -105,3 +106,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.69722545, y: 0.46289062, z: 0.82101893}
   m_Center: {x: -0.00000016391277, y: 0.23144531, z: 0}
+--- !u!114 &7068386822424669853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010433659354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureItem: {fileID: 11400000, guid: 9769f6f9e695ba8409d058b4338089ff, type: 2}
+  materialData: {fileID: 0}

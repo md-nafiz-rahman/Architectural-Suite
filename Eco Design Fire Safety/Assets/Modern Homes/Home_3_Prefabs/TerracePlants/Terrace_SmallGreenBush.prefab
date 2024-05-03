@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4000011181774568}
   - component: {fileID: 33000010854406090}
   - component: {fileID: 23000010726229172}
+  - component: {fileID: 7958303226313002520}
   m_Layer: 0
   m_Name: Terrace_BushWhitebase2
   m_TagString: Untagged
@@ -83,6 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7958303226313002520
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011050798830}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.79096544, y: 0.75882506, z: 2.420564}
+  m_Center: {x: 0.00000014901164, y: 0.37941253, z: 0.00000011920932}
 --- !u!1 &1000013633102444
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,6 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011655466850}
+  - component: {fileID: 3019251170606139429}
   m_Layer: 0
   m_Name: Terrace_SmallGreenBush
   m_TagString: Untagged
@@ -116,6 +139,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &3019251170606139429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013633102444}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureItem: {fileID: 11400000, guid: 0c2efab416c64d74b8c9aa375f2a7561, type: 2}
+  materialData: {fileID: 0}
 --- !u!1 &1000014212964974
 GameObject:
   m_ObjectHideFlags: 0

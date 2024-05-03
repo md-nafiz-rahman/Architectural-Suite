@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000011503378478}
+  - component: {fileID: 8114906508509951010}
   m_Layer: 0
   m_Name: MasterBedroom_Wardrobe
   m_TagString: Untagged
@@ -33,6 +34,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8114906508509951010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010269953896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureItem: {fileID: 11400000, guid: 467014bfc7d41a44084a9eafca63de34, type: 2}
+  materialData: {fileID: 0}
 --- !u!1 &1000011907097546
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,6 +59,7 @@ GameObject:
   - component: {fileID: 4000010564333886}
   - component: {fileID: 33000013032380210}
   - component: {fileID: 23000012271965066}
+  - component: {fileID: 8421158065547748121}
   m_Layer: 0
   m_Name: MasterBedroom_Wardrobe 1
   m_TagString: Untagged
@@ -116,6 +132,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8421158065547748121
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000011907097546}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.7388327, y: 3.1054952, z: 3.6368003}
+  m_Center: {x: 0.36929834, y: 1.6901668, z: -0.06386638}
 --- !u!1 &1000013274041754
 GameObject:
   m_ObjectHideFlags: 0
