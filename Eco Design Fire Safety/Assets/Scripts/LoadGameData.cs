@@ -1,10 +1,9 @@
-
 // LoadGameData.cs script is responsible for loading the game data from JSON file. The game data inlcude player's position, furniture count and applied material, inventory state, 
 // and material selections of room walls and floors for a specific house. 
 
 using UnityEngine;
 using System.IO;
-using TMPro; 
+using TMPro;
 using SojaExiles;
 using System.Collections;
 
@@ -54,7 +53,7 @@ public class LoadGameData : MonoBehaviour
             }
             if (materialSelection != null)
             {
-                materialSelection.ResetAndReapplyScores(); 
+                materialSelection.ResetAndReapplyScores();
             }
 
             InventoryManager.Instance.ClearInventory();
@@ -162,7 +161,6 @@ public class LoadGameData : MonoBehaviour
     // Loads the inventory items based on the saved data.
     private void LoadInventoryItem(string itemName, int count)
     {
-        Debug.Log($"Loading {count} of {itemName}");
         FurnitureItem item = Resources.Load<FurnitureItem>("Furniture/" + itemName);
         if (item)
         {
@@ -184,7 +182,7 @@ public class LoadGameData : MonoBehaviour
         Furniture[] existingFurnitures = FindObjectsOfType<Furniture>();
         foreach (var furniture in existingFurnitures)
         {
-            FurnitureScoreManager.Instance.RemoveFurniturePlacement(furniture); 
+            FurnitureScoreManager.Instance.RemoveFurniturePlacement(furniture);
             Destroy(furniture.gameObject);
         }
     }
@@ -234,7 +232,7 @@ public class LoadGameData : MonoBehaviour
     void Start()
     {
         UpdateButtonLabels(loadButtons);
-        ShowHelpMenu(); 
+        ShowHelpMenu();
 
     }
 }

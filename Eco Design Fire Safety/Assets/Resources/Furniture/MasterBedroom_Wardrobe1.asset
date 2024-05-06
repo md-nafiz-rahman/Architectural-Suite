@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: MasterBedroom_Wardrobe
   icon: {fileID: 21300000, guid: 06cf4ef5367feb44e92fe6597ad4e54a, type: 3}
-  prefab: {fileID: 1000012893767276, guid: f501368bb993c6f438f9853d01b02345, type: 3}
+  prefab: {fileID: 3999803920714809040, guid: f501368bb993c6f438f9853d01b02345, type: 3}
   category: 3
   materialData: {fileID: 11400000, guid: cc46f1eb7b120f743847a0b8fc112e8e, type: 2}

@@ -205,12 +205,12 @@ public class InventoryManager : MonoBehaviour
     {
         if (data.button == PointerEventData.InputButton.Left) 
         {
-            if (item.itemName == "SolarPanel")
+            if (item.itemName == "SolarPanel" || item.itemName == "WindTurbine")
             {
                 selectedItemForPlacement = item;
                 ShowConfirmationPanel(item); 
             }
-            else if (item.itemName != "SolarPanel") 
+            else if (item.itemName == "SolarPanel" || item.itemName == "WindTurbine") 
             {
                 ShowMaterialSelectionPanel(item, item.materialData); 
             }
@@ -269,7 +269,7 @@ public class InventoryManager : MonoBehaviour
 
         Button button = slotInAll.GetComponent<Button>();
         button.onClick.AddListener(() => {
-            if (furnitureItem.itemName == "SolarPanel")
+            if (furnitureItem.itemName == "SolarPanel" || furnitureItem.itemName == "WindTurbine")
             {
                 ShowConfirmationPanel(furnitureItem);
             }
@@ -319,8 +319,17 @@ public class InventoryManager : MonoBehaviour
         quantityText.text = "x" + furnitureCounts[furnitureItem]; // Updates text to show the current count of this furniture type.
 
         Button button = newSlot.GetComponent<Button>(); // Gets the button component.
-        button.onClick.AddListener(() => ShowMaterialSelectionPanel(furnitureItem, furnitureItem.materialData)); // Adds listener for material selection.
 
+        button.onClick.AddListener(() => {
+            if (furnitureItem.itemName == "SolarPanel" || furnitureItem.itemName == "WindTurbine")
+            {
+                ShowConfirmationPanel(furnitureItem);
+            }
+            else
+            {
+                ShowMaterialSelectionPanel(furnitureItem, furnitureItem.materialData);
+            }
+        });
         EventTrigger trigger = newSlot.AddComponent<EventTrigger>(); // Adds an event trigger to handle click events.
         EventTrigger.Entry entry = new EventTrigger.Entry { eventID = EventTriggerType.PointerClick };
         entry.callback.AddListener((data) => OnLeftClick((PointerEventData)data, furnitureItem)); // Adds a callback for left-click.

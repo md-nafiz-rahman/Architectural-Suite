@@ -38,7 +38,7 @@
   <Class Name="FeedBackManager" Collapsed="true">
     <Position X="9.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AADAAAAAAEACAAAAAAAAAAAEAAAAAAEAQAEAAAAAAEA=</HashCode>
+      <HashCode>AADAAAAAAMACAAAAAAAAEAAEACAAAAEAQAEAAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\FeedBackManager.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -59,7 +59,7 @@
   <Class Name="FurnitureScoreManager" Collapsed="true">
     <Position X="5.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>YAAAAEBAAAAAUBBAKAAQAIAgAAAABIAARFAAIAACAEA=</HashCode>
+      <HashCode>YAAAAEBAAAAAUJBAKAAQAIAgAAAABIAAxFAAIAACAEA=</HashCode>
       <FileName>Assets\Scripts\FurnitureScoreManager.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -87,7 +87,7 @@
   <Class Name="InventoryManager" Collapsed="true">
     <Position X="4" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>LgSgiSQCAiAAIohESYEAAAGAACWIaBAhVgcQyAQAiEA=</HashCode>
+      <HashCode>LgSgiSQCAiACIohESYEAAAGAACWIaBAhVgcQyAQAiEA=</HashCode>
       <FileName>Assets\Scripts\InventoryManager.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -101,7 +101,7 @@
   <Class Name="LoadGameData" Collapsed="true">
     <Position X="7.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAAABAAGAIEAAAABAAAAKAAIAIIAAAEAAAAAAgAAE=</HashCode>
+      <HashCode>ACAAAABAAGAIEAAAABAAAAKAAIAIIAAAEAAAAAAAAAE=</HashCode>
       <FileName>Assets\Scripts\LoadGameData.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -115,7 +115,7 @@
   <Class Name="MainMenu" Collapsed="true">
     <Position X="11" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAAAAAAAAAEAAAgAAAAABAACAAEAgAAAAAAABAAAA=</HashCode>
+      <HashCode>ACAAAAAAAAAAEAAAgAAAAABAACAAEAgAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\MainMenu.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -143,7 +143,7 @@
   <Class Name="MaterialSelection" Collapsed="true">
     <Position X="9.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>B4BCAIgAQMABoAAA4gLwOACAAARAABQAQAAgAIASAMA=</HashCode>
+      <HashCode>B4BCAIgAQMABoAAA4gLwOACAAARAABQAQAAgAIACAMA=</HashCode>
       <FileName>Assets\Scripts\MaterialSelection.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -162,47 +162,54 @@
     </TypeIdentifier>
   </Class>
   <Class Name="SaveLoadPanelController" Collapsed="true">
-    <Position X="11" Y="4.5" Width="1.5" />
+    <Position X="4" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAgAAABAAAAAAAAAAQAAAAAAAQAQAIACAAAAIAgAAAA=</HashCode>
       <FileName>Assets\Scripts\SaveLoadPanelController.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SaveGameData" Collapsed="true">
-    <Position X="9.25" Y="4.5" Width="1.5" />
+    <Position X="11" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAQQAAAAAAAAAAAAAAAAAAAAAAAAAAgAAE=</HashCode>
       <FileName>Assets\Scripts\SaveGameData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ScoreManager" Collapsed="true">
-    <Position X="4" Y="5.5" Width="1.5" />
+    <Position X="5.75" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAEAAgiAAAAAAAAAAAgAgAAAAAIAAQAAAAAgAAEI=</HashCode>
       <FileName>Assets\Scripts\ScoreManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ScorePanelManager" Collapsed="true">
-    <Position X="5.75" Y="5.5" Width="1.5" />
+    <Position X="7.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAgAAgBgQgAAQBQAAACAAAAAAABEAAAgEAEgAQAA=</HashCode>
       <FileName>Assets\Scripts\ScorePanelManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ScoreUpdatePopup" Collapsed="true">
-    <Position X="7.5" Y="5.5" Width="1.5" />
+    <Position X="9.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAACgAAQAAAAAgACAAAAAAAAAABAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\ScoreUpdatePopup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ScrollEventPasser" Collapsed="true" BaseTypeListCollapsed="true">
-    <Position X="9.25" Y="5.5" Width="1.5" />
+    <Position X="11" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAABAEAAAAAAAACQAAAAAAAAAAAA=</HashCode>
       <FileName>Assets\Scripts\ScrollEventPasser.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="RenewablePopup" Collapsed="true">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAACAAAAAAAAAgACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\RenewablePopup.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

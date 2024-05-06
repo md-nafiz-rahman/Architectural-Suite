@@ -119,4 +119,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   furnitureItem: {fileID: 11400000, guid: cd6148cb6a64bac45bca97993e059ec1, type: 2}
-  materialData: {fileID: 0}
+  materialData: {fileID: 11400000, guid: cc6554ad6d4f6d941818d3094eb32da6, type: 2}

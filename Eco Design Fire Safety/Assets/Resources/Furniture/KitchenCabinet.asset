@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: KitchenCabinet
   icon: {fileID: 21300000, guid: 4e6eca0b24f3d074f8694d3bfded475a, type: 3}
-  prefab: {fileID: 1000012549904858, guid: 6567983953eb2d248b1a20907528ea89, type: 3}
+  prefab: {fileID: 1633733733186034428, guid: 6567983953eb2d248b1a20907528ea89, type: 3}
   category: 3
   materialData: {fileID: 11400000, guid: cc46f1eb7b120f743847a0b8fc112e8e, type: 2}

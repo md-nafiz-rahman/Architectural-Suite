@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: LoungeRoom_BarShelf
   icon: {fileID: 21300000, guid: fd2b6e482a224d54ba6889e8071446e7, type: 3}
-  prefab: {fileID: 1000010851965894, guid: c06bf6aeeefdac04394794675ee669da, type: 3}
+  prefab: {fileID: 6261261885848012224, guid: c06bf6aeeefdac04394794675ee669da, type: 3}
   category: 3
   materialData: {fileID: 11400000, guid: cc46f1eb7b120f743847a0b8fc112e8e, type: 2}

@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: GuestBedroom_Wardrobe
   icon: {fileID: 21300000, guid: 3ce3443ca02837a4a864cd93352a44ef, type: 3}
-  prefab: {fileID: 1000013215380642, guid: 6c25c1470aac2ec4abf67f31d109b1e7, type: 3}
+  prefab: {fileID: 6455283335840937032, guid: 6c25c1470aac2ec4abf67f31d109b1e7, type: 3}
   category: 3
   materialData: {fileID: 11400000, guid: cc46f1eb7b120f743847a0b8fc112e8e, type: 2}

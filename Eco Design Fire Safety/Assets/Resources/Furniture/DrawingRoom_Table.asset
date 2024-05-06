@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: DrawingRoom_Table
   icon: {fileID: 21300000, guid: ba7312472d3c94f4c8c5ce5f73144c2c, type: 3}
-  prefab: {fileID: 1000013003268850, guid: f2f51b9574e06794698fb63c2806da37, type: 3}
+  prefab: {fileID: 3130843475222019868, guid: f2f51b9574e06794698fb63c2806da37, type: 3}
   category: 1
   materialData: {fileID: 11400000, guid: cc46f1eb7b120f743847a0b8fc112e8e, type: 2}

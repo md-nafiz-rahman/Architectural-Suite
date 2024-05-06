@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: LoungeRoom_BarSeat
   icon: {fileID: 21300000, guid: 137aa03a91fc4184d872cd4a0cb43dd3, type: 3}
-  prefab: {fileID: 1000012454105828, guid: 6081b662dc198ad47b0b1a422f7d21b4, type: 3}
+  prefab: {fileID: 7590430007007841468, guid: 6081b662dc198ad47b0b1a422f7d21b4, type: 3}
   category: 2
   materialData: {fileID: 11400000, guid: cc46f1eb7b120f743847a0b8fc112e8e, type: 2}

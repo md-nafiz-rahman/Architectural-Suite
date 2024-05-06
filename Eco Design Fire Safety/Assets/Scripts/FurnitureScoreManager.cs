@@ -1,4 +1,3 @@
-
 // FurnitureScoreManager.cs is responsible for calculating fire-safety and sustainability score based on furniture placement and material selection within specific house.
 
 using System;
@@ -27,6 +26,7 @@ public class FurnitureScoreManager : MonoBehaviour
     public static FurnitureScoreManager Instance;
     private List<Furniture>[] obstructedFurnitures;
     private List<Furniture>[] closeToFireFurnitures;
+    private List<Furniture>[] renewableSources;
     public RenewablePopup renewablePopup;
     public event Action<int> OnScoresUpdated;
 
@@ -40,6 +40,7 @@ public class FurnitureScoreManager : MonoBehaviour
             houseFurnitures = new List<Furniture>[numHouses];
             obstructedFurnitures = new List<Furniture>[numHouses];
             closeToFireFurnitures = new List<Furniture>[numHouses];
+            renewableSources = new List<Furniture>[numHouses];
             fireSafetyScores = new float[numHouses];
             sustainabilityScores = new float[numHouses];
             for (int i = 0; i < numHouses; i++)
@@ -47,6 +48,7 @@ public class FurnitureScoreManager : MonoBehaviour
                 houseFurnitures[i] = new List<Furniture>();
                 obstructedFurnitures[i] = new List<Furniture>();
                 closeToFireFurnitures[i] = new List<Furniture>();
+                renewableSources[i] = new List<Furniture>();
             }
 
             foreach (var entry in materialEntries)
@@ -66,7 +68,7 @@ public class FurnitureScoreManager : MonoBehaviour
     {
         if (furniture == null || houseIndex < 0 || houseIndex >= houseFurnitures.Length)
         {
-            Debug.LogError($"Invalid furniture addition attempt: furniture is null or houseIndex out of range for furniture: {furniture?.name ?? "Unknown"}.");
+            Debug.LogWarning($"Invalid furniture addition attempt: furniture is null or houseIndex out of range for furniture: {furniture?.name ?? "Unknown"}.");
             return;
         }
         if (furniture.transform.position == Vector3.zero)
@@ -74,9 +76,10 @@ public class FurnitureScoreManager : MonoBehaviour
             Debug.LogWarning($"Skipping furniture at position zero: {furniture.name}");
             return;
         }
+
         if (furniture.materialData == null)
         {
-            Debug.LogError($"Missing material data for furniture: {furniture.name}.");
+            Debug.LogWarning($"Missing material data for furniture: {furniture.name}.");
             return;
         }
 
@@ -88,9 +91,9 @@ public class FurnitureScoreManager : MonoBehaviour
     // Removes a furniture from a specific house and call to recalculate scores.
     public void RemoveFurniturePlacement(int houseIndex, Furniture furniture)
     {
-        if (houseIndex < 0 || houseIndex >= fireSafetyScores.Length)
-        {
-            Debug.LogError("Invalid house index for removal.");
+        if (houseIndex < 0 || houseIndex >= fireSafetyScores.Length || houseIndex >= sustainabilityScores.Length)
+        { 
+            Debug.LogWarning("Invalid house index for removal.");
             return;
         }
 
@@ -101,7 +104,7 @@ public class FurnitureScoreManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Attempted to remove furniture not found in the current house.");
+            Debug.LogWarning("Attempted to remove furniture not found in the current house.");
         }
     }
 
@@ -132,7 +135,7 @@ public class FurnitureScoreManager : MonoBehaviour
             var furniture = houseFurnitures[houseIndex][i];
             if (furniture == null || furniture.materialData == null)
             {
-                Debug.LogError("Material data missing for furniture: " + (furniture != null ? furniture.name : "Unknown furniture"));
+                Debug.LogWarning("Material data missing for furniture: " + (furniture != null ? furniture.name : "Unknown furniture"));
                 houseFurnitures[houseIndex].RemoveAt(i);
                 continue;
             }
@@ -143,12 +146,15 @@ public class FurnitureScoreManager : MonoBehaviour
             fireSafetyScores[houseIndex] += (furniture.materialData.fireSafetyScore / 10.0f) * weightedScore;
             sustainabilityScores[houseIndex] += (furniture.materialData.sustainabilityScore / 10.0f) * weightedScore;
 
-            // Check if furniture is in the rooftop zone and is a solar panel; add 5 to sustainability score.
-            if (IsInRooftopZone(furniture.gameObject, houseIndex) && furniture.furnitureItem != null && furniture.furnitureItem.itemName == "SolarPanel")
+            // Check if furniture is in the rooftop zone and is a solar panel or wind turbine; add 5 to sustainability score.
+            if (IsInRooftopZone(furniture.gameObject, houseIndex) && (furniture.furnitureItem.itemName == "SolarPanel" || furniture.furnitureItem.itemName == "WindTurbine"))
             {
                 sustainabilityScores[houseIndex] += 5;
-                renewablePopup.ShowPopup();
-
+                if (!renewableSources[houseIndex].Contains(furniture))
+                {
+                    renewableSources[houseIndex].Add(furniture);
+                    renewablePopup.ShowPopup();
+                }
             }
 
             // Check if furniture is in door obstruction zone, deduct 5 from fire-safety score and add the furniture to list of obstructing furniture, display popup for door obstruction.
@@ -176,6 +182,7 @@ public class FurnitureScoreManager : MonoBehaviour
 
         obstructedFurnitures[houseIndex].RemoveAll(furniture => !IsInDoorObstructionZone(furniture.gameObject, houseIndex));
         closeToFireFurnitures[houseIndex].RemoveAll(furniture => !IsCloseToFire(furniture.gameObject, houseIndex));
+        renewableSources[houseIndex].RemoveAll(furniture => !IsInRooftopZone(furniture.gameObject, houseIndex) && (furniture.furnitureItem.itemName == "SolarPanel" || furniture.furnitureItem.itemName == "WindTurbine"));
 
         if (fireSafetyScores[houseIndex] < 0)
         {
@@ -218,7 +225,7 @@ public class FurnitureScoreManager : MonoBehaviour
     }
 
     // Checks if furniture is placed on a rooftop.
-    private bool IsInRooftopZone(GameObject furniture, int houseIndex)
+    public bool IsInRooftopZone(GameObject furniture, int houseIndex)
     {
         Collider[] hitColliders = Physics.OverlapSphere(furniture.transform.position, 0.1f);
         string rooftopTag = $"Rooftop{houseIndex + 1}";
@@ -229,7 +236,6 @@ public class FurnitureScoreManager : MonoBehaviour
         }
         return false;
     }
-
 
     // Calculates weighted score for a piece of furniture based on its count.
     private float CalculateWeightedScore(int count)

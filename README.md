@@ -20,13 +20,15 @@ In order to run the software, the executable folder must be downloaded to local 
 Alternatively the source code folder can be download and opened in unity editor. In order to do that the zipped folder downloaded from gitlab must be unzipped to locate the source code folder which is "Eco Design Fire Safety". The unity hub need to be open and from unity hub, option for adding project from local disk should be selected. When the window file explorer pop up menu is open the source code folder must be located and selected to load in unity editor.
 
 ## External Resources 
-The main scene is located in the source code folder in file path 'Assets/Modern Homes'. The main scene is part of an asset from Unity asset store called "Modern Homes Pack" [1].
-The player controller located in source code folder in file path 'Assets/First Person and Cursor' is part of an unity asset called "Apartment Kit" [2]. The scripts for player controller were adapted to include jump functionality for the player. 
-The furniture prefabs located in the file path 'Assets/Modern Homes/Furniture and Props Simple' are also part of the same unity asset called "Apartment Kit" [2]. 
-The DontDestroy script located in 'Assets/Scripts' is directly adapted from a tutorial video on youtube [3].
+- The main scene is located in the source code folder in file path 'Assets/Modern Homes'. The main scene is part of an asset from Unity asset store called "Modern Homes Pack" [1].
+- The player controller located in source code folder in file path 'Assets/First Person and Cursor' is part of an unity asset called "Apartment Kit" [2]. The scripts for player controller were adapted to include jump functionality for the player. 
+- The furniture prefabs located in the file path 'Assets/Modern Homes/Furniture and Props Simple' are also part of the same unity asset called "Apartment Kit" [2]. 
+- The DontDestroy script located in 'Assets/Scripts' is directly adapted from a tutorial video on youtube [3].
+- The 'WindTurbine' 3D object loacted in 'Assets/Material and Miscellaneous' is a 3D object downloaded from TurboSquid [4].
 
 
 ## References
 [1] Unity Asset Store. “Modern Homes Pack.” assetstore.unity.com. [https://assetstore.unity.com/packages/3d/environments/urban/modern-homes-pack-68912](https://assetstore.unity.com/packages/3d/environments/urban/modern-homes-pack-68912). (accessed Jan. 2, 2024).
 [2]  Brick Project Studio. “Apartment Kit.” assetstore.unity.com. https://assetstore.unity.com/packages/3d/environments/apartment-kit-124055 (accessed Jan. 2, 2024). 
 [3] JTAGames, How To Make a Don't Destroy on Load (One Script for Every Object) (Unity Tutorial). (Mar. 26, 2021). Accessed Mar. 2, 2024. [Online Video]. Available: https://www.youtube.com/watch?v=HXaFLm3gQws
+[4] Scheissegalo. "Wind Turbine." TurboSquid.com https://www.turbosquid.com/3d-models/free-3ds-model-environmentally-friendly/964716 (accessed May. 3, 2024).

@@ -20,6 +20,7 @@ TagManager:
   - Rooftop1
   - Rooftop2
   - Rooftop3
+  - Rooftop0
   layers:
   - Default
   - TransparentFX

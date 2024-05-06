@@ -1,4 +1,3 @@
-
 // InteractionManager.cs manages user interactions with game objects, specifically picking up furniture.
 
 using UnityEngine;
@@ -14,7 +13,7 @@ public class InteractionManager : MonoBehaviour
             RaycastHit hit;
             // Setup a layer mask to ignore colliders tagged as "IgnoreColliderRaycast"
             int layerMask = 1 << LayerMask.NameToLayer("IgnoreColliderRaycast");
-            layerMask = ~layerMask; 
+            layerMask = ~layerMask;
             // Create a ray from the camera through the mouse position
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -23,7 +22,7 @@ public class InteractionManager : MonoBehaviour
             {
                 // Attempt to get the Furniture component from the hit object
                 Furniture furnitureComponent = hit.collider.GetComponentInParent<Furniture>();
-                if (furnitureComponent != null) 
+                if (furnitureComponent != null)
                 {
                     // Identify which house area the furniture is in
                     int houseIndex = IdentifyHouseIndex(furnitureComponent.transform.position);

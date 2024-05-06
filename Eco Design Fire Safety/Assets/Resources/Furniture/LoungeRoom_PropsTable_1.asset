@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: LoungeRoom_PropsTable_1
   icon: {fileID: 21300000, guid: 113273020d071df4383407fc666c1c57, type: 3}
-  prefab: {fileID: 1000010122431316, guid: 17358759a5230ad41a0b7b9a448da886, type: 3}
+  prefab: {fileID: 8213873595635948514, guid: 17358759a5230ad41a0b7b9a448da886, type: 3}
   category: 1
   materialData: {fileID: 11400000, guid: cc46f1eb7b120f743847a0b8fc112e8e, type: 2}

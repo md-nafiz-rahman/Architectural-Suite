@@ -1,4 +1,3 @@
-
 // SaveGameData.cs is responsible for saving the current game state, including player position, furniture count and applied material, inventory state, 
 // and material selections of room walls and floors for a specific house into a JSON file.
 
@@ -51,7 +50,7 @@ public class HouseMaterialData
 
 public class SaveGameData : MonoBehaviour
 {
-    public TextMeshProUGUI[] saveButtons; 
+    public TextMeshProUGUI[] saveButtons;
     public ItemPlacementHandler placementHandler;
 
     private void Start()
@@ -68,10 +67,10 @@ public class SaveGameData : MonoBehaviour
         foreach (var furniture in FindObjectsOfType<Furniture>())
         {
             if (furniture.furnitureItem != null && furniture.transform.position != Vector3.zero)
-                {
+            {
                 Renderer renderer = furniture.GetComponent<Renderer>();
-                string materialName = renderer ? renderer.material.name : "No Material"; 
-                int houseIndex = IdentifyHouseIndex(furniture.transform.position); 
+                string materialName = renderer ? renderer.material.name : "No Material";
+                int houseIndex = IdentifyHouseIndex(furniture.transform.position);
 
                 data.furnitures.Add(new FurnitureData
                 {
@@ -79,7 +78,7 @@ public class SaveGameData : MonoBehaviour
                     rotation = furniture.transform.rotation,
                     itemName = furniture.furnitureItem.itemName,
                     materialName = materialName,
-                    houseIndex = houseIndex 
+                    houseIndex = houseIndex
                 });
             }
             else
@@ -121,7 +120,7 @@ public class SaveGameData : MonoBehaviour
             if (hitColliders[i].CompareTag("House2FurnitureArea")) return 1;
             if (hitColliders[i].CompareTag("House3FurnitureArea")) return 2;
         }
-        return -1; 
+        return -1;
     }
 
 
