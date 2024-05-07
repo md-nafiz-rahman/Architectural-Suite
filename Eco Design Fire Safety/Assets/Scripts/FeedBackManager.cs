@@ -70,9 +70,26 @@ public class FeedBackManager : MonoBehaviour
         StringBuilder fileContent = new StringBuilder();
 
         fileContent.AppendLine("Eco-Design & Safety Architectural Suite");
-        fileContent.AppendLine("Feedback Report");
+        fileContent.AppendLine("Feedback Report For House" + (activeHouseIndex + 1));
         fileContent.AppendLine("Date and Time: " + System.DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss"));
         fileContent.AppendLine("");
+
+        float totalFireSafetyScore = ScoreManager.Instance.GetTotalFireSafetyScore(activeHouseIndex);
+        float totalSustainabilityScore = ScoreManager.Instance.GetTotalSustainabilityScore(activeHouseIndex);
+        float furnitureFireSafetyScore = FurnitureScoreManager.Instance.GetTotalFireSafetyScore(activeHouseIndex);
+        float furnitureSustainabilityScore = FurnitureScoreManager.Instance.GetTotalSustainabilityScore(activeHouseIndex);
+        float houseFireSafetyScore = HouseScoreManager.Instance.GetTotalFireSafetyScore(activeHouseIndex);
+        float houseSustainabilityScore = HouseScoreManager.Instance.GetTotalSustainabilityScore(activeHouseIndex);
+
+        fileContent.AppendLine("Score Breakdown:");
+        fileContent.AppendLine($"Total Fire-Safety Score: {totalFireSafetyScore}");
+        fileContent.AppendLine($"  - Furniture Fire-Safety Score: {furnitureFireSafetyScore}");
+        fileContent.AppendLine($"  - House Wall and Floor Fire-Safety Score: {houseFireSafetyScore}");
+        fileContent.AppendLine($"Total Sustainability Score: {totalSustainabilityScore}");
+        fileContent.AppendLine($"  - Furniture Sustainability Score: {furnitureSustainabilityScore}");
+        fileContent.AppendLine($"  - House Wall and Floor Sustainability Score: {houseSustainabilityScore}");
+        fileContent.AppendLine("");
+
         fileContent.AppendLine("Feedback Details:");
         fileContent.AppendLine("");
         fileContent.AppendLine(feedbackText.text);
@@ -148,6 +165,7 @@ public class FeedBackManager : MonoBehaviour
         }
         else
         {
+            feedbackBuilder.AppendLine("- Specific feedback regarding material selection for furniture is given below:");
             var materialFeedbackFurniture = GenerateMaterialFeedbackForFurniture(houseIndex);
             feedbackBuilder.Append(materialFeedbackFurniture);
         }
@@ -190,6 +208,7 @@ public class FeedBackManager : MonoBehaviour
         string materialFeedback = MaterialSelection.Instance.GenerateMaterialFeedback(houseIndex);
         if (!string.IsNullOrEmpty(materialFeedback))
         {
+            feedbackBuilder.AppendLine("- Specific feedback regarding material selection for walls and floors is given below:");
             feedbackBuilder.AppendLine(materialFeedback);
         }
 

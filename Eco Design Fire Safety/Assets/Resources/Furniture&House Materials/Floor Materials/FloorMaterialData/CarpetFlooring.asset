@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b6d8ce96de502a468fde644e80b0df9, type: 3}
   m_Name: CarpetFlooring
   m_EditorClassIdentifier: 
-  materialName: Carpet Flooring
+  materialName: CarpetFlooring
   material: {fileID: 2100000, guid: 0531079dd368ba647adeb24d9e117e7e, type: 2}
   fireSafetyScore: 5
   sustainabilityScore: 7
