@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33000011182886752}
   - component: {fileID: 23000010017331088}
   - component: {fileID: 2199543711306601176}
+  - component: {fileID: 7447035901411874827}
   m_Layer: 0
   m_Name: LivingRoom_Vase
   m_TagString: Untagged
@@ -98,3 +99,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   furnitureItem: {fileID: 11400000, guid: f53959379fd77b542ab90590067241c7, type: 2}
   materialData: {fileID: 0}
+--- !u!65 &7447035901411874827
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000014118409822}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.17690735, y: 0.4245831, z: 0.17690521}
+  m_Center: {x: 0, y: 0.21229155, z: -0.0000001527369}

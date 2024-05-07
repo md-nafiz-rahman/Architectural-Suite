@@ -4,6 +4,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public class MaterialSelection : MonoBehaviour
@@ -32,6 +33,12 @@ public class MaterialSelection : MonoBehaviour
         }
     }
 
+    public struct MaterialEntry
+    {
+        public string materialName;
+        public string roomName;
+    }
+
     public MaterialData defaultWallMaterialData; 
     public MaterialData defaultFloorMaterialData;
     public static MaterialSelection Instance { get; private set; }
@@ -48,6 +55,48 @@ public class MaterialSelection : MonoBehaviour
     public Room livingRoomHouse3, drawingRoomHouse3, guestRoomHouse3, kitchenHouse3, staircaseHouse3,
                 bedroom1House3, bedroom2House3, masterBedroomHouse3, loungeHouse3, roofTopHouse3;
 
+    private Dictionary<string, string> feedbackTemplates = new Dictionary<string, string>
+    {
+        {"BasaltBasedCladding", "- {0}: You have choosen to use {0} for walls in {1}. {0} is naturally fire resistant and production of it is sustainable, because it can be mined near production sites."},
+
+        {"Brick", "- {0}: You have choosen to use {0} for walls in {1}. {0} is highly fire-resistant, production of {0} are slowly shifting to be more sustainabable."},
+
+        {"CalciumSilicateBoard", "- {0}: You have choosen to use {0} for walls in {1}. {0} is good for fire protection and made of recycled materials."},
+
+        {"CrossLaminatedTimber", "- {0}: You have choosen to use {0} for walls in {1}. {0} is very sustainable material, it is also fire-resistant."},
+
+        {"FiberCementSiding", "- {0}: You have choosen to use {0} for walls in {1}. {0} is highly fire-resistant, however production is not as sustainable as Brick."},
+
+        {"GypsumBoard", "- {0}: You have choosen to use {0} for walls in {1}. {0} is fire-resistant, however production of it can be energy intensive."},
+
+        {"InsulatedConcrete", "- {0}: You have choosen to use {0} for walls in {1}. {0} does not burn easily making it highly fire-resistant. However, production of {0} can lead a high CO2 emission."},
+
+        {"InsulatedFireResistantPanels", "- {0}: You have choosen to use {0} for walls in {1}. {0} is one of the most fire-resistant material for wall as the name suggests. {0} can be sustainable as it helps to reduce gas or energy bill during winter as it keeps the house warm."},
+
+        {"RockwoolInsulation", "- {0}: You have choosen to use {0} for walls in {1}. {0} can withstand very high temperatures, upto 1000°C. It also keeps the house warm in winter and cold in summer making it very sustainable."},
+
+        {"Steel", "- {0}: You have choosen to use {0} for walls in {1}. {0} is also one of the highest fire-resistant material for wall. However it is not as sustainable as some of the other materials available."},
+
+        {"BambooFlooring", "- {0}: You have choosen to use {0} for flooring in {1}. {0} is very sustainable and versatile flooring material. It is also naturally fire-resistant, upto 400°C."},
+
+        {"Carpet Flooring", "- {0}: You have choosen to use {0} for flooring in {1}. {0} is not as fire-resistant as the other materials available for flooring. Specific {0} made of wool can be sustainable."},
+            
+        {"ConcreteFlooring", "- {0}: You have choosen to use {0} for flooring in {1}. {0} Similar to Concrete material for walls, it has very high fire-resistant capabilities. However production of it is not as sustainable as some of the other materials available for flooring."},
+
+        {"CorkFlooring", "- {0}: You have choosen to use {0} for flooring in {1}. {0} is naturally fire-resistant. {0} is harvested from Oak trees without damaging the tree."},
+
+        {"HardwoodFlooring", "- {0}: You have choosen to use {0} for flooring in {1}. {0} can be fire-resistant due to it's dense nature containing water."},
+
+        {"LinoleumFlooring", "- {0}: You have choosen to use {0} for flooring in {1}. {0} is made from natural materials. The natural properties of {0} makes it fire-resistant, however not as much as most of the other materials for flooring."},
+
+        {"RecycledGlassTilesFlooring", "- {0}: You have choosen to use {0} for flooring in {1}. {0} is very recyclable as it is made from recycled glass. Glass is also highly fire and heat resistant making it a good choice for kitchen or new fireplace."},
+
+        {"ResinFlooring", "- {0}: You have choosen to use {0} for flooring in {1}. {0} can be sustainable when made from renewable materials. It also does not burn easily."},
+
+        {"TilesFlooring", "- {0}: You have choosen to use {0} for flooring in {1}. {0} is hard to melt and burn. It can be sustainable when made from natural clay or materials."},
+
+        {"WoodCarpetFlooring", "- {0}: You have choosen to use {0} for flooring in {1}. {0} is sustainable as it saves gas and electricity by keeping the house warm in winter and cold in summer. However it is not very fire-resistant."},
+    };
 
     private Room GetRoomByHouseAndName(string houseTag, string roomName)
     {
@@ -259,6 +308,55 @@ public class MaterialSelection : MonoBehaviour
         }
     }
 
+    public Dictionary<string, List<string>> GetConsolidatedMaterialEntries(int houseIndex)
+    {
+        Dictionary<string, List<string>> materialRooms = new Dictionary<string, List<string>>();
+        string houseTag = $"House{houseIndex + 1}LampPost";
 
+        foreach (var item in currentMaterials)
+        {
+            if (item.Key.StartsWith(houseTag))
+            {
+                string materialName = item.Value.materialName;
+                string roomName = ExtractRoomNameFromKey(item.Key);
+
+                if (!materialRooms.ContainsKey(materialName))
+                {
+                    materialRooms[materialName] = new List<string>();
+                }
+
+                if (!materialRooms[materialName].Contains(roomName))
+                {
+                    materialRooms[materialName].Add(roomName);
+                }
+            }
+        }
+
+        return materialRooms;
+    }
+
+    private string ExtractRoomNameFromKey(string key)
+    {
+        int index = key.IndexOf("LampPost") + "LampPost".Length;
+        string roomPart = key.Substring(index);
+        return roomPart.Replace("Wall", "").Replace("Floor", "");
+    }
+
+    public string GenerateMaterialFeedback(int houseIndex)
+    {
+        StringBuilder feedbackBuilder = new StringBuilder();
+        var materialRooms = GetConsolidatedMaterialEntries(houseIndex);
+
+        foreach (var entry in materialRooms)
+        {
+            if (feedbackTemplates.TryGetValue(entry.Key, out string template))
+            {
+                string roomsList = string.Join(", ", entry.Value);
+                feedbackBuilder.AppendLine(string.Format(template, entry.Key, roomsList));
+            }
+        }
+
+        return feedbackBuilder.ToString();
+    }
 
 }

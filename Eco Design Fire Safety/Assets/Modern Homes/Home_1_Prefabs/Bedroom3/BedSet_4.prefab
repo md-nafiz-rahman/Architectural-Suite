@@ -1373,6 +1373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   furnitureItem: {fileID: 11400000, guid: 8571c4ffae60b834d82c6027d2cbf1df, type: 2}
+  materialData: {fileID: 0}
 --- !u!1 &1000014000171044
 GameObject:
   m_ObjectHideFlags: 0

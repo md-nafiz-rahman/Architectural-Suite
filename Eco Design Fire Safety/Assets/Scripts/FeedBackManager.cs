@@ -6,6 +6,7 @@ using TMPro;
 using System.Text;
 using System.IO;
 using System.Collections;
+using System.Collections.Generic;
 
 public class FeedBackManager : MonoBehaviour
 {
@@ -97,6 +98,7 @@ public class FeedBackManager : MonoBehaviour
     }
 
 
+
     // Generate feedback for a specific house index based on various parameters and conditions.
     private string GenerateFeedback(int houseIndex)
     {
@@ -106,71 +108,118 @@ public class FeedBackManager : MonoBehaviour
         int furnitureCount = FurnitureScoreManager.Instance.houseFurnitures[houseIndex].Count;
         bool hasMaterialChanges = MaterialSelection.Instance.HasMaterialChanges(houseIndex);
 
+        feedbackBuilder.AppendLine($"Your total fire-safety score is: {fireSafetyScore}");
+        feedbackBuilder.AppendLine($"Your total sustainability score is: {sustainabilityScore}");
+
+        if (!hasMaterialChanges && furnitureCount == 0)
+        {
+            feedbackBuilder.AppendLine("- No available feedback, need to interact with house and furniture first");
+            return feedbackBuilder.ToString();
+        }
+
         if (fireSafetyScore == 0 && sustainabilityScore == 0)
         {
-            feedbackBuilder.AppendLine("No available feedback, need to interact with house and furniture first.");
+            feedbackBuilder.AppendLine("- To get better score, you need to change house materials or furniture materials..");
+        }
+
+        if (furnitureCount < 10)
+        {
+            feedbackBuilder.AppendLine($"- To get a better score make sure to choose material and place more than {furnitureCount} furniture.");
         }
 
         if (fireSafetyScore ==  0)
         {
-            feedbackBuilder.AppendLine("Make sure furniture placement does not obstruct safety exits and furniture is not placed close to fire hazards.");
+            feedbackBuilder.AppendLine("- Make sure furniture placement does not obstruct safety exits and furniture is not placed close to fire hazards.");
         }
 
         if (sustainabilityScore == 0)
         {
-            feedbackBuilder.AppendLine("Make sure to properly choose wall, floor and furniture materials to reflect good sustainability score.");
-        }
-
-        if (!hasMaterialChanges && furnitureCount == 0)
-        {
-            feedbackBuilder.AppendLine("To get better score, you need to change house materials or furniture materials.");
+            feedbackBuilder.AppendLine("- Make sure to properly choose wall, floor and furniture materials to reflect good sustainability score.");
         }
 
         if (furnitureCount == 0)
         {
-            feedbackBuilder.AppendLine("Please make sure you have selected furniture with furniture material to place in the house");
+            feedbackBuilder.AppendLine("- Please make sure you have selected furniture with furniture material to place in the house");
+        }
+
+        if (FurnitureScoreManager.Instance.houseFurnitures[houseIndex].Count == 0)
+        {
+            feedbackBuilder.AppendLine("- Please make sure you have selected furniture with furniture material to place in the house");
+        }
+        else
+        {
+            var materialFeedbackFurniture = GenerateMaterialFeedbackForFurniture(houseIndex);
+            feedbackBuilder.Append(materialFeedbackFurniture);
         }
 
         if (FurnitureScoreManager.Instance.CheckDoorObstruction(houseIndex))
         {
-            feedbackBuilder.AppendLine("You have placed furniture that is obstructing safe fire exit.");
+            feedbackBuilder.AppendLine("- You have placed furniture that is obstructing safe fire exit.");
         }
 
         if (FurnitureScoreManager.Instance.CheckCloseProximityToFire(houseIndex))
         {
-            feedbackBuilder.AppendLine("You have placed furniture too close to fire hazard.");
+            feedbackBuilder.AppendLine("- You have placed furniture too close to fire hazard.");
         }
 
         if (!MaterialSelection.Instance.AllMaterialsChanged(houseIndex))
         {
-            feedbackBuilder.AppendLine("Changing all house wall and floor materials will reflect better feedback.");
+            feedbackBuilder.AppendLine("- Changing all house wall and floor materials will reflect better feedback.");
         }
 
         if (furnitureCount > 25)
         {
-            feedbackBuilder.AppendLine("Too many furniture items may affect score negatively.");
+            feedbackBuilder.AppendLine("- Too many furniture items may affect score negatively.");
         }
 
         if (furnitureCount == 20 && (fireSafetyScore + sustainabilityScore) < 50)
         {
-            feedbackBuilder.AppendLine("Try using more sustainable and fire safe materials to improve scores.");
+            feedbackBuilder.AppendLine("- Try using more sustainable and fire safe materials to improve scores.");
         }
 
         if (fireSafetyScore + sustainabilityScore == 60)
         {
-            feedbackBuilder.AppendLine("Good effort, but using more sustainable and fire safe materials could enhance scores further.");
+            feedbackBuilder.AppendLine("- Good effort, but using more sustainable and fire safe materials could enhance scores further.");
         }
 
         if (fireSafetyScore + sustainabilityScore >= 70)
         {
-            feedbackBuilder.AppendLine("Well done, your house is fire-safe and sustainable.");
+            feedbackBuilder.AppendLine("- Well done, your house is fire-safe and sustainable.");
         }
+
+        string materialFeedback = MaterialSelection.Instance.GenerateMaterialFeedback(houseIndex);
+        if (!string.IsNullOrEmpty(materialFeedback))
+        {
+            feedbackBuilder.AppendLine(materialFeedback);
+        }
+
 
         if (feedbackBuilder.Length == 0)
         {
-            feedbackBuilder.Append("For specific feedback, adjust your interiors more!");
+            feedbackBuilder.Append("- For specific feedback, adjust your interiors more!");
         }
 
         return feedbackBuilder.ToString();
     }
+
+    private string GenerateMaterialFeedbackForFurniture(int houseIndex)
+    {
+        StringBuilder feedback = new StringBuilder();
+        HashSet<string> usedMaterials = new HashSet<string>();
+
+        foreach (var furniture in FurnitureScoreManager.Instance.houseFurnitures[houseIndex])
+        {
+            usedMaterials.Add(furniture.materialData.materialName);
+        }
+        foreach (var material in usedMaterials)
+        {
+            if (FurnitureScoreManager.Instance.furnitureMaterialFeedback.TryGetValue(material, out string materialFeedback))
+            {
+                feedback.AppendLine(materialFeedback);
+            }
+        }
+
+        return feedback.ToString();
+    }
+
 }

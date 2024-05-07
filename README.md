@@ -25,6 +25,7 @@ Alternatively the source code folder can be download and opened in unity editor.
 - The furniture prefabs located in the file path 'Assets/Modern Homes/Furniture and Props Simple' are also part of the same unity asset called "Apartment Kit" [2]. 
 - The DontDestroy script located in 'Assets/Scripts' is directly adapted from a tutorial video on youtube [3].
 - The 'WindTurbine' 3D object loacted in 'Assets/Material and Miscellaneous' is a 3D object downloaded from TurboSquid [4].
+- The feedback text for specific materials located in FurnitureScoreManager.cs and MaterialSelection.cs is taken from my dissertation's research section 2.4.1, 2.4.2 and 2.4.3. 
 
 
 ## References

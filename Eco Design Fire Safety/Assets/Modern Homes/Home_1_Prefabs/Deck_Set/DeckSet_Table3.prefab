@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33000010629107966}
   - component: {fileID: 23000011966367964}
   - component: {fileID: 65000010581631974}
+  - component: {fileID: 8021145887602227876}
   m_Layer: 0
   m_Name: DeckSet_Table3
   m_TagString: Untagged
@@ -105,3 +106,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7414119, y: 0.46441618, z: 0.741416}
   m_Center: {x: -0.000000074505806, y: 0.23220809, z: -0.0000018328428}
+--- !u!114 &8021145887602227876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013276036186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureItem: {fileID: 11400000, guid: 3802dee36f4ef1b449f6c2e2d4dbef59, type: 2}
+  materialData: {fileID: 0}

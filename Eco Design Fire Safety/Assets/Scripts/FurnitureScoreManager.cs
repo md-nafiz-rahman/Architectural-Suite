@@ -63,6 +63,7 @@ public class FurnitureScoreManager : MonoBehaviour
         }
     }
 
+
     // Adds a furniture to a list for a specific house and call to recalculate scores.
     public void AddFurniturePlacement(int houseIndex, Furniture furniture)
     {
@@ -282,6 +283,35 @@ public class FurnitureScoreManager : MonoBehaviour
     {
         return closeToFireFurnitures[houseIndex].Any();
     }
+
+    public bool CheckRenewableEnergy(int houseIndex)
+    {
+        return renewableSources[houseIndex].Any();
+    }
+
+    public Dictionary<string, string> furnitureMaterialFeedback = new Dictionary<string, string>
+{
+    {"AluminiumFurniture", "- You have used Aluminium for your furniture material. Similar to Steel, Aluminium is highly fire-resistant, Aluminium can be recycled saving energy usage for production."},
+
+    {"BambooFurniture", "- You have used Bamboo for your furniture material. It is very sustainable and naturally fire-resistant upto 400°C."},
+
+    {"CardboardFurniture", "- You have used Cardboard for your furniture material. Cardboard is very sustainable as it can be easily made from recyclable materials. However's cardboard's natural properties are weak when exposed to fire."},
+
+    {"EcoboardFurniture", "- You have used Ecoboard for your furniture material. Ecoboard is a new material made from wheat straw and it is very sustainable. However, it's natural properties are weak against fire."},
+
+    {"HempFabricFurniture", "- You have used Hemp Fabric for your furniture material. Hemp fabric is produced with a mix of sustainable materials, it contains some fire-resistant properties."},
+
+    {"RecycledPlasticFurniture", "- You have used Recycled Plastic for your furniture material. Recycled plastic is very sustainable, however in order to make it fire-resistant chemical application is necessary."},
+
+    {"RecycledWoodFurniture", "- You have used Recycled Wood for your furniture material. Recycled wood is usually made from old furniture and it is very sustainable, however chemical application is required to make it fire-resistant."},
+
+    {"SeagrassFurniture", "- You have used Seagrass for your furniture material. Seagrass is a natural material and it contains some fire-resistant properties."},
+
+    {"SteelFurniture", "- You have used Steel for your furniture material. Steel is very strong against fire, it can also be resourced sustainably."},
+
+    {"WoolFurniture", "- You have used Wool for your furniture material. Wool is a sustainable furniture material as it is recyclable, it has some fire-resistant properties as well."},
+};
+
 
 
 }

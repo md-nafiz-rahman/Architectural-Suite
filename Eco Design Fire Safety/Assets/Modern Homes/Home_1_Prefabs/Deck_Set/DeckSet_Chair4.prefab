@@ -65,6 +65,7 @@ GameObject:
   - component: {fileID: 33000010214929332}
   - component: {fileID: 23000013718691232}
   - component: {fileID: 8916902943828317598}
+  - component: {fileID: -7903422784840301702}
   m_Layer: 0
   m_Name: DeckSet_Chair4
   m_TagString: Untagged
@@ -160,6 +161,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8434096, y: 0.9808865, z: 0.7482023}
   m_Center: {x: -0.000000029802322, y: 0.48850873, z: -0.00000022351742}
+--- !u!114 &-7903422784840301702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013798739002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 174ca1ade18ed7247a05255dbe5c7025, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  furnitureItem: {fileID: 11400000, guid: 47aa4be3b03716a4cbb7e66a1a70580c, type: 2}
+  materialData: {fileID: 0}
 --- !u!1 &6261496600116774256
 GameObject:
   m_ObjectHideFlags: 0
