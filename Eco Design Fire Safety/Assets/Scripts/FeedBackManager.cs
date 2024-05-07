@@ -154,11 +154,6 @@ public class FeedBackManager : MonoBehaviour
             feedbackBuilder.AppendLine("- Make sure to properly choose wall, floor and furniture materials to reflect good sustainability score.");
         }
 
-        if (furnitureCount == 0)
-        {
-            feedbackBuilder.AppendLine("- Please make sure you have selected furniture with furniture material to place in the house");
-        }
-
         if (FurnitureScoreManager.Instance.houseFurnitures[houseIndex].Count == 0)
         {
             feedbackBuilder.AppendLine("- Please make sure you have selected furniture with furniture material to place in the house");
@@ -168,6 +163,11 @@ public class FeedBackManager : MonoBehaviour
             feedbackBuilder.AppendLine("- Specific feedback regarding material selection for furniture is given below:");
             var materialFeedbackFurniture = GenerateMaterialFeedbackForFurniture(houseIndex);
             feedbackBuilder.Append(materialFeedbackFurniture);
+        }
+
+        if (!FurnitureScoreManager.Instance.CheckRenewableEnergy(houseIndex))
+        {
+            feedbackBuilder.AppendLine("- Consider adding renewable energy sources like solar panels or wind turbines to enhance your sustainability score.");
         }
 
         if (FurnitureScoreManager.Instance.CheckDoorObstruction(houseIndex))
